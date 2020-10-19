@@ -1,6 +1,6 @@
 <?php
 include 'fonctions/fonctionsLayout.php';
-include 'fonctions/fonctionsProduits.php';
+include 'fonctions/fonctionsUtilisateurs.php';
 ?>
 
 <!DOCTYPE html>
@@ -16,25 +16,13 @@ include 'fonctions/fonctionsProduits.php';
     <title>Taupe Musique</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="Projet/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/datepicker.min.css" />
-	<link rel="stylesheet" href="css/datepicker3.min.css" />
-	<script>
-					function removeItem(e){
-						$.ajax({
-							type: 'POST',
-							url: 'fonctions/removeItem.php',
-							data: {item : e},
-							success: function(data){
-										alert(data);
-										location.reload();
-							},
-						});
-					};	
-	</script>
+    <link href="Projet/css/shop-homepage.css" rel="stylesheet">
+	<link rel="stylesheet" href="Projet/css/datepicker.min.css" />
+	<link rel="stylesheet" href="Projet/css/datepicker3.min.css" />
+
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -63,8 +51,8 @@ include 'fonctions/fonctionsProduits.php';
             <div class="col-md-9">
 
                 <div class="row carousel-holder">
-					<h2>Produits</h2>
-					<?php afficherProduits(); ?>
+					<h2>Utilisateurs</h2>
+					<?php afficherUtilisateurs(); ?>
 					<hr>
 					
                 </div>
@@ -81,19 +69,19 @@ include 'fonctions/fonctionsProduits.php';
         <hr>
 
         <!-- Footer -->
+    <!-- Footer -->
     <?php include("./footer.php");?>
 
     </div>
-	
 
     <!-- jQuery -->
-<script src="js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="js/jq.js"></script>
+<script src="Projet/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="Projet/js/jq.js"></script>
     <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/daterangepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="js/moment.min.js"></script>
+<script src="Projet/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="Projet/js/daterangepicker.js"></script>
+<script type="text/javascript" src="Projet/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="Projet/js/moment.min.js"></script>
 
 
 </body>

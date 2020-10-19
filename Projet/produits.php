@@ -1,7 +1,6 @@
 <?php
-	session_start();
-	include 'fonctions/fonctionsLayout.php';
-	include 'fonctions/fonctionsAcheter.php';
+include 'fonctions/fonctionsLayout.php';
+include 'fonctions/fonctionsProduits.php';
 ?>
 
 <!DOCTYPE html>
@@ -17,19 +16,18 @@
     <title>Taupe Musique</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="Projet/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/datepicker.min.css" />
-	<link rel="stylesheet" href="css/datepicker3.min.css" />
-
+    <link href="Projet/css/shop-homepage.css" rel="stylesheet">
+	<link rel="stylesheet" href="Projet/css/datepicker.min.css" />
+	<link rel="stylesheet" href="Projet/css/datepicker3.min.css" />
 	<script>
-					function removePanier(e,p){
+					function removeItem(e){
 						$.ajax({
 							type: 'POST',
-							url: 'fonctions/fonctionsRemove.php',
-							data: {item : e,pos: p},
+							url: 'fonctions/removeItem.php',
+							data: {item : e},
 							success: function(data){
 										alert(data);
 										location.reload();
@@ -37,6 +35,7 @@
 						});
 					};	
 	</script>
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,7 +47,6 @@
 </head>
 
 <body>
-
     <!-- Navigation -->
     <?php include("./navbar.php");?>
 
@@ -58,25 +56,18 @@
         <div class="row">
 
             <div class="col-md-3">
-                <p class="lead">Votre Profil</p>			
+                <p class="lead">Votre Profil</p>
+				<?php afficherCadreCompte(); ?>				
             </div>
 
             <div class="col-md-9">
 
                 <div class="row carousel-holder">
-					<h2>Panier</h2>
-				<?php afficherPanier(); ?>				
-				
+					<h2>Produits</h2>
+					<?php afficherProduits(); ?>
+					<hr>
+					
                 </div>
-									<div>
-					<?php
-						if(isset($_Cookie["user"]) && isset($_COOKIE["panier"])){
-									echo '<a class="btn btn-default" href="confirmerCommande.php">ACHETER</a>';
-						}else if(isset($_COOKIE["panier"])){
-										echo '<p>Connectez vous pour pouvoir acheter</p>';
-									}
-					?>
-				</div>
 
             </div>
 
@@ -93,14 +84,16 @@
     <?php include("./footer.php");?>
 
     </div>
+	
+
     <!-- jQuery -->
-<script src="js/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="js/jq.js"></script>
+<script src="Projet/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="Projet/js/jq.js"></script>
     <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/daterangepicker.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
-<script type="text/javascript" src="js/moment.min.js"></script>
+<script src="Projet/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="Projet/js/daterangepicker.js"></script>
+<script type="text/javascript" src="Projet/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="Projet/js/moment.min.js"></script>
 
 
 </body>

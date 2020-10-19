@@ -9,16 +9,16 @@
 (function(root, factory) {
 
   if (typeof define === 'function' && define.amd) {
-    define(['moment', 'jquery', 'exports'], function(momentjs, $, exports) {
+    define(['Projet/js/moment', 'jquery', 'exports'], function(momentjs, $, exports) {
       root.daterangepicker = factory(root, exports, momentjs, $);
     });
 
   } else if (typeof exports !== 'undefined') {
-      var momentjs = require('moment');
+      var momentjs = require('Projet/js/moment');
       var jQuery = (typeof window != 'undefined') ? window.jQuery : undefined;  //isomorphic issue
       if (!jQuery) {
           try {
-              jQuery = require('jquery');
+              jQuery = require('Projet/js/jquery');
               if (!jQuery.fn) jQuery.fn = {}; //isomorphic issue
           } catch (err) {
               if (!jQuery) throw new Error('jQuery dependency not found');
