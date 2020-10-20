@@ -161,6 +161,10 @@ def search(choix, CMD, TAUPE_PATH):
 		exit(-1)
 
 
+import random
+
+  
+
 
 def test_graph():
 	G = nx.petersen_graph()
@@ -216,7 +220,11 @@ def build_dico():
 
 
 def plot_graph(G):
-	nx.draw(G, pos=nx.drawing.layout.planar_layout(G), with_labels=True, font_weight='bold')
+	plt.figure(figsize=(10,6))
+	pos = nx.spring_layout(G, k=0.3)
+	nx.draw(G, pos=pos, with_labels=False, node_size=100)
+	nx.draw_networkx_labels(G, pos=pos, font_size=10)
+	nx.draw_networkx_edges(G, pos=pos, width=0.2)
 	plt.show()
 
 """
