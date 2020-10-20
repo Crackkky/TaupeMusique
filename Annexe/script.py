@@ -2,6 +2,20 @@ import os #pour lancer des cmd (UNIX)
 import re #pour le regex
 from bs4 import BeautifulSoup
 import sys
+import networkx as nx
+import matplotlib.pyplot as plt
+
+"""
+@author : gouth
+requirements :
+pip install networkx
+pip install bs4
+
+outil pour cibler les failles dans le cadre du projet de synthèse
+M2 - SSI 2020/21
+"""
+
+DEBUG = True
 
 """
 beautiful soup va chercher plus en profondeur les données formulaires
@@ -18,12 +32,13 @@ def get_form_info(FILE, NUM_LINE, TAUPE_PATH):
 			#print(data)
 			soup = BeautifulSoup(data, 'html.parser')
 			for form in soup.find_all('form'):
-				print("\tmethode:",form.get('method'))
-				print("\taction:",form.get('action'))
-				fields = form.findAll('input')
-				for field in fields:
-					print("\t\tchamp:",field)
-				print("_________________________\n\n")
+				if(DEBUG):
+					print("\tmethode:",form.get('method'))
+					print("\taction:",form.get('action'))
+					fields = form.findAll('input')
+					for field in fields:
+						print("\t\tchamp:",field)
+					print("_________________________\n\n")
 
 		#print("_____________________end")
 		fd.close()
@@ -51,14 +66,14 @@ def get_ajax_info(FILE, NUM_LINE, TAUPE_PATH):
 			exit(1)
 			for form in soup.find_all('ajax'):
 				print("AJAX : > "+ form)
-				"""
-				print("\tmethode:",form.get('method'))
-				print("\taction:",form.get('action'))
-				fields = form.findAll('input')
-				for field in fields:
-					print("\t\tchamp:",field)
-				print("_________________________\n\n")
-				"""
+				if(DEBUG):
+					print("\tmethode:",form.get('method'))
+					print("\taction:",form.get('action'))
+					fields = form.findAll('input')
+					for field in fields:
+						print("\t\tchamp:",field)
+					print("_________________________\n\n")
+				
 		#print("_____________________end")
 		fd.close()
 		return None
@@ -139,7 +154,7 @@ def search(choix, CMD, TAUPE_PATH):
 					get_ajax_info(FILE, NUM_LINE, TAUPE_PATH)
 
 				else:#choix libre
-					print("WOK search else clause")
+					pass
 
 
 	except Exception:
@@ -147,12 +162,83 @@ def search(choix, CMD, TAUPE_PATH):
 
 
 
+def test_graph():
+	G = nx.petersen_graph()
+	plt.subplot(121)
+	nx.draw(G, with_labels=True, font_weight='bold')
+	plt.subplot(122)
+	nx.draw_shell(G, nlist=[range(5, 10), range(5)], with_labels=True, font_weight='bold')
+	plt.show()
+	
+
+#construit le dico python pour le graphe des includes seulement
+def build_dico():
+	CMD = "grep -R --exclude-dir=js --exclude-dir=css --exclude-dir=font-awesome -n -e \"include*\" ../Projet > out_sitemap"
+	os.system(CMD)
+	DICO = dict()
+
+	with open("out_sitemap") as f: #fichier ou le resultat de la commande est stockée
+			all_lines = f.readlines()
+			for line in all_lines: #lecture du fichier
+				line = line.split(":") 
+				
+				FILE = line[0].split("../Projet")[-1] #chemin du fichier ou grep trouve qqchose
+				NUM_LINE = int(line[1]) #la ligne du fichier ou grep trouve
+				INCLUDED = line[2].lstrip("\t").lstrip(" ")
+				#je rafine le nom du fichier pour qu'ils soient exact pcq dans un dico l'id est une clé 
+				PAGE = INCLUDED.split("include")[1].replace(")", '').replace(";", '').replace("\"", '').replace("'", '')
+				PAGE = PAGE.replace("(", '').replace("?", '').replace('>', '')
+
+				if(PAGE[0]=="."):
+					PAGE = PAGE[1:len(PAGE)]
+
+				if(PAGE[0]!="/"):
+					PAGE = "/"+PAGE
+
+				PAGE = PAGE.replace(" ", "").replace("\n", "").replace("\r", "")
+
+
+				if(DEBUG):
+					print("FILE:",FILE)
+					print("NUM_LINE",NUM_LINE)
+					print("PAGE", PAGE)
+					print("++++++++++++++++++")
+
+				#construction du dico
+				if(FILE not in DICO.keys()):#si on a pas déjà un noeud 
+					DICO[FILE] = [] #on initialise le noeud avec une liste 
+
+				DICO[FILE].append((FILE, PAGE)) 
+
+
+	return DICO
+
+
+
+def plot_graph(G):
+	nx.draw(G, pos=nx.drawing.layout.planar_layout(G), with_labels=True, font_weight='bold')
+	plt.show()
+
 """
 la on va procéder a l'établissement du graph et du .xml du sitemap
 """
 def generate_sitemap():
-	print("WOK generate_sitemap")
-	exit(1)
+	
+	#décommenter la ligne pour tester networkx et plot 
+	#test_graph()
+	
+	G = nx.Graph() #creation du graph
+	dico = build_dico()
+	
+	G.add_nodes_from(dico)
+	for ptite_liste in dico.values():
+		print("add : ", ptite_liste)	
+		G.add_edges_from(ptite_liste)
+
+	plot_graph(G)
+	#exit(1)
+
+
 
 def main():
 	while(True):
@@ -165,7 +251,7 @@ def main():
 		
 			#on récupère la commande
 			cmd = build_cmd(choix)
-			CMD = "grep -R --exclude-dir=js --exclude-dir=css -n -e "+cmd+" ../Projet > out_cmd"
+			CMD = "grep -R --exclude-dir=js --exclude-dir=css --exclude-dir=font-awesome -n -e "+cmd+" ../Projet > out_cmd"
 
 			#on envoie la commande 
 			search(choix, CMD, TAUPE_PATH)
