@@ -16,13 +16,13 @@ include ("API.php");
     <title>Taupe Musique</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="Projet/css/bootstrap.min.css" rel="stylesheet">
-    <link href="Projet/css/heart.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/heart.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="Projet/css/shop-homepage.css" rel="stylesheet">
-	<link rel="stylesheet" href="Projet/css/datepicker.min.css" />
-	<link rel="stylesheet" href="Projet/css/datepicker3.min.css" />
+    <link href="./css/shop-homepage.css" rel="stylesheet">
+	<link rel="stylesheet" href="./css/datepicker.min.css" />
+	<link rel="stylesheet" href="./css/datepicker3.min.css" />
 
     <!--
     [if lt IE 9]>
@@ -178,15 +178,15 @@ include ("API.php");
 
 	
 	    <!-- jQuery -->
-	<script src="Projet/js/jquery-1.11.3.min.js"></script>
-	<script type="text/javascript" src="Projet/js/jq.js"></script>
+	<script src="./js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="./js/jq.js"></script>
 		<!-- Bootstrap Core JavaScript -->    
-	<script src="Projet/js/heart.js"></script>
-    <script src="Projet/js/jq.js"></script>
-	<script src="Projet/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="Projet/js/daterangepicker.js"></script>
-	<script type="text/javascript" src="Projet/js/bootstrap-datepicker.min.js"></script>
-	<script type="text/javascript" src="Projet/js/moment.min.js"></script>
+	<script src="./js/heart.js"></script>
+    <script src="./js/jq.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="./js/daterangepicker.js"></script>
+	<script type="text/javascript" src="./js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="./js/moment.min.js"></script>
 
 </body>
 
