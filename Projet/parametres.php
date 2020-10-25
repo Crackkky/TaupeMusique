@@ -1,8 +1,8 @@
 <?php
 
-  // Parametres de configuration de la connexion
-  // -> permet de porter l'application en ne modifiant qu'une seule fois
-  //	les param�tres de connexions � un serveur MySQL 
+// Parametres de configuration de la connexion
+// -> permet de porter l'application en ne modifiant qu'une seule fois
+//	les param�tres de connexions � un serveur MySQL
 
 function getHost(){
     $host="127.0.0.1";
@@ -14,7 +14,7 @@ function getUser(){
 }
 
 function getPass(){
-    $pass="";
+    $pass="je suis un mot de passe fort";
     return $pass;
 }
 

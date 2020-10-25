@@ -41,16 +41,7 @@ $(document).ready(function(){
 					dataType: 'json',
 					cahce: false,
 					success: function(data){
-						$('#reponse').removeClass().addClass((data.error === true) ? 'error' : 'success').html(data.msg).fadeIn(500);	
-						
-						if($('#reponse').hasClass('error')){
-							$('#reponse').fadeOut(4000);
-						}
-						else
-						{
-								location.reload();
-						}
-						
+						$('#reponse').innerHTML = "OK";
 					},
 				});
 			};	

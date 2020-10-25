@@ -5,7 +5,7 @@ include("API.php");
 <?php
 
 if(!isset($_GET["id"])) {
-	header("location: ./");
+    header("location: ./");
 }
 
 $albumId = $_GET["id"];
@@ -28,23 +28,23 @@ $imgURL = (file_exists("img_cover/$nom.jpg") != false) ? ("img_cover/$nom.jpg") 
 
 <head>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<?php include("imports.html"); ?>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <?php include("imports.html"); ?>
 
-	<title>Taupe Musique</title>
+    <title>Taupe Musique</title>
 
-	<!-- Custom CSS -->
-	<link href="css/shop-homepage.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/shop-homepage.css" rel="stylesheet">
 
     <!--
     [if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]
     -->
 
 </head>
@@ -52,53 +52,53 @@ $imgURL = (file_exists("img_cover/$nom.jpg") != false) ? ("img_cover/$nom.jpg") 
 <body>
 
 
-	<!-- Navigation -->
-	<?php include("./navbar.php");?>
+<!-- Navigation -->
+<?php include("./navbar.php");?>
 
-	<!-- Page Content -->
-	<div class="container">
+<!-- Page Content -->
+<div class="container">
 
-		<div class="col-xs-5">
+    <div class="col-xs-5">
 
-			<img style="width: 100%;" src="<?=$imgURL?>"></img>
+        <img style="width: 100%;" src="<?=$imgURL?>"></img>
 
-		</div>
+    </div>
 
-		<div class="col-xs-7">
+    <div class="col-xs-7">
 
-			<h1><?=$nom?></h1>
+        <h1><?=$nom?></h1>
 
-			<h3>Chansons</h3>
+        <h3>Chansons</h3>
 
-			<ul>
-				<?php
+        <ul>
+            <?php
 
-				foreach ($ingr as $chanson) {
-					echo "<li>".$chanson."</li>";
-				}
+            foreach ($ingr as $chanson) {
+                echo "<li>".$chanson."</li>";
+            }
 
-				?>
-			</ul>
+            ?>
+        </ul>
 
-			<h3>Critique</h3>
+        <h3>Critique</h3>
 
-			<p><?=$prep?></p>
-			<hr>
-			<h3><?=$prix?> €  </h3><button class="btn btn-default">Ajouter au panier</button>
-		</div>
-		
+        <p><?=$prep?></p>
+        <hr>
+        <h3><?=$prix?> €  </h3><button class="btn btn-default">Ajouter au panier</button>
+    </div>
 
-	</div>
+
+</div>
 
 </div>
 <!-- /.container -->
 
 <div class="container">
 
-	<hr>
+    <hr>
 
-	<!-- Footer -->
-	<?php include("./footer.php");?>
+    <!-- Footer -->
+    <?php include("./footer.php");?>
 </body>
 
 </html>

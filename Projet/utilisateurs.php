@@ -20,64 +20,64 @@ include 'fonctions/fonctionsUtilisateurs.php';
 
     <!-- Custom CSS -->
     <link href="./css/shop-homepage.css" rel="stylesheet">
-	<link rel="stylesheet" href="./css/datepicker.min.css" />
-	<link rel="stylesheet" href="./css/datepicker3.min.css" />
+    <link rel="stylesheet" href="./css/datepicker.min.css" />
+    <link rel="stylesheet" href="./css/datepicker3.min.css" />
 
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
 
 <body>
-    <!-- Navigation -->
-    <?php include("./navbar.php");?>
+<!-- Navigation -->
+<?php include("./navbar.php");?>
 
-    <!-- Page Content -->
-    <div class="container">
+<!-- Page Content -->
+<div class="container">
 
-        <div class="row">
+    <div class="row">
 
-            <div class="col-md-3">
-                <p class="lead">Votre Profil</p>
-				<?php afficherCadreCompte(); ?>				
-            </div>
+        <div class="col-md-3">
+            <p class="lead">Votre Profil</p>
+            <?php afficherCadreCompte(); ?>
+        </div>
 
-            <div class="col-md-9">
+        <div class="col-md-9">
 
-                <div class="row carousel-holder">
-					<h2>Utilisateurs</h2>
-					<?php afficherUtilisateurs(); ?>
-					<hr>
-					
-                </div>
+            <div class="row carousel-holder">
+                <h2>Utilisateurs</h2>
+                <?php afficherUtilisateurs(); ?>
+                <hr>
 
             </div>
 
         </div>
 
     </div>
-    <!-- /.container -->
 
-    <div class="container">
+</div>
+<!-- /.container -->
 
-        <hr>
+<div class="container">
 
-        <!-- Footer -->
+    <hr>
+
+    <!-- Footer -->
     <!-- Footer -->
     <?php include("./footer.php");?>
 
-    </div>
+</div>
 
-    <!-- jQuery -->
+<!-- jQuery -->
 <script src="./js/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="./js/jq.js"></script>
-    <!-- Bootstrap Core JavaScript -->
+<!-- Bootstrap Core JavaScript -->
 <script src="./js/bootstrap.min.js"></script>
 <script type="text/javascript" src="./js/daterangepicker.js"></script>
 <script type="text/javascript" src="./js/bootstrap-datepicker.min.js"></script>
