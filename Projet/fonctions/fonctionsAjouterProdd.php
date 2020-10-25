@@ -3,7 +3,7 @@
 	$file_result = '';
 	$file_extension = '';
 	if($_FILES['file']['error']>0){
-		header('location: ../Produits.php?Erreur=img');
+		header('location: ../produits.php?Erreur=img');
 		exit();
 		
 	}else{
@@ -19,7 +19,7 @@
 		}else if(preg_match("/[.](bmp)$/i",$file)){
 			$file_extension = '.bmp';
 		}else{
-			header('location: ../Produits.php?Erreur=img2');
+			header('location: ../produits.php?Erreur=img2');
 			exit();
 		}
 		
@@ -92,7 +92,7 @@
 						$fp = fopen("../Donnees.inc.php", 'w');
 						fwrite($fp, "<?php ".$str." \n\n".$file." \n?>");
 						fclose($fp);
-						header('location: ../Produits.php');
+						header('location: ../produits.php');
 				}
 				else
 				{

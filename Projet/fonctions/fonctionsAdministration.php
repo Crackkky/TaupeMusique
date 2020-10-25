@@ -23,7 +23,7 @@ function uploadFichier()
 		}
 		else
 		{
-			$_SESSION['message'] = '<div style="text-align:center"><h1>Echec de l\'envoi du fichier xml.</h1><br /><br /><a href="Administration.php">Cliquez ici pour retourner � l\'administration.</a></div>';
+			$_SESSION['message'] = '<div style="text-align:center"><h1>Echec de l\'envoi du fichier xml.</h1><br /><br /><a href="administration.php">Cliquez ici pour retourner � l\'administration.</a></div>';
 			header('Location: message.php');
 		}
 		
@@ -53,21 +53,21 @@ function xmlValide($dom)
 		
 		if(!$estValide['Libelle'])
 		{
-			$_SESSION['message'] = '<div style="text-align:center"><h1>Erreur ligne '.$propriete->getLineNo().'. Le produit n\'a pas de propri�t� Libelle.</h1><br /><br /><a href="Administration.php">Cliquez ici pour retourner � l\'administration.</a></div>';
+			$_SESSION['message'] = '<div style="text-align:center"><h1>Erreur ligne '.$propriete->getLineNo().'. Le produit n\'a pas de propri�t� Libelle.</h1><br /><br /><a href="administration.php">Cliquez ici pour retourner � l\'administration.</a></div>';
 			header('Location: message.php');
 			exit;
 		}
 		
 		if(!$estValide['Prix'])
 		{
-			$_SESSION['message'] = '<div style="text-align:center"><h1>Erreur ligne '.$propriete->getLineNo().'. Le produit n\'a pas de propri�t� Prix.</h1><br /><br /><a href="Administration.php">Cliquez ici pour retourner � l\'administration.</a></div>';
+			$_SESSION['message'] = '<div style="text-align:center"><h1>Erreur ligne '.$propriete->getLineNo().'. Le produit n\'a pas de propri�t� Prix.</h1><br /><br /><a href="administration.php">Cliquez ici pour retourner � l\'administration.</a></div>';
 			header('Location: message.php');
 			exit;
 		}
 		
 		if(!$estValide['UniteDeVente'])
 		{
-			$_SESSION['message'] = '<div style="text-align:center"><h1>Erreur ligne '.$propriete->getLineNo().'. Le produit n\'a pas de propri�t� UniteDeVente.</h1><br /><br /><a href="Administration.php">Cliquez ici pour retourner � l\'administration.</a></div>';
+			$_SESSION['message'] = '<div style="text-align:center"><h1>Erreur ligne '.$propriete->getLineNo().'. Le produit n\'a pas de propri�t� UniteDeVente.</h1><br /><br /><a href="administration.php">Cliquez ici pour retourner � l\'administration.</a></div>';
 			header('Location: message.php');
 			exit;
 		}
@@ -219,13 +219,13 @@ function afficherAdministration()
 	//si on a cliqu� sur le bouton envoyer
 	if(isset($_POST['envoyer'])) uploadFichier();
 	
-	echo '<a href="Administration.php?action=bdd">Editer la base de donn�es.</a><br /><br />';
+	echo '<a href="administration.php?action=bdd">Editer la base de donn�es.</a><br /><br />';
 	
 	//si on a cliqu� sur "Editer la base de donn�es." alors on affiche ce qui suit
 	if(isset($action) && $action=='bdd')
 	{
 		echo '<div style="margin-left:30px">';
-			echo '<form method="post" action="Administration.php" enctype="multipart/form-data">';
+			echo '<form method="post" action="administration.php" enctype="multipart/form-data">';
 				echo '<div>';
 					echo '<label>Fichier: </label><input type="file" name="xml"/>
 						 <input type="submit" name="envoyer" value="Envoyer"/>';
@@ -234,15 +234,15 @@ function afficherAdministration()
 		echo '</div><br /><br />';
 	}
 	
-	echo '<a href="Produits.php">Gestion de produits</a><br/><br/>';
-	echo '<a href="Utilisateurs.php">Gestion d\'utilisateurs</a><br/><br/>';
+	echo '<a href="produits.php">Gestion de produits</a><br/><br/>';
+	echo '<a href="utilisateurs.php">Gestion d\'utilisateurs</a><br/><br/>';
 	
-	echo '<a href="Administration.php?action=commande">Visualiser les commandes.</a><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />';
+	echo '<a href="administration.php?action=commande">Visualiser les commandes.</a><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />';
 	
 	//si on a cliqu� sur "Visualiser les commandes." alors on affiche ce qui suit
 	if(isset($action) && $action=='commande')
 	{
-		echo '<form action="Administration.php?action=commande" method="post"><div class="floatRight">';
+		echo '<form action="administration.php?action=commande" method="post"><div class="floatRight">';
 		$result = mysql_query('select * from commande order by id_com DESC');
 		
 		echo '<label>N� commande: </label><select name="id_com">';

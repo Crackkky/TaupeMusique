@@ -36,7 +36,7 @@ $(document).ready(function(){
 			function submitForm(formdata){
 				$.ajax({
 					type: 'POST',
-					url: 'Login.php',
+					url: 'login.php',
 					data: formdata,
 					dataType: 'json',
 					cahce: false,
@@ -59,7 +59,7 @@ $(document).ready(function(){
 				var str = '';
 				$.ajax({
 					type: 'POST',
-					url: 'Enregistrer.php',
+					url: 'enregistrer.php',
 					data: formdata,
 					dataType: 'json',
 					cahce: false,
@@ -87,7 +87,7 @@ function updateDetails(formdata){
 				var str = '';
 				$.ajax({
 					type: 'POST',
-					url: 'Update.php',
+					url: 'update.php',
 					data: formdata,
 					dataType: 'json',
 					cahce: false,

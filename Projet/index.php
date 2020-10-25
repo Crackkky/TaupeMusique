@@ -68,7 +68,7 @@ include ("API.php");
 	function addFav(e){
 		$.ajax({
 		method: "POST",
-		url: "EnregFav.php",
+		url: "enregFav.php",
 		data: {id_produit: e},
 		success: function(data){				
 		},

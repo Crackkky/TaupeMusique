@@ -15,10 +15,10 @@
             <ul class="nav navbar-nav">
                 <li>
 				<?php if(isset($_COOKIE["admin"])){
-							echo '<a href="Administration.php">Profil</a>';
+							echo '<a href="administration.php">Profil</a>';
 						}
 						else{
-							echo '<a href="Profil.php">Profil</a>';
+							echo '<a href="profil.php">Profil</a>';
 						}
 				?>
                     
