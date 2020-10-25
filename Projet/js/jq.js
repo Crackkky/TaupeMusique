@@ -39,7 +39,7 @@ function submitForm(formdata){
 		url: 'login.php',
 		data: formdata,
 		dataType: 'json',
-		cahce: false,
+		cache: false,
 		success: function(data){
 			$('#reponse').innerHTML = "OK";
 		},
@@ -54,7 +54,9 @@ function submitDetails(formdata){
 		data: formdata,
 		dataType: 'json',
 		cache: false,
-		error: function(data){
+		success: function(data){
+
+			/*
 			$('#test').innerText="OSKOUUUUUUR";
 			$('#reponse1').show();
 			$.each(data, function(i,item) {
@@ -63,9 +65,15 @@ function submitDetails(formdata){
 				}
 				$('#reponse1').innerHTML('<span style="color: #ff0000; "><ul>' + str + '</ul></span">');
 				$('#reponse1').fadeOut(5000);
+
 			});
 			location.reload();
+			*/
+			$("#test").html("SUCCESS")
 		},
+		error: function(){
+			$("#test").html("ERROR");
+		}
 	});
 };
 

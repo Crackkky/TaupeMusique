@@ -3,8 +3,6 @@ session_start();
 
 include("Fonctions.inc.php");
 
-
-
 $ok = true;
 $result["msg"] = "valide";
 
@@ -153,14 +151,14 @@ if(isset($login) && !empty($login) && is_char_ok($login)){ //si on a renseigné 
 
 //todo je fais une connexion de la BDD pour check si mail et login sont pas déjà utilisé puis j'en refais une après : utile ?
 
-if($ok === true){ // tout est bon , on pérenise les entrées puis on insert
+if($ok === true){ // tout est bon , on se connecte a la BDD puis on insert les valeurs
 	$mysqli = connect();
 	$return['msg'] = "OK";
-	//todo oskour l'injection SQL
+	//todo oskour l'injection SQL, faire des "sql prepare" machin
 	$str = "INSERT INTO USERS VALUES ('".$login."','".$email."','".password_hash($pass, PASSWORD_DEFAULT)."','".$nom."','".$prenom."','".$date."','".$sexe."','".$adresse."','".$codepostal."','".$ville."','".$telephone."');";
 	query($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
 	setcookie('user',$login,time() + 3600);
-	unset($return);
+	//unset($return);
 	disconnect($mysqli); //DECONNEXION BDD
 	header('location: index.php');
 	exit();

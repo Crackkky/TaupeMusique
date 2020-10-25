@@ -1,3 +1,11 @@
+<?php
+
+if(isset($_SESSION['inscription'])) {
+    print_r($_SESSION['inscription']);
+}else{
+    echo "pas def";
+}
+?>
 <div class="modal fade" id="Login" role="dialog">
     <div class="modal-dialog">
         <div class = "modal-content">
@@ -35,18 +43,12 @@
                 <h4>Créer un compte</h4>
             </div>
             <div class="modal-body">
-                <?php
-                    if(isset($_SESSION['inscription'])){
-                        echo $_SESSION['inscription'];
-                    }
-                ?>
-
                 <form role="form" method="post" id="enregform">
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" value="Enregistrer">
                         <font color="red"><label id="reponse"></label></font>
                         <?php
-                            if (isset($_SESSION['inscription'])){ //si y'a des erreurs d'inscription :
+                            if(isset($_SESSION['inscription'])){ //si y'a des erreurs d'inscription :
                                 print_r(array_values($_SESSION['inscription']));
                             }
                         ?>

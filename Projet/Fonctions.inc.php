@@ -26,19 +26,13 @@ function select_database($mysqli){
  * @return false|mysqli : représente la connexion à la BDD ou false si cela échoue.
  */
 function connect(){ //todo lire les creds dans un fichier avec les bons droits
-
     $host = getHost();
     $user = getUser();
     $pass = getPass();
     $base = getBase();
-    $port = 8889;
-
     $mysqli = mysqli_init(); //pour le msqli_error
     $mysqli = mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error($mysqli));
     mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");
-
-
-    mysqli_select_db($mysqli, $base) or die("Impossible de sélectionner la base : $base");
 
     return $mysqli;
 }
@@ -53,7 +47,7 @@ function disconnect($mysqli){
 
 function queryDB($link,$query)
 {
-    $resultat = mysqli_query($link,$query) or die("ERR ==> $query : ".mysqli_error($link));
+    $resultat=mysqli_query($link,$query) or die("$query : ".mysqli_error($link));
     return($resultat);
 }
 
