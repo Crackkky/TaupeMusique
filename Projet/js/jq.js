@@ -53,7 +53,7 @@ $(document).ready(function(){
 					url: 'enregistrer.php',
 					data: formdata,
 					dataType: 'json',
-					cahce: false,
+					cache: false,
 					success: function(data){
 						if(data.ok === false){
 							$('#reponse1').show();
@@ -66,10 +66,8 @@ $(document).ready(function(){
 							});
 						}
 						else{
-
 							location.reload();
 						}
-						
 					},
 				});	
 };	

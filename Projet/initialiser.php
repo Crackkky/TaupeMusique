@@ -12,8 +12,8 @@ include("Fonctions.inc.php");
 include("Donnees.inc.php");
 
 // Connexion au serveur MySQL
-$mysqli = connect();
-$base = getBase();
+$mysqli = first_connect();
+select_database($mysqli);
 
 // Suppression / Création / Sélection de la base de données : $base
 query($mysqli,'DROP DATABASE IF EXISTS '.$base);
