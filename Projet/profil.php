@@ -45,7 +45,7 @@ if(isset($_COOKIE["user"])){
     $mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());
     mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");
     $str = "SELECT LOGIN,EMAIL,PASS,NOM,PRENOM,DATE,SEXE,ADRESSE,CODEP,VILLE,TELEPHONE FROM USERS WHERE LOGIN = '".$_COOKIE["user"]."'";
-    $result = query($mysqli,$str) or die("Impossible de se connecter");
+    $result = queryDB($mysqli,$str) or die("Impossible de se connecter");
     $row = mysqli_fetch_assoc($result);
     if(is_null($row["LOGIN"])){$login = "";}else{$login = $row["LOGIN"];}
     if(is_null($row["EMAIL"])){$email = "";}else{$email = $row["EMAIL"];}

@@ -15,12 +15,12 @@ if(isset($_COOKIE["user"])){
     $produit = $_POST["id_produit"];
     $str0 = 'select * from favs where id_prod = '.$produit;
     $str = "INSERT INTO FAVS VALUES('".$user."','".$produit."')";
-    $result = query($mysqli,$str0) or die("Impossible de ajouter produit<br>");
+    $result = queryDB($mysqli,$str0) or die("Impossible de ajouter produit<br>");
     if(mysqli_num_rows($result)>0){
-        query($mysqli,'delete from favs where id_prod = '.$produit.' and LOGIN = \''.$_COOKIE["user"].'\'');
+        queryDB($mysqli,'delete from favs where id_prod = '.$produit.' and LOGIN = \''.$_COOKIE["user"].'\'');
         echo 'delete set';
     }else{
-        query($mysqli,$str);
+        queryDB($mysqli,$str);
     }
 }
 else{

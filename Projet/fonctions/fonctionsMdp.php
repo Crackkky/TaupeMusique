@@ -5,7 +5,7 @@
 
 		$mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());
 		mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");	
-		$result = query($mysqli,'select login,prenom,nom,email,adresse,ville,telephone from users where login = \'admin\'');
+		$result = queryDB($mysqli,'select login,prenom,nom,email,adresse,ville,telephone from users where login = \'admin\'');
 		//creation d'un nouveau mot de pass
 		$newpass = substr(str_shuffle(MD5(microtime())), 0, 8);
 		$message = "Monsieur, Madame, \n\n\n Votre mot de pass pour le site TaupeAchat est maintenant: ".$newpass.".\n\n\nBien cordialement, l'equipe Taupe Achat.";

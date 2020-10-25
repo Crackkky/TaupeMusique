@@ -131,7 +131,7 @@ if(isset($login) && !empty($login) && is_char_ok($login)){ //si on a renseigné 
 	$mysqli = connect(); //CONNEXION BDD
 	//ici on fait une requete à la BDD pour savoir si le login est déjà récupéré ou non
 	$str = "SELECT EMAIL FROM USERS WHERE login = '".$login."'";
-	$result = query($mysqli,$str) or die("L'email est déjà utilisé<br>");
+	$result = queryDB($mysqli,$str) or die("L'email est déjà utilisé<br>");
 	if(mysqli_num_rows($result)>0){
 		$ok = false;
 		$return["dejaEmail"] = "l'email saisi est déjà enregistré";
@@ -139,7 +139,7 @@ if(isset($login) && !empty($login) && is_char_ok($login)){ //si on a renseigné 
 
 
 	$str = "SELECT LOGIN FROM USERS WHERE LOGIN = '".$login."'";
-	$result = query($mysqli,$str) or die("Le Login est déjà utilisé<br>");
+	$result = queryDB($mysqli,$str) or die("Le Login est déjà utilisé<br>");
 	if(mysqli_num_rows($result)>0){
 		$ok = false;
 		$return["dejaLogin"] = "le login saisi est déjà enregistré";
@@ -156,7 +156,7 @@ if($ok === true){ // tout est bon , on se connecte a la BDD puis on insert les v
 	$return['msg'] = "OK";
 	//todo oskour l'injection SQL, faire des "sql prepare" machin
 	$str = "INSERT INTO USERS VALUES ('".$login."','".$email."','".password_hash($pass, PASSWORD_DEFAULT)."','".$nom."','".$prenom."','".$date."','".$sexe."','".$adresse."','".$codepostal."','".$ville."','".$telephone."');";
-	query($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
+	queryDB($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
 	setcookie('user',$login,time() + 3600);
 	//unset($return);
 	disconnect($mysqli); //DECONNEXION BDD

@@ -77,26 +77,26 @@ function xmlValide($dom)
 //on ins�re une nouvelle rubrique dans la base de donn�es (si la rubrique est d�j� pr�sente alors on insert que les rubriques sup�rieures de fa�on r�cursive)
 function insererRub($rub)
 {
-	$result = mysql_query('select id_rub from rubrique where Libelle_rub ="'.$rub['Nom'].'"');
+	$result = mysqli_query('select id_rub from rubrique where Libelle_rub ="'.$rub['Nom'].'"');
 	
-	if(mysql_num_rows($result) == 0)
+	if(mysqli_num_rows($result) == 0)
 	{
-		mysql_query('insert into rubrique (Libelle_rub) values("'.$rub['Nom'].'")');
+		mysqli_query('insert into rubrique (Libelle_rub) values("'.$rub['Nom'].'")');
 		if(isset($rub['RubriquesSuperieures'])) $result = mysql_query('select id_rub from rubrique where Libelle_rub ="'.$rub['Nom'].'"');
 	}
 	
 	if(isset($rub['RubriquesSuperieures']))
 	{
-		$id_rub = mysql_fetch_row($result);
+		$id_rub = mysqli_fetch_row($result);
 		
 		foreach($rub['RubriquesSuperieures'] as $libelle)
 		{	
 			insererRub(array('Nom'=>$libelle)); //on ins�re r�cursivement les rubriques sup�rieures dans la base de donn�es
 			
-			$result = mysql_query('select id_rub from rubrique where Libelle_rub ="'.$libelle.'"');
-			$id_rub_sup = mysql_fetch_row($result);
+			$result = mysqli_query('select id_rub from rubrique where Libelle_rub ="'.$libelle.'"');
+			$id_rub_sup = mysqli_fetch_row($result);
 
-			mysql_query('insert into hierarchie (id_parent, id_enfant) values("'.$id_rub_sup[0].'","'.$id_rub[0].'")');
+			mysqli_query('insert into hierarchie (id_parent, id_enfant) values("'.$id_rub_sup[0].'","'.$id_rub[0].'")');
 		}
 	}
 }
