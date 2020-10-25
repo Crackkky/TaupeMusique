@@ -7,16 +7,13 @@
 <body>
 <?php
 
-include("parametres.php");
+
 include("Fonctions.inc.php");
 include("Donnees.inc.php");
 
 // Connexion au serveur MySQL
-$host = getHost();
-$user = getUser();
-$pass = getPass();
+$mysqli = connect();
 $base = getBase();
-$mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());
 
 // Suppression / Création / Sélection de la base de données : $base
 query($mysqli,'DROP DATABASE IF EXISTS '.$base);
