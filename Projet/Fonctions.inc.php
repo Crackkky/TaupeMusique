@@ -57,7 +57,7 @@ function is_size_ok($string){
  * @return false|int : return false ou int selon si la chaine contient que les bons characteres
  */
 function is_char_ok($string){
-    return preg_match("/^[a-zA-Z'\-\_0-9 ]+$/)", $string);
+    return preg_match("/^[a-zA-Z'\-\_0-9 ]+$/", $string);
 }
 
 //fait une batterie de test sur une string pour valider le format
@@ -71,7 +71,7 @@ function is_ok($string){
         $res = false;
     }
 
-    return res;
+    return $res;
 }
 
 ?>

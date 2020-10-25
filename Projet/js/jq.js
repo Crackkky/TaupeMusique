@@ -55,17 +55,18 @@ $(document).ready(function(){
 					dataType: 'json',
 					cahce: false,
 					success: function(data){
-						if(data.ok == false){
+						if(data.ok === false){
 							$('#reponse1').show();
 							$.each(data, function(i,item) {
-								if(item != data.ok){
+								if(item !== data.ok){
 									str+='<li>' + item +'</li>'
 								}
-								$('#reponse1').html('<font color="red"><ul>' + str + '</ul></font">');
+								$('#reponse1').innerHTML('<span style="color: #ff0000; "><ul>' + str + '</ul></span">');
 								$('#reponse1').fadeOut(5000);
 							});
 						}
 						else{
+
 							location.reload();
 						}
 						
