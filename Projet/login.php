@@ -1,5 +1,4 @@
 <?php
-include("parametres.php");
 include("Fonctions.inc.php");
 include("Donnees.inc.php");
 
@@ -18,8 +17,10 @@ if(isset($_POST["login"]) && isset($_POST["password"])){
     $str = "SELECT LOGIN,PASS,EMAIL FROM USERS WHERE LOGIN = '".$login."'";
     $result = query($mysqli,$str) or die ("Impossible de se connection à la base de données<br>");
     if(mysqli_num_rows($result)>0){
+
         $row = mysqli_fetch_assoc($result);
-        if($pass == $row["PASS"]){
+
+        if(password_verify($pass, $row["PASS"])){
             setcookie("user",$row["LOGIN"]);
             unset($return);
             $return["msg"] = "L'utilisateur est connecté";

@@ -5,6 +5,22 @@ include("parametres.php");
  * fonctions pour la base de donnée
  * -------------------------------*/
 
+function first_connect(){
+    $host = getHost();
+    $user = getUser();
+    $pass = getPass();
+    $mysqli = mysqli_init(); //pour le msqli_error
+    $mysqli = mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error($mysqli));
+
+    return $mysqli;
+}
+
+function select_database($mysqli){
+    $base = getBase();
+    $mysqli = mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");
+
+}
+
 /**
  * Connexion à la BDD et selectionne la bonne table.
  * @return false|mysqli : représente la connexion à la BDD ou false si cela échoue.
@@ -64,7 +80,7 @@ function is_size_ok($string){
  * @return false|int : return false ou int selon si la chaine contient que les bons characteres
  */
 function is_char_ok($string){
-    return preg_match("/^[a-zA-Z'\-\_0-9 ]+$/)", $string);
+    return preg_match("/^[a-zA-Z'\-\_0-9 ]+$/", $string);
 }
 
 //fait une batterie de test sur une string pour valider le format

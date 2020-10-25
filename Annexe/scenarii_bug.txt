@@ -4,7 +4,9 @@
 #
 
  > cliquer sur profil lorsqu'on est pas connecté : error 404 not found 
-+> péréniser le nom des fichiers : Fichier.php et pas fichier.php
++> péréniser le nom des fichiers : fichier.php et pas Fichier.php
 
 
- 
+> lorsqu'on créer un compte, deux sont crées
++> modification de enregistrer.php 
+

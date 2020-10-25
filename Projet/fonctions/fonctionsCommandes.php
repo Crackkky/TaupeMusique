@@ -1,6 +1,5 @@
 <?php
 	function afficherCommandes(){
-		include("parametres.php");
 		include("Fonctions.inc.php");
 		include("Donnees.inc.php");
 

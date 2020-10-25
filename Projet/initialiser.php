@@ -12,15 +12,14 @@ include("Fonctions.inc.php");
 include("Donnees.inc.php");
 
 // Connexion au serveur MySQL
-$mysqli = connect();
-$base = getBase();
+$mysqli = first_connect();
+select_database($mysqli);
 
 // Suppression / Création / Sélection de la base de données : $base
-//echo 'BITE <br />';
-queryDB($mysqli,'DROP DATABASE IF EXISTS '.$base);
-//echo 'BITE <br />';
-queryDB($mysqli,'CREATE DATABASE '.$base);
-mysqli_select_db($mysqli, $base) or die("Impossible de sélectionner la base : $base");
+$base = getBase();
+query($mysqli,'DROP DATABASE IF EXISTS '.$base);
+query($mysqli,'CREATE DATABASE '.$base);
+mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");
 
 
 queryDB($mysqli,"CREATE TABLE IF NOT EXISTS USERS (
@@ -127,6 +126,6 @@ queryDB($mysqli,"INSERT INTO PRODUITS VALUES (
 mysqli_close($mysqli);
 ?>
 
-Insertion réussie
+Initialisation réussie
 </body>
 </html>

@@ -35,12 +35,23 @@
                 <h4>Créer un compte</h4>
             </div>
             <div class="modal-body">
+                <?php
+                    if(isset($_SESSION['inscription'])){
+                        echo $_SESSION['inscription'];
+                    }
+                ?>
 
                 <form role="form" method="post" id="enregform">
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" value="Enregistrer">
                         <font color="red"><label id="reponse"></label></font>
+                        <?php
+                            if (isset($_SESSION['inscription'])){ //si y'a des erreurs d'inscription :
+                                print_r(array_values($_SESSION['inscription']));
+                            }
+                        ?>
                     </div>
+                    <div id="test">oui<br></div>
                     <div class="form-group">
                         <label id="reponse1""></label>
                     </div>

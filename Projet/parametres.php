@@ -5,7 +5,7 @@
 //	les paramètres de connexions à un serveur MySQL
 
 function getHost(){
-    $host="localhost";
+    $host="127.0.0.1";
     return $host;
 }
 function getUser(){
@@ -14,7 +14,7 @@ function getUser(){
 }
 
 function getPass(){
-    $pass="root";
+    $pass="";
     return $pass;
 }
 

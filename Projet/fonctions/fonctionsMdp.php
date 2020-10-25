@@ -1,7 +1,6 @@
 <?php
 	//verification de l'email inseree
 	if(isset($_POST["email"]) && preg_match('#^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,5}$#', $_POST["email"])){
-		include("../parametres.php");
 		include("../Fonctions.inc.php");
 
 		$mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());
