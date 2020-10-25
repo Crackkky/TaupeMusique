@@ -8,10 +8,10 @@ if (isset($_COOKIE["user"])) {
     $user = getUser();
     $pass = getPass();
     $base = getBase();
-    $mysqliFav=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());
+    $mysqliFav=mysqli_connect($host, $user, $pass) or die("Problème de connexion Fav de la base :".mysqli_error());
     mysqli_select_db($mysqliFav,$base) or die("Impossible de sélectionner la base : $base");
 
-    $result = query($mysqliFav, "SELECT ID_PROD FROM favs WHERE LOGIN = '".$_COOKIE["user"]."'") or die("récupération des Albums favorites impossible");
+    $result = queryDB($mysqliFav, "SELECT ID_PROD FROM favs WHERE LOGIN = '".$_COOKIE["user"]."'") or die("récupération des Albums favoris impossible");
 
     $favAlbums = array();
 

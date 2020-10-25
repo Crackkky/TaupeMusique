@@ -1,8 +1,20 @@
 <?php
 include("Donnees.inc.php");
 
+function getHierarchies() {
+
+
+
+    $hierarchies = array();
+
+
+
+
+    return $hierarchies;
+}
+
 function getRoots() {
-    global $Hierarchie;
+    $Hierarchie = getHierarchies();
     $roots = array();
     foreach ($Hierarchie as $categorie => $ssCategorie) {
         if (array_key_exists("super-categorie", $Hierarchie[$categorie])) {
@@ -11,6 +23,17 @@ function getRoots() {
     }
     return $roots;
 }
+
+/*function getRoots() { //TODO Adapter a la db
+    global $Hierarchie;
+    $roots = array();
+    foreach ($Hierarchie as $categorie => $ssCategorie) {
+        if (array_key_exists("super-categorie", $Hierarchie[$categorie])) {
+            $roots[] = $categorie;
+        }
+    }
+    return $roots;
+}*/
 
 function getNexts($current) {
     global $Hierarchie;

@@ -2,10 +2,10 @@
 
 // Parametres de configuration de la connexion
 // -> permet de porter l'application en ne modifiant qu'une seule fois
-//	les param�tres de connexions � un serveur MySQL
+//	les paramètres de connexions à un serveur MySQL
 
 function getHost(){
-    $host="127.0.0.1";
+    $host="localhost";
     return $host;
 }
 function getUser(){
@@ -14,7 +14,7 @@ function getUser(){
 }
 
 function getPass(){
-    $pass="je suis un mot de passe fort";
+    $pass="root";
     return $pass;
 }
 
@@ -24,7 +24,7 @@ function getBase(){
 }
 
 function getID(){
-    $id_user="0000";
+    $id_user = "0000";
     return $id_user;
 }
 
