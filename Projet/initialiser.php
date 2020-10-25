@@ -13,14 +13,12 @@ include("Donnees.inc.php");
 
 // Connexion au serveur MySQL
 $mysqli = first_connect();
-select_database($mysqli);
 
 // Suppression / Création / Sélection de la base de données : $base
 $base = getBase();
 queryDB($mysqli,'DROP DATABASE IF EXISTS '.$base);
 queryDB($mysqli,'CREATE DATABASE '.$base);
-mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");
-
+select_database($mysqli);
 
 queryDB($mysqli,"CREATE TABLE IF NOT EXISTS USERS (
                         LOGIN varchar(100)  PRIMARY KEY,
