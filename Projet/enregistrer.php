@@ -23,6 +23,7 @@ $telephone = mysqli_real_escape_string($mysqli,$_POST["telephonebdd"]);
 disconnect($mysqli);
 
 
+// * LOGIN ET MOT DE PASSE
 //todo séparer le check du login et du mdp
 if((isset($_POST["loginbdd"])) && (isset($_POST["passwordbdd"]))){ //si login et password sont renseignés
 	if(empty($login) || empty($pass)){ //si l'un des deux est vide
@@ -56,16 +57,23 @@ else{ //le login et le mot de passe ne sont pas renseignés
 } //fin du test du login et mot de passe
 
 
+
+// * EMAIL
+
 if(!isset($_POST["emailbdd"]) || empty($_POST['emailbdd']) || !filter_var($_POST["emailbdd"], FILTER_VALIDATE_EMAIL)){
 	$email = NULL;
-	$return["emailVal"] = "L'email n'est pas valide";
+	$return["emailVal"] = "L'email invalide";
 	$ok = false;
 }
 
+// * NOM
+
 if(!isset($_POST["nombdd"]) || empty($_POST["nombdd"]) || !is_ok($nom)){ //si le nom est renseigné
-		$return["Nom"] = "le Nom ne peut pas être vide";
-		$nom = NULL;
+	$return["Nom"] = "Nom invalide";
+	$nom = NULL;
 }
+
+// * PRENOM
 
 if(!isset($_POST["prenombdd"]) || empty($_POST['prenombdd']) || !is_ok($prenom)){
 	$prenom = NULL;
@@ -73,43 +81,53 @@ if(!isset($_POST["prenombdd"]) || empty($_POST['prenombdd']) || !is_ok($prenom))
 	$ok = false;
 }
 
+// * ADRESSE
+
 if(!isset($_POST["adressebdd"]) || empty($_POST["adressebdd"]) || !is_ok($adresse)) {
 	$adresse = NULL;
 	$return["Adresse"] = "Adresse invalide";
 	$ok = false;
 }
 
+// * VILLE
 
 if(!isset($_POST["villebdd"]) || empty(($_POST['villebdd'])) || !is_ok($ville)){
-		$return["ville"] = "La ville n'est pas valide";
-		$ok = false;
+	$return["ville"] = "La ville n'est pas valide";
+	$ok = false;
 }
+
+// * CODE POSTAL
 
 if(!isset($_POST["codepostalbdd"]) || empty($_POST["codepostalbdd"]) || strlen($codepostal)!=5){
-		$return["codepostal"] = "Le code postal n'est pas valide";
-		$ok = false;
+	$return["codepostal"] = "Le code postal n'est pas valide";
+	$ok = false;
 }
 
+
+// * DATE
 
 if(!isset($_POST["datebdd"]) || empty($_POST['datebdd']) || strlen($date)>50){ //todo verifier la date
-		$return["date"] = "la date n'est pas valide";
-		$ok = false;
+	$return["date"] = "la date n'est pas valide";
+	$ok = false;
 }
+
+// * TELEPHONE
 
 if(!isset($_POST["telephonebdd"]) || empty(($_POST['telephonebdd']))
 	|| !preg_match("/^[0-9]{9,15}$/", $_POST["telephonebdd"])) {
-		$return["telephoneVal"] = "le telephone n'est pas valide";
-		$telephone = NULL;
-		$ok = false;
+	$return["telephoneVal"] = "le telephone n'est pas valide";
+	$telephone = NULL;
+	$ok = false;
 }
 
-
+// * SEXE (oui)
 
 if(isset($_POST["optradio"])){
 	$sexe = $_POST["optradio"];
 }else{
 	$sexe = NULL;
 }
+
 
 if(isset($login) && !empty($login) && is_char_ok($login)){ //si on a renseigné le login et qu'il est bon
 	$mysqli = connect(); //CONNEXION BDD
@@ -137,12 +155,12 @@ if(isset($login) && !empty($login) && is_char_ok($login)){ //si on a renseigné 
 
 if($ok === true){ // tout est bon , on pérenise les entrées puis on insert
 	$mysqli = connect();
-		$return['msg'] = "OK";
-		//todo oskour l'injection SQL
-		$str = "INSERT INTO USERS VALUES ('".$login."','".$email."','".password_hash($pass, PASSWORD_DEFAULT)."','".$nom."','".$prenom."','".$date."','".$sexe."','".$adresse."','".$codepostal."','".$ville."','".$telephone."');";
-		query($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
-		setcookie('user',$login,time() + 3600);
-		unset($return);
+	$return['msg'] = "OK";
+	//todo oskour l'injection SQL
+	$str = "INSERT INTO USERS VALUES ('".$login."','".$email."','".password_hash($pass, PASSWORD_DEFAULT)."','".$nom."','".$prenom."','".$date."','".$sexe."','".$adresse."','".$codepostal."','".$ville."','".$telephone."');";
+	query($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
+	setcookie('user',$login,time() + 3600);
+	unset($return);
 	disconnect($mysqli); //DECONNEXION BDD
 	header('location: index.php');
 	exit();
