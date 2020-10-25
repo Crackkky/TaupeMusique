@@ -2,7 +2,7 @@
 	session_start();
 	if(isset($_COOKIE["panier"]) && isset($_SESSION["login"])){
 					$panier = json_decode($_COOKIE["panier"]);		
-					include("Parametres.php");
+					include("parametres.php");
 					include("Fonctions.inc.php");
 					include("Donnees.inc.php");
 

@@ -7,7 +7,7 @@
 <body>
 <?php
 
-  include("Parametres.php");
+  include("parametres.php");
   include("Fonctions.inc.php");
   include("Donnees.inc.php");
 

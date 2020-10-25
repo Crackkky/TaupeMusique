@@ -34,7 +34,7 @@ function setAnimationState () {
 
 /*	$.ajax({
 		method: "POST",
-		url: "EnregFav.php",
+		url: "enregFav.php",
 		data: {id_produit: this.getAttribute("data-recipe")}
 	})*/
 

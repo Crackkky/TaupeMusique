@@ -1,7 +1,7 @@
 <?php
 
-	include("Parametres.php");
-	include("Fonctions.inc.php");
+	include("parametres.php");
+	include("fonctions.inc.php");
 	include("Donnees.inc.php");
 									  
 		$mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());

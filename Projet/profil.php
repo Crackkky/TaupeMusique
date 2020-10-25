@@ -36,7 +36,7 @@ include 'fonctions/fonctionsLayout.php';
 <body>
 <?php
 	if(isset($_COOKIE["user"])){
-		  include("Parametres.php");
+		  include("parametres.php");
 		  include("Fonctions.inc.php");
 		  include("Donnees.inc.php");
 		  $mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());

@@ -26,7 +26,7 @@
                 <li id="conn">
                     <?php
                     if(isset($_COOKIE["user"])){
-                        echo "<a href='Logout.php'>Log Out</a>";
+                        echo "<a href='logout.php'>Log Out</a>";
                     }
                     else{
                         echo "<a href='#Login' data-toggle='modal'>Log In</a>";
@@ -36,7 +36,7 @@
                 </li>
             </ul >
 			<ul class="nav navbar-nav" style="margin-left:75%">
-			<li><a href="Panier.php"><img src="./images/icone_panier.png" style="height:30px;"/></a></li>
+			<li><a href="panier.php"><img src="./images/icone_panier.png" style="height:30px;"/></a></li>
 			</ul>
         </div>
         <!-- /.navbar-collapse -->

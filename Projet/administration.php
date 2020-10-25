@@ -38,7 +38,7 @@ include 'fonctions/fonctionsAdministration.php';
 <body>
 <?php
 	if(isset($_COOKIE["user"])){
-          include("Parametres.php");
+          include("parametres.php");
           include("Fonctions.inc.php");
           include("Donnees.inc.php");
         $host = getHost();

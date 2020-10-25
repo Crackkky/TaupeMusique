@@ -68,13 +68,13 @@
 				<?php afficherPanier(); ?>				
 				
                 </div>
-									<div>
+                <div>
 					<?php
 						if(isset($_Cookie["user"]) && isset($_COOKIE["panier"])){
-									echo '<a class="btn btn-default" href="confirmerCommande.php">ACHETER</a>';
+						    echo '<a class="btn btn-default" href="confirmerCommande.php">ACHETER</a>';
 						}else if(isset($_COOKIE["panier"])){
-										echo '<p>Connectez vous pour pouvoir acheter</p>';
-									}
+						    echo '<p>Connectez vous pour pouvoir acheter</p>';
+						}
 					?>
 				</div>
 

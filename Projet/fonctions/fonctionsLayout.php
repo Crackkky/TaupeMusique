@@ -39,7 +39,7 @@ function afficherCadrePanier()
 		if($nbArticle ==1) echo '1 article ';
 		else echo $nbArticle.' articles ';
 		
-		echo $total.' €';
+		echo $total.' ï¿½';
 	}
 	
 	echo '</a>';
@@ -50,7 +50,7 @@ function afficherCadreCompte()
 	echo '<div style="padding-left:8px; padding-right:8px;">';
 	
 if(isset($_COOKIE["user"]) && $_COOKIE["user"] == 'admin'){
-	echo '<a class="btn btn-default" href="administration.php">Administration</a><br /><br /><a class="btn btn-default" href="profil.php">Mon compte</a><br /><br />';
+	echo '<a class="btn btn-default" href="Administration.php">Administration</a><br /><br /><a class="btn btn-default" href="profil.php">Mon compte</a><br /><br />';
 	
 	}else if(isset($_COOKIE["user"])){
 		echo '<a class="btn btn-default" href="profil.php">Mon compte</a><br /><br />';
