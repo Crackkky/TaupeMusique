@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$('#logform').submit(function(e){
 		e.preventDefault();
 		formdata = $('#logform').serialize();
+		alert("envoie des données");
 		submitForm(formdata);
 	});
 
@@ -41,7 +42,7 @@ function submitForm(formdata){
 		dataType: 'json',
 		cache: false,
 		success: function(data){
-			$('#reponse').innerHTML = "OK";
+			$('#reponse').innerHTML = data;
 		},
 	});
 };

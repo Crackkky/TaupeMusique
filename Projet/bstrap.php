@@ -16,7 +16,7 @@ if(isset($_SESSION['inscription'])) {
 
                 <form role="form" method="post" id="logform">
                     <div class="form-group">
-                        <font color="red"><label id="reponse"></label></font>
+                        <span style="color: #ff0000; "><label id="reponse"></label></span>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Login d'utilisateur" maxlength="200" name="login"/>
