@@ -39,6 +39,7 @@
                 <form role="form" method="post" id="enregform">
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" value="Enregistrer">
+                        <font color="red"><label id="reponse"></label></font>
                     </div>
                     <div class="form-group">
                         <label id="reponse1""></label>

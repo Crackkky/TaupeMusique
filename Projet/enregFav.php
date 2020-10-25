@@ -1,7 +1,7 @@
 <?php
 
 include("parametres.php");
-include("fonctions.inc.php");
+include("Fonctions.inc.php");
 include("Donnees.inc.php");
 
 $host = getHost();

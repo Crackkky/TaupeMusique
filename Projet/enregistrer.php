@@ -1,7 +1,7 @@
 <?php
 session_start();
 include("parametres.php");
-include("fonctions.inc.php");
+include("Fonctions.inc.php");
 include("Donnees.inc.php");
 
 $host = getHost();
@@ -183,7 +183,7 @@ if(isset($_POST["optradio"])){
 
 if(isset($login)){
 	$str = "SELECT EMAIL FROM USERS WHERE login = '".$login."'";
-	$result = query($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
+	$result = query($mysqli,$str) or die("Impossible de creer un compte pour le moment<br>");
 	if(mysqli_num_rows($result)>0){
 		$ok = false;
 		$return["dejaEmail"] = "l'email saisi est déjà enregistré";
