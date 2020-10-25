@@ -1,76 +1,63 @@
 <?php
 session_start();
-include("parametres.php");
-include("Fonctions.inc.php");
-include("Donnees.inc.php");
 
-$host = getHost();
-$user = getUser();
-$pass = getPass();
-$base = getBase();
-$mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());
-mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");
+include("Fonctions.inc.php");
+
 
 
 $ok = true;
-$result["msg"] = "invalide";
+$result["msg"] = "valide";
 
 
-if((isset($_POST["loginbdd"])) && (isset($_POST["passwordbdd"]))){
-	if(empty($_POST["loginbdd"]) || empty($_POST["passwordbdd"])){
-		$return["pass"] = "le mot de pass est très court";
-		$return["loginVal"] = "le login n'est pas valid";
+
+if((isset($_POST["loginbdd"])) && (isset($_POST["passwordbdd"]))){ //si login et password sont renseignés
+	if(empty($_POST["loginbdd"]) || empty($_POST["passwordbdd"])){ //si l'un des deux est vide
+		$return["pass"] = "Il faut entrer un mot de passe.";
+		$return["loginVal"] = "Il faut entrer un Login.";
 		$ok = false;
-	}
-	else{
-		$pass = mysqli_real_escape_string($mysqli,$_POST["passwordbdd"]);
-		$login = mysqli_real_escape_string($mysqli,$_POST["loginbdd"]);
+	} else{ //login et mot de passe non vide
 		$matches[] = NULL;
-		if(!preg_match("/^[a-zA-Z'\-\_0-9 ]+$/",$_POST["loginbdd"])){
-			$return["loginVal"] = "le login n'est pas valid";
+		if(!is_char_ok($_POST["loginbdd"])){
+			//si le login ne contient pas uniquement des lettres min ou maj, chiffres - et _
+			$return["loginVal"] = "Caractères illégaux détécté(s)";
 			$login = NULL;
-
+			$ok = false;
 		}
-
-
-		if(sizeof($login)>100){
-			$return["loginLong"] = "l'login est trop long";
+		if(!is_size_ok($login)){ //si le login est trop grand
+			$return["loginLong"] = "Le login est trop long (max 100)";
 			$ok = false;
 		}
 
-		if(sizeof($pass)>100){
+		if(!is_size_ok($pass)){ //si le mot de passe à la bonne taille
 			$return["passLong"] = "le mot de pass est trop long";
 			$ok = false;
 		}
-
 	}
 
 }
-else{
-	$return["loginVal"] = "l'login n'est pas valid";;
-	$return["passVal"] = "le mot de pass n'est valid";
+else{ //le login et le mot de passe ne sont pas renseignés
+	$return["loginVal"] = "Le login n'est pas valide";;
+	$return["passVal"] = "Le mot de passe n'est valide";
 	$ok = false;
-}
+} //fin du test du login et mot de passe
 
-if(isset($_POST["emailbdd"])){
-	if(!filter_var($_POST["emailbdd"], FILTER_VALIDATE_EMAIL)){
-		$return["emailVal"] = "l'email n'est pas valid";
+
+if(isset($_POST["emailbdd"])){ //si on a renseignée le mail
+	if(!filter_var($_POST["emailbdd"], FILTER_VALIDATE_EMAIL)){ //si mail non valide
+		$return["emailVal"] = "L'email n'est pas valide";
 		$email = NULL;
-	}
-	else{
+	} else{ //le mail est valide et renseigné
 		$email = $_POST["emailbdd"];
 	}
-}else{
+}else{ //le mail n'est pas renseigné
 	$email = NULL;
 }
 
-if(isset($_POST["nombdd"])){
-	if(empty($_POST["nombdd"])){
-		$return["Nom"] = "le Nom n'est pas valid";
+if(isset($_POST["nombdd"])){ //si le nom est renseigné
+	if(empty($_POST["nombdd"])){ //s'il n'est pas vide
+		$return["Nom"] = "le Nom ne peut pas être vide";
 		$nom = NULL;
-	}
-	else{
-		$nom = mysqli_real_escape_string($mysqli,$_POST["nombdd"]);
+	} else{
 		if(!preg_match("/^[a-zA-Z'\- ]+$/",$_POST["nombdd"])){
 			$return["Nom"] = "le Nom n'est pas valid";
 			$nom = NULL;
@@ -202,21 +189,28 @@ if(isset($login)){
 
 
 
+if($ok === true){ // tout est bon , on pérenise les entrées puis on insert
+	$mysqli = connect(); //CONNEXION BDD
+		$pass = mysqli_real_escape_string($mysqli,$_POST["passwordbdd"]);
+		$login = mysqli_real_escape_string($mysqli,$_POST["loginbdd"]);
+		$email = mysqli_real_escape_string($mysqli,$_POST["emailbdd"]);
+		$nom = mysqli_real_escape_string($mysqli,$_POST["nombdd"]);//
 
-if($ok === true){
-	$str = "INSERT INTO USERS VALUES ('".$login."','".$email."','".password_hash($pass, PASSWORD_DEFAULT)."','".$nom."','".$prenom."','".$date."','".$sexe."','".$adresse."','".$codepostal."','".$ville."','".$telephone."');";
-	query($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
-	setcookie('user',$login,time() + 3600);
-	unset($return);
-	mysqli_close($mysqli);
+		$return['msg'] = "OK";
+		$str = "INSERT INTO USERS VALUES ('".$login."','".$email."','".password_hash($pass, PASSWORD_DEFAULT)."','".$nom."','".$prenom."','".$date."','".$sexe."','".$adresse."','".$codepostal."','".$ville."','".$telephone."');";
+		query($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
+		setcookie('user',$login,time() + 3600);
+		unset($return);
+	disconnect($mysqli); //DECONNEXION BDD
 	header('location: index.php');
 	exit();
-}else{
+}
 
-	mysqli_close($mysqli);
+else{
 	$_SESSION["inscription"] = $return;
 	exit();
 }
+
 
 
 ?>
