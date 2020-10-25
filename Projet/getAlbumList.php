@@ -1,5 +1,4 @@
 <?php
-include("parametres.php");
 include("Fonctions.inc.php");
 include("./API.php");
 $favAlbums = array();

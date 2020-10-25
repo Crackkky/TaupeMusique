@@ -14,7 +14,7 @@ function getUser(){
 }
 
 function getPass(){
-    $pass="je suis un mot de passe fort";
+    $pass="";
     return $pass;
 }
 
