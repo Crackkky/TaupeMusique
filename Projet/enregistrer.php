@@ -68,14 +68,14 @@ if(!isset($_POST["emailbdd"]) || empty($_POST['emailbdd']) || !filter_var($_POST
 
 // * NOM
 
-if(!isset($_POST["nombdd"]) || empty($_POST["nombdd"]) || !is_ok($nom)){ //si le nom est renseigné
+if(!isset($_POST["nombdd"]) || empty($_POST["nombdd"]) || !is_char_ok($nom)){ //si le nom est renseigné
 	$return["Nom"] = "Nom invalide";
 	$nom = NULL;
 }
 
 // * PRENOM
 
-if(!isset($_POST["prenombdd"]) || empty($_POST['prenombdd']) || !is_ok($prenom)){
+if(!isset($_POST["prenombdd"]) || empty($_POST['prenombdd']) || !is_char_ok($prenom)){
 	$prenom = NULL;
 	$return["Prenom"] = "Prénom invalide";
 	$ok = false;
@@ -83,7 +83,7 @@ if(!isset($_POST["prenombdd"]) || empty($_POST['prenombdd']) || !is_ok($prenom))
 
 // * ADRESSE
 
-if(!isset($_POST["adressebdd"]) || empty($_POST["adressebdd"]) || !is_ok($adresse)) {
+if(!isset($_POST["adressebdd"]) || empty($_POST["adressebdd"]) || !is_char_ok($adresse)) {
 	$adresse = NULL;
 	$return["Adresse"] = "Adresse invalide";
 	$ok = false;
@@ -91,7 +91,7 @@ if(!isset($_POST["adressebdd"]) || empty($_POST["adressebdd"]) || !is_ok($adress
 
 // * VILLE
 
-if(!isset($_POST["villebdd"]) || empty(($_POST['villebdd'])) || !is_ok($ville)){
+if(!isset($_POST["villebdd"]) || empty(($_POST['villebdd'])) || !is_char_ok($ville)){
 	$return["ville"] = "La ville n'est pas valide";
 	$ok = false;
 }
