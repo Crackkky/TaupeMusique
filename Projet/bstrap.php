@@ -40,6 +40,7 @@
                         echo $_SESSION['inscription'];
                     }
                 ?>
+
                 <form role="form" method="post" id="enregform">
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" value="Enregistrer">
@@ -50,6 +51,7 @@
                             }
                         ?>
                     </div>
+                    <div id="test">oui<br></div>
                     <div class="form-group">
                         <label id="reponse1""></label>
                     </div>

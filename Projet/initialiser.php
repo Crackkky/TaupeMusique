@@ -16,6 +16,7 @@ $mysqli = first_connect();
 select_database($mysqli);
 
 // Suppression / Création / Sélection de la base de données : $base
+$base = getBase();
 query($mysqli,'DROP DATABASE IF EXISTS '.$base);
 query($mysqli,'CREATE DATABASE '.$base);
 mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");

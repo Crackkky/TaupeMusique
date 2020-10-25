@@ -38,7 +38,7 @@ if((isset($_POST["loginbdd"])) && (isset($_POST["passwordbdd"]))){ //si login et
 			$ok = false;
 		}
 		if(!is_size_ok($login)){ //si le login est trop grand
-			$return["loginLong"] = "Le login est trop long (max 100)";
+			$return["loginLong"] = "Le login doit faire entre 6 et 64 caractères";
 			$ok = false;
 		}
 
@@ -56,7 +56,7 @@ else{ //le login et le mot de passe ne sont pas renseignés
 } //fin du test du login et mot de passe
 
 
-if(!isset($_POST["emailbdd"]) || empty($_POST['emailbdd']) || filter_var($_POST["emailbdd"], FILTER_VALIDATE_EMAIL)){
+if(!isset($_POST["emailbdd"]) || empty($_POST['emailbdd']) || !filter_var($_POST["emailbdd"], FILTER_VALIDATE_EMAIL)){
 	$email = NULL;
 	$return["emailVal"] = "L'email n'est pas valide";
 	$ok = false;
