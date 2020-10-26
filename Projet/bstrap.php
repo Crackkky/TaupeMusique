@@ -46,7 +46,7 @@ if(isset($_SESSION['inscription'])) {
                 <form role="form" method="post" id="enregform">
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" value="Enregistrer">
-                        <font color="red"><label id="reponse"></label></font>
+                        <span style="color: red; "><label id="reponseEnr"></label></span>
                         <?php
                             if(isset($_SESSION['inscription'])){ //si y'a des erreurs d'inscription :
                                 print_r(array_values($_SESSION['inscription']));

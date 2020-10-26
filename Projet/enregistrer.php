@@ -21,38 +21,45 @@ $telephone = mysqli_real_escape_string($mysqli,$_POST["telephonebdd"]);
 disconnect($mysqli);
 
 
-// * LOGIN ET MOT DE PASSE
+// * LOGIN
 //todo séparer le check du login et du mdp
-if((isset($_POST["loginbdd"])) && (isset($_POST["passwordbdd"]))){ //si login et password sont renseignés
-	if(empty($login) || empty($pass)){ //si l'un des deux est vide
-		$return["pass"] = "Il faut entrer un mot de passe.";
+
+if((isset($_POST["loginbdd"])) || empty($login)){ //si login est vide ou non renseigné
 		$return["loginVal"] = "Il faut entrer un Login.";
 		$ok = false;
-	} else{ //login et mot de passe non vide
-		$matches[] = NULL;
-		if(!is_char_ok($login)){
-			//si le login ne contient pas uniquement des lettres min ou maj, chiffres - et _
-			$return["loginVal"] = "Caractères illégaux détécté(s)";
-			$login = NULL;
-			$ok = false;
-		}
-		if(!is_size_ok($login)){ //si le login est trop grand
-			$return["loginLong"] = "Le login doit faire entre 6 et 64 caractères";
-			$ok = false;
-		}
-
-		if(!is_size_ok($pass)){ //si le mot de passe à la bonne taille
-			$return["passLong"] = "le mot de pass est trop long";
-			$ok = false;
-		}
+} else{ //login non vide
+	if(!is_char_ok($login)){
+		//si le login ne contient pas uniquement des lettres min ou maj, chiffres - et _
+		$return["loginVal"] = "Caractères illégaux détécté(s)";
+		$login = NULL;
+		$ok = false;
 	}
-
+	if(!is_size_ok($login)){
+		$return["loginVal"] = "Login trop court";
+		$login = NULL;
+		$ok = false;
+	}
 }
-else{ //le login et le mot de passe ne sont pas renseignés
-	$return["loginVal"] = "Le login n'est pas valide";;
-	$return["passVal"] = "Le mot de passe n'est valide";
-	$ok = false;
-} //fin du test du login et mot de passe
+
+
+// * MDP
+
+if(isset($_POST["passwordbdd"])|| empty($pass)){
+		$return["pass"] = "Il faut entrer un mot de passe.";
+		$ok = false;
+} else {
+	if(!is_char_ok($pass)){
+		//si le mdp ne contient pas uniquement des lettres min ou maj, chiffres - et _
+		$return["passVal"] = "Caractères illégaux détécté(s)";
+		$pass = NULL;
+		$ok = false;
+	}
+	if(!is_size_pass_ok($pass)){
+		$return["passVal"] = "Mot de passe trop court";
+		$pass = NULL;
+		$ok = false;
+	}
+}
 
 
 

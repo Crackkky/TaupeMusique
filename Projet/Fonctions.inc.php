@@ -66,7 +66,16 @@ function queryDB($link,$query)
  * @return bool : true si la taille de string est entre 6 et 64
  */
 function is_size_ok($string){
-    return strlen($string) > 5 && strlen($string) < 65;
+    return strlen($string) > 1 && strlen($string) < 65;
+}
+
+
+/**
+ * @param $pass : mot de passe a tester
+ * @return bool : true si le mot de passe fait entre 6 et 64 caractères
+ */
+function is_size_pass_ok($pass){
+    return strlen($pass) > 5 && strlen($pass) < 65;
 }
 
 /**
@@ -80,7 +89,7 @@ function is_char_ok($string){
 //fait une batterie de test sur une string pour valider le format
 function is_ok($string){
     $res = true;
-    //check la taille entre 6 et 64
+    //check la taille entre 2 et 64
     if(!(is_size_ok($string))){
         $res = false;
     }
