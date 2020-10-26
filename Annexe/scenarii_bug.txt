@@ -5,8 +5,15 @@
 
  > cliquer sur profil lorsqu'on est pas connecté : error 404 not found 
 +> péréniser le nom des fichiers : fichier.php et pas Fichier.php
+==> DONE
 
 
 > lorsqu'on créer un compte, deux sont crées
-+> modification de enregistrer.php 
++> modification de enregistrer.php qui insert qu'une fois (bug lié a deux requêtes AJAX comme le scénario suivant)
+==> DONE mais la source du pb (ajax) TODO
+
+
+> lorsqu'on se connecte, deux requêtes ajax sont envoyés
++> (bug lié a deux requêtes AJAX)
+==> TODO
 

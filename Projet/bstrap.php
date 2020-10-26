@@ -14,9 +14,9 @@ if(isset($_SESSION['inscription'])) {
             </div>
             <div class="modal-body">
 
-                <form role="form" method="post" id="logform">
+                <form role="form" id="logform">
                     <div class="form-group">
-                        <span style="color: #ff0000; "><label id="reponse"></label></span>
+                        <span style="color: #ff0000; "><label id="reponse0"></label></span>
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Login d'utilisateur" maxlength="200" name="login"/>
@@ -53,7 +53,6 @@ if(isset($_SESSION['inscription'])) {
                             }
                         ?>
                     </div>
-                    <div id="test">oui<br></div>
                     <div class="form-group">
                         <label id="reponse1""></label>
                     </div>

@@ -1,9 +1,11 @@
 $(document).ready(function(){
 	$('#reponse').hide();
+
 	$('#logform').submit(function(e){
+
 		e.preventDefault();
+		//e.stopPropagation();
 		formdata = $('#logform').serialize();
-		alert("envoie des données");
 		submitForm(formdata);
 	});
 
@@ -42,8 +44,14 @@ function submitForm(formdata){
 		dataType: 'json',
 		cache: false,
 		success: function(data){
-			$('#reponse').innerHTML = data;
+			rep_elem = document.getElementById("reponse0");
+			rep_elem.innerText = data.msg;
+			rep_elem.show();
+			rep_elem.css("display", "block")
 		},
+	}).then(function (){ //si j'enleve ça, il y a un trigger deux fois de l'event ajax, WTF je sais pas pourquoi
+		alert("fonction then");
+		$("#reponse").html(data);
 	});
 };
 
