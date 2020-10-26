@@ -14,10 +14,12 @@
 
 
 > lorsqu'on se connecte, deux requêtes ajax sont envoyés
-+> (bug lié a deux requêtes AJAX), je l'ai patch mais je sais pas trop comment et pourquoi , yes.
-==> DONE
++> (bug lié a deux requêtes AJAX)
 
 > lorsqu'il y a une erreur de formulaire, renvoie un msg d'erreur visible de l'utilisateur
 +> php -> ajax
-==> DONE
+==> DONE pour login et enregistrer
+
+
+
 
