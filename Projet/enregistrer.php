@@ -4,7 +4,7 @@ session_start();
 include("Fonctions.inc.php");
 
 $ok = true;
-$result["msg"] = "valide";
+$return["msg"] = "";
 
 $mysqli = connect();
 //on pérénise les informations
@@ -24,7 +24,7 @@ disconnect($mysqli);
 // * LOGIN
 //todo séparer le check du login et du mdp
 
-if((isset($_POST["loginbdd"])) || empty($login)){ //si login est vide ou non renseigné
+if((!isset($_POST["loginbdd"])) || empty($login)){ //si login est vide ou non renseigné
 		$return["loginVal"] = "Il faut entrer un Login.";
 		$ok = false;
 } else{ //login non vide
@@ -44,10 +44,10 @@ if((isset($_POST["loginbdd"])) || empty($login)){ //si login est vide ou non ren
 
 // * MDP
 
-if(isset($_POST["passwordbdd"])|| empty($pass)){
+if(!isset($_POST["passwordbdd"])|| empty($pass)){
 		$return["pass"] = "Il faut entrer un mot de passe.";
 		$ok = false;
-} else {
+} else { //mdp non vide
 	if(!is_char_ok($pass)){
 		//si le mdp ne contient pas uniquement des lettres min ou maj, chiffres - et _
 		$return["passVal"] = "Caractères illégaux détécté(s)";
@@ -159,21 +159,22 @@ if(isset($login) && !empty($login) && is_char_ok($login)){ //si on a renseigné 
 //todo je fais une connexion de la BDD pour check si mail et login sont pas déjà utilisé puis j'en refais une après : utile ?
 
 if($ok === true){ // tout est bon , on se connecte a la BDD puis on insert les valeurs
+	$return["msg"] = "Compte crée, vous pouvez maintenant vous connecter.";
 	$mysqli = connect();
 	$return['msg'] = "OK";
 	//todo oskour l'injection SQL, faire des "sql prepare" machin
 	$str = "INSERT INTO USERS VALUES ('".$login."','".$email."','".password_hash($pass, PASSWORD_DEFAULT)."','".$nom."','".$prenom."','".$date."','".$sexe."','".$adresse."','".$codepostal."','".$ville."','".$telephone."');";
+	echo "insert into BDD...<br>";
 	queryDB($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
 	setcookie('user',$login,time() + 3600);
 	//unset($return);
 	disconnect($mysqli); //DECONNEXION BDD
-	header('location: index.php');
-	exit();
+	//header('location: index.php');
+} else {
+	$return["msg"] = "Une ou plusieurs erreurs detectée : ";
 }
-else{//il y a eu une erreur, elle est dans $return
-	echo "something went wrong...<br>";
-	$_SESSION["inscription"] = $return;
-	print_r($return);
-	exit();
-}
+//on renvoie la donnée pour ajax
+echo json_encode($return);
+exit();
+
 ?>

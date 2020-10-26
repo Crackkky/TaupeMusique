@@ -61,28 +61,50 @@ function submitDetails(formdata){
 		dataType: 'json',
 		cache: false,
 		success: function(data){
-			alert("SUCCESS");
+			/*
+			1. on recupere le conteneur d'affichage de message
+			2. on affiche les messages d'erreurs eventuelles
+			 */
 			rep_elem = document.getElementById("reponseEnr");
-			alert(rep_elem.innerText);
-			rep_elem.innerText = data.msg;
-			alert(rep_elem.innerText);
-			$.each(data, function(i,item) {
-				if(item !== data.ok){
-					str+='<li>' + item +'</li>'
+			//rep_elem.innerText = data.msg;
+			i = 0
+			$.each(data, function(key,value) {
+				if(i==0){//juste pour ne pas mettre le premier message dans la liste à puce
+					str+= data[key];
+					i= i+1;
+				} else {
+					str+='<li>' + data[key] +'</li>'
 				}
+				rep_elem.innerHTML = "<span style=\"color: #ff0000; \"><ul>" + str + "</ul></span\">";
+				/*
+				alert("data:"+data);
+				alert("key:"+key);
+				alert("value:"+value);
+				 */
+
+			});
+			;
+
+		},
+		error: function(data){
+			alert("error");
+			/*
+			1. on recupere le conteneur d'affichage de message
+			2. on affiche un message d'erreur
+			3. on enumère tous les messages d'erreurs enregistré
+			 */
+			rep_elem = document.getElementById("reponseEnr");
+			//rep_elem.innerText = data.msg;
+			alert(data[0]);
+			alert(data[1]);
+			$.each(data, function(i,item) {
+				str+='<li>' + item +'</li>'
 				rep_elem.innerHTML('<span style="color: #ff0000; "><ul>' + str + '</ul></span">');
 				rep_elem.fadeOut(5000);
 
 			});
-			location.reload();
-
-		},
-		error: function(data){
-			alert("ERROR: " + data.msg);
-			$("#test").html("ERROR");
 		}
 	}).then(function(){
-		$("#reponse1").html(data.msg);
 	});
 };
 
