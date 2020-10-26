@@ -31,8 +31,8 @@ function connect(){ //todo lire les creds dans un fichier avec les bons droits
     $pass = getPass();
     $base = getBase();
     $mysqli = mysqli_init(); //pour le msqli_error
-    $mysqli = mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error($mysqli));
-    mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");
+    $mysqli = mysqli_connect($host, $user, $pass) or die("Problème de connexion à la base :".mysqli_error($mysqli));
+    mysqli_select_db($mysqli, $base) or die("Impossible de sélectionner la base : $base");
 
     return $mysqli;
 }
@@ -50,8 +50,6 @@ function queryDB($link,$query)
     $resultat=mysqli_query($link,$query) or die("$query : ".mysqli_error($link));
     return($resultat);
 }
-
-
 
 
 

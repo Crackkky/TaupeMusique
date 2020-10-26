@@ -1,5 +1,6 @@
 <?php
 include ("API.php");
+include ("Fonctions.inc.php")
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -61,7 +62,7 @@ include ("API.php");
             })
                 .done(function(msg) {
                     $("#albumList").html(msg);
-                    addEvents();
+                    //addEvents();
                 });
         };
 
@@ -137,10 +138,13 @@ include ("API.php");
                         <input  type="checkbox" name="selection" id="cb'.$elementId.'" value="'.$current.'"> '.$current.'</label>'.PHP_EOL;
                     }
                 }
-
-                foreach (getRoots() as $root) {
+///////////
+                echo 'PRODUITS : <br />';
+                getProduits();
+///////////
+                /*foreach (getRoots() as $root) {
                     displayList($root, 0);
-                }
+                }*/
 
                 ?>
             </div>

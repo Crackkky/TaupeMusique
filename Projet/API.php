@@ -1,27 +1,56 @@
 <?php
-include("Donnees.inc.php");
-
-function getHierarchies() {
 
 
+function getRubriques() {
+    $rubriques = array();
 
-    $hierarchies = array();
+    $mysqli = connect();
+    $str = "SELECT ID_RUB, LIBELLE_RUB FROM RUBRIQUES;";
+    $result = queryDB($mysqli, $str) or die ("Impossible de se connection à la base de données pour afficher les rubriques<br>");
 
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            //echo $row["LIBELLE_RUB"]."<br />";
+            $rubriques[$row["ID_RUB"]] = $row["LIBELLE_RUB"];
+        }
+    } else {
+        echo "0 results rubriques";
+    }
 
-
-
-    return $hierarchies;
+    //print_r($rubriques);
+    return $rubriques;
 }
 
-function getRoots() {
-    $Hierarchie = getHierarchies();
-    $roots = array();
-    foreach ($Hierarchie as $categorie => $ssCategorie) {
-        if (array_key_exists("super-categorie", $Hierarchie[$categorie])) {
-            $roots[] = $categorie;
+function getProduits() {
+    $rubriques = getRubriques();
+    $produits = array();
+    $temp = array();
+
+    $mysqli = connect();
+    $str = "SELECT LIBELLE, GENRE FROM PRODUITS;";
+    $result = queryDB($mysqli, $str) or die ("Impossible de se connection à la base de données pour afficher les rubriques<br>");
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            //echo $row["GENRE"]."<br />";
+            $temp[$row["LIBELLE"]] = $row["GENRE"];
+        }
+    } else {
+        echo "0 results products";
+    }
+
+    //print_r($temp);
+    foreach ($rubriques as $keyGenre => $genre) {
+        foreach ($temp as $prod => $genreProd) {
+            //echo $genre;
+            if($genreProd == $keyGenre){
+                $produits[$prod] = $genre;
+            }
         }
     }
-    return $roots;
+
+    print_r($produits);
+    return $produits;
 }
 
 /*function getRoots() { //TODO Adapter a la db

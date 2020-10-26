@@ -3,8 +3,8 @@
 		include("Fonctions.inc.php");
 		include("Donnees.inc.php");
 
-		$mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());
-		mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");	
+		$mysqli = mysqli_connect($host, $user, $pass) or die("Problème de création de la base :".mysqli_error($mysqli));
+		mysqli_select_db($mysqli, $base) or die("Impossible de sélectionner la base : $base");
 		echo "<hr>";
 		$result = queryDB($mysqli,'select login,prenom,nom,email,adresse,ville,telephone from users where login = \'admin\'');
 		$result2 = queryDB($mysqli,'select login,prenom,nom,email,adresse,ville,telephone from users where login != \'admin\'');
