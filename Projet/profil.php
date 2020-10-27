@@ -111,7 +111,7 @@ if(isset($_COOKIE["user"])){
 						</tr>
 						
 						<tr>
-							<td><p><strong>ADRESSEe</strong></p></td><td>".$adresse."</td>
+							<td><p><strong>Adresse</strong></p></td><td>".$adresse."</td>
 						</tr>
 						<tr>
 							<td><p><strong>Ville</strong></p></td><td>".$ville."</td>
