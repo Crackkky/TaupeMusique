@@ -1,5 +1,6 @@
 <?php
 include("API.php");
+include("Fonctions.inc.php");
 ?>
 
 <?php
@@ -11,22 +12,37 @@ if(!isset($_GET["id"])) {
 $albumId = $_GET["id"];
 
 
+$mysqli = connect();
+
+//PRODUIT : ID_PROD|LIBELLE|PRIX|CHANSONS|DESCRIPTIF|GENRE
+$resultAll = queryDB($mysqli, "SELECT * FROM PRODUITS") or die("echec recuperation de tous les albums");
+
+//on parse les resultats de tous les albums
+$Albums = array();
+while($all = mysqli_fetch_assoc($resultAll)) {
+    $Albums[] = $all;
+} //on a fini de construire l'album des favoris
+
+//print_r($Albums);
+disconnect($mysqli);
+
+
 if (filter_var($albumId, FILTER_VALIDATE_INT) === false) {
     header("location: 404.php");
 } 
 
-$album = getAlbumById($albumId);
+$album = getAlbumById($albumId, $Albums);
 
 if(empty($album)){
     header("location: 404.php");
 }
 else{
-    $nom = $album["titre"];
+    $nom = $album["LIBELLE"];
     $shortName = substr($nom, 0, 25);
     $shortName .= ((strlen($nom) != strlen($shortName)) ? ("...") : (""));
-    $prep = $album["descriptif"];
-    $prix = $album["prix"];
-    $ingr = explode("|", $album["chansons"]);
+    $prep = $album["DESCRIPTIF"];
+    $prix = $album["PRIX"];
+    $ingr = explode("|", $album["CHANSONS"]);
     $imgURL = (file_exists("img_cover/$nom.jpg") != false) ? ("img_cover/$nom.jpg") : ("images/tech.jpg");
 
 
