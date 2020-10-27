@@ -113,7 +113,6 @@ if(isset($_POST["passwordbdd"])|| !empty($pass)){
         $pass = NULL;
     }
     else{
-        echo "good";
         $str = "UPDATE USERS SET PASS = '".password_hash($pass, PASSWORD_DEFAULT)."' WHERE login='".$login."';";
         queryDB($mysqli,$str) or die("erreur<br>");
     }
