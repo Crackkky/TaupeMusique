@@ -115,7 +115,7 @@ function updateDetails(formdata){
 		url: 'update.php',
 		data: formdata,
 		dataType: 'json',
-		cahce: false,
+		cache: false,
 		success: function(data){
 			location.reload();
 		},

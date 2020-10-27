@@ -22,34 +22,33 @@ function getRubriques() {
 }
 
 function getProduits() {
-    $rubriques = getRubriques();
+    //$rubriques = getRubriques();
     $produits = array();
-    $temp = array();
 
     $mysqli = connect();
-    $str = "SELECT LIBELLE, GENRE FROM PRODUITS;";
+    $str = "SELECT ID_PROD, LIBELLE, GENRE FROM PRODUITS;";
     $result = queryDB($mysqli, $str) or die ("Impossible de se connection à la base de données pour afficher les rubriques<br>");
 
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             //echo $row["GENRE"]."<br />";
-            $temp[$row["LIBELLE"]] = $row["GENRE"];
+            $produits[$row["ID_PROD"]] = array($row["LIBELLE"], $row["GENRE"]);
         }
     } else {
         echo "0 results products";
     }
 
     //print_r($temp);
-    foreach ($rubriques as $keyGenre => $genre) {
+    /*foreach ($rubriques as $keyGenre => $genre) {
         foreach ($temp as $prod => $genreProd) {
             //echo $genre;
             if($genreProd == $keyGenre){
                 $produits[$prod] = $genre;
             }
         }
-    }
+    }*/
 
-    print_r($produits);
+    //print_r($produits);
     return $produits;
 }
 

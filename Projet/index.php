@@ -113,35 +113,67 @@ include ("Fonctions.inc.php")
 
             <div class="list-group">
                 <?php
-                $elementId = 0; // pour éviter les ID en doublon
+                function displayList($rubriques, $produits) {
+                    $indentLvl = 0;
+                    if ($rubriques) {
+                        print_r($produits);
+                        echo '<br />';
+                        echo '<br />';
+                        foreach ($rubriques as $keyRub => $rubrique) {
+                            foreach ($produits as $keyProd => $produit) {
+                                echo 'CLEF : '.$keyRub.'<br />';
+                                echo 'CLEF PROD: '.$keyProd.'<br />';
+                                echo 'PRODUIT : '.$produit[$keyProd]["LIBELLE"].'<br />';
+                                echo 'GENRE : '.$produit[$keyProd]["GENRE"].'<br />';
+                                echo '<br />';
+                                if($keyRub == $produit[$keyProd]["GENRE"]) {
+                                    echo '<a href="#" class="list-group-item" style="margin-left:' . (25 * $indentLvl) . 'px" data-toggle="collapse" data-target="#element' . $keyProd . '">
+                            <i class="fa fa-angle-down"></i>' . $rubrique . '</a href="#">' . PHP_EOL;
 
-                function displayList($current, $indentLvl) {
-                    global $elementId;
-                    $elementId++;
-                    $nexts = getNexts($current);
+                                    echo '<div id="element' . $keyProd . '" class="list-group collapse parent">';
 
-                    if ($nexts) {
-                        echo '<a href="#" class="list-group-item" style="margin-left:'.(25*$indentLvl).'px" data-toggle="collapse" data-target="#element'.$elementId.'">
-                        <i class="fa fa-angle-down"></i>'.$current.'</a href="#">'.PHP_EOL;
-
-                        echo '<div id="element'.$elementId.'" class="list-group collapse parent">';
-
-                        // On affiche les genres suivants si il y en a
-                        foreach ($nexts as $next) {
-                            echo displayList($next, $indentLvl+1);
+                                    echo '</div>' . PHP_EOL;
+                                    $indentLvl++;
+                                }
+                            }
                         }
-
-                        echo '</div>'.PHP_EOL;
                     }
-                    else {
-                        echo '<label class="list-group-item" style="cursor:pointer; margin-left:'.(25*$indentLvl).'px" for="cb'.$elementId.'">
-                        <input  type="checkbox" name="selection" id="cb'.$elementId.'" value="'.$current.'"> '.$current.'</label>'.PHP_EOL;
-                    }
+                    /*else {
+                        echo '<label class="list-group-item" style="cursor:pointer; margin-left:'.(25*$indentLvl).'px" for="cb'.$keyProd.'">
+                        <input  type="checkbox" name="selection" id="cb'.$elementId.'" value="'.$rubrique.'"> '.$rubrique.'</label>'.PHP_EOL;
+                    }*/
                 }
+
+
+
+//                function displayList($current, $indentLvl) {
+//                    global $elementId;
+//                    $elementId++;
+//                    $nexts = getNexts($current);
+//
+//                    if ($nexts) {
+//                        echo '<a href="#" class="list-group-item" style="margin-left:'.(25*$indentLvl).'px" data-toggle="collapse" data-target="#element'.$elementId.'">
+//                        <i class="fa fa-angle-down"></i>'.$current.'</a href="#">'.PHP_EOL;
+//
+//                        echo '<div id="element'.$elementId.'" class="list-group collapse parent">';
+//
+//                        // On affiche les genres suivants si il y en a
+//                        foreach ($nexts as $next) {
+//                            echo displayList($next, $indentLvl+1);
+//                        }
+//
+//                        echo '</div>'.PHP_EOL;
+//                    }
+//                    else {
+//                        echo '<label class="list-group-item" style="cursor:pointer; margin-left:'.(25*$indentLvl).'px" for="cb'.$elementId.'">
+//                        <input  type="checkbox" name="selection" id="cb'.$elementId.'" value="'.$current.'"> '.$current.'</label>'.PHP_EOL;
+//                    }
+//                }
 ///////////
-                echo 'PRODUITS : <br />';
-                getProduits();
+                //echo 'PRODUITS : <br />';
+                //getProduits();
 ///////////
+                displayList(getRubriques(), getProduits());
                 /*foreach (getRoots() as $root) {
                     displayList($root, 0);
                 }*/

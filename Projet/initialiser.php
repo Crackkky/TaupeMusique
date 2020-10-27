@@ -102,6 +102,13 @@ queryDB($mysqli,"INSERT INTO PRODUITS VALUES ('1',
                                                      'Joss Stone n avait pas sorti de chansons originales depuis son LP1, publié en 2011. Il lui a fallu 4 ans de voyages, de Projets et d enseignements pour arriver à collecter les 14 nouveaux morceaux de Water For Your Soul. De ses sessions d improvisation à Los Angeles avec Damian Marley à l Angleterre, en passant par Hawaï et les routes d Europe où elle a voyagées dans un vieux camping-car en compagnie de son ancien petit ami, la chanteuse a nourri son âme de nouvelles expériences. ',
                                                      1);");
 
+queryDB($mysqli,"INSERT INTO PRODUITS VALUES ('2',
+                                                     'Album Test',
+                                                     99.99,
+                                                     '1 Hello there | 2 General Kenobi | 3 Youre a bold one',
+                                                     'TIN TINTINTIN TINTINTIN TINTIN TINTINTINTINTIN TINTINTINTIN TIN TINTINTINTIN TIN TINTINTINTIN TIN TINTINTINTIN ',
+                                                     4);");
+
 mysqli_close($mysqli);
 ?>
 
