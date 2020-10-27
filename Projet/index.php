@@ -116,23 +116,18 @@ include ("Fonctions.inc.php")
                 function displayList($rubriques, $produits) {
                     $indentLvl = 0;
                     if ($rubriques) {
-                        foreach ($rubriques as $keyRub => $rubrique) {
-                            echo '<label class="list-group-item" style="cursor:pointer; margin-left:'.(25 * $indentLvl).'px" for="cb'.$keyRub.'"><input type="checkbox" name="selection" id="cb'.$keyRub.'" value="'.$keyRub.'"> '.$rubrique.'</label>'.PHP_EOL;
+                        foreach ($produits as $keyProd => $produit) {
+                            /*echo 'CLEF : '.$keyRub.'<br />';
+                            echo 'CLEF PROD: '.$keyProd.'<br />';
+                            echo 'PRODUIT : '.$produit[0].'<br />';
+                            echo 'GENRE : '.$produit[1].'<br />';
+                            echo '<br />';*/
 
-                            foreach ($produits as $keyProd => $produit) {
-                                /*echo 'CLEF : '.$keyRub.'<br />';
-                                echo 'CLEF PROD: '.$keyProd.'<br />';
-                                echo 'PRODUIT : '.$produit[0].'<br />';
-                                echo 'GENRE : '.$produit[1].'<br />';
-                                echo '<br />';*/
-                                if($keyRub == $produit[1]) {
-                                    //echo '<a href="#" class="list-group-item" style="margin-left:' . (25 * $indentLvl) . 'px" data-toggle="collapse" data-target="#element' . $produit[1] . '"><i class="fa fa-angle-down"></i>' . $rubrique . '</a href="#">' . PHP_EOL;
+                            //echo '<a href="#" class="list-group-item" style="margin-left:' . (25 * $indentLvl) . 'px" data-toggle="collapse" data-target="#element' . $produit[1] . '"><i class="fa fa-angle-down"></i>' . $rubrique . '</a href="#">' . PHP_EOL;
 
-                                    //echo '<div id="element' . $keyRub . '" class="list-group collapse parent">';
-                                    //echo '</div>' . PHP_EOL;
-                                    $indentLvl++;
-                                }
-                            }
+                            //echo '<div id="element' . $keyRub . '" class="list-group collapse parent">';
+                            //echo '</div>' . PHP_EOL;
+                            $indentLvl++;
                         }
                     }
                     /*else {
