@@ -10,15 +10,24 @@ if(!isset($_GET["id"])) {
 
 $albumId = $_GET["id"];
 
+
+if (filter_var($albumId, FILTER_VALIDATE_INT) === false) {
+    header("location: 404.php");
+} 
+
 $album = getAlbumById($albumId);
 
-$nom = $album["titre"];
-$shortName = substr($nom, 0, 25);
-$shortName .= ((strlen($nom) != strlen($shortName)) ? ("...") : (""));
-$prep = $album["descriptif"];
-$prix = $album["prix"];
-$ingr = explode("|", $album["chansons"]);
-$imgURL = (file_exists("img_cover/$nom.jpg") != false) ? ("img_cover/$nom.jpg") : ("images/tech.jpg");
+if(empty($album)){
+    header("location: 404.php");
+}
+else{
+    $nom = $album["titre"];
+    $shortName = substr($nom, 0, 25);
+    $shortName .= ((strlen($nom) != strlen($shortName)) ? ("...") : (""));
+    $prep = $album["descriptif"];
+    $prix = $album["prix"];
+    $ingr = explode("|", $album["chansons"]);
+    $imgURL = (file_exists("img_cover/$nom.jpg") != false) ? ("img_cover/$nom.jpg") : ("images/tech.jpg");
 
 
 
@@ -87,6 +96,7 @@ $imgURL = (file_exists("img_cover/$nom.jpg") != false) ? ("img_cover/$nom.jpg") 
         <h3><?=$prix?> €  </h3><button class="btn btn-default">Ajouter au panier</button>
     </div>
 
+<?php } ?>
 
 </div>
 

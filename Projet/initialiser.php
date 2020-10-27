@@ -21,17 +21,17 @@ queryDB($mysqli,'CREATE DATABASE '.$base);
 select_database($mysqli);
 
 queryDB($mysqli,"CREATE TABLE IF NOT EXISTS USERS (
-                        LOGIN varchar(100)  PRIMARY KEY,
-                        EMAIL varchar(200),
+                        LOGIN varchar(50)  PRIMARY KEY,
+                        EMAIL varchar(100),
                         PASS varchar(100),
                         NOM varchar(50),
                         PRENOM varchar(50),
                         DATE varchar(10),
                         SEXE varchar(10),
-                        ADRESSE varchar(500),
-                        CODEP int(20),
+                        ADRESSE varchar(300),
+                        CODEP varchar(5),
                         VILLE varchar(50),
-                        TELEPHONE int(20)					  
+                        TELEPHONE varchar(10)                     
                         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
 queryDB($mysqli,"CREATE TABLE IF NOT EXISTS  RUBRIQUES (

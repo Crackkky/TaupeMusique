@@ -34,7 +34,7 @@ if((!isset($_POST["loginbdd"])) || empty($login)){ //si login est vide ou non re
 		$login = NULL;
 		$ok = false;
 	}
-	if(!is_size_ok($login)){
+	if(strlen($login) < 3 || strlen($login) > 50){
 		$return["loginVal"] = "Login trop court";
 		$login = NULL;
 		$ok = false;
@@ -54,7 +54,7 @@ if(!isset($_POST["passwordbdd"])|| empty($pass)){
 		$pass = NULL;
 		$ok = false;
 	}
-	if(!is_size_pass_ok($pass)){
+	if(strlen($pass) < 5 || strlen($pass) > 100){
 		$return["passVal"] = "Mot de passe trop court";
 		$pass = NULL;
 		$ok = false;
@@ -65,7 +65,7 @@ if(!isset($_POST["passwordbdd"])|| empty($pass)){
 
 // * EMAIL
 
-if(!isset($_POST["emailbdd"]) || empty($_POST['emailbdd']) || !filter_var($_POST["emailbdd"], FILTER_VALIDATE_EMAIL)){
+if(!isset($_POST["emailbdd"]) || empty($_POST['emailbdd']) || !filter_var($_POST["emailbdd"], FILTER_VALIDATE_EMAIL) || strlen($email) < 5 || strlen($email) > 100){
 	$email = NULL;
 	$return["emailVal"] = "L'email invalide";
 	$ok = false;
@@ -73,14 +73,14 @@ if(!isset($_POST["emailbdd"]) || empty($_POST['emailbdd']) || !filter_var($_POST
 
 // * NOM
 
-if(!isset($_POST["nombdd"]) || empty($_POST["nombdd"]) || !is_char_ok($nom)){ //si le nom est renseigné
+if(!isset($_POST["nombdd"]) || empty($_POST["nombdd"]) || !is_char_ok($nom) || strlen($nom) < 3 || strlen($nom) > 50){ //si le nom est renseigné
 	$return["Nom"] = "Nom invalide";
 	$nom = NULL;
 }
 
 // * PRENOM
 
-if(!isset($_POST["prenombdd"]) || empty($_POST['prenombdd']) || !is_char_ok($prenom)){
+if(!isset($_POST["prenombdd"]) || empty($_POST['prenombdd']) || !is_char_ok($prenom) || strlen($prenom) < 3 || strlen($prenom) > 50){
 	$prenom = NULL;
 	$return["Prenom"] = "Prénom invalide";
 	$ok = false;
@@ -88,7 +88,7 @@ if(!isset($_POST["prenombdd"]) || empty($_POST['prenombdd']) || !is_char_ok($pre
 
 // * ADRESSE
 
-if(!isset($_POST["adressebdd"]) || empty($_POST["adressebdd"]) || !is_char_ok($adresse)) {
+if(!isset($_POST["adressebdd"]) || empty($_POST["adressebdd"]) || !is_char_ok($adresse) || strlen($adresse) < 5 || strlen($adresse) > 300) {
 	$adresse = NULL;
 	$return["Adresse"] = "Adresse invalide";
 	$ok = false;
@@ -96,14 +96,14 @@ if(!isset($_POST["adressebdd"]) || empty($_POST["adressebdd"]) || !is_char_ok($a
 
 // * VILLE
 
-if(!isset($_POST["villebdd"]) || empty(($_POST['villebdd'])) || !is_char_ok($ville)){
+if(!isset($_POST["villebdd"]) || empty(($_POST['villebdd'])) || !is_char_ok($ville) || strlen($ville) < 5 || strlen($ville) > 50){
 	$return["ville"] = "La ville n'est pas valide";
 	$ok = false;
 }
 
 // * CODE POSTAL
 
-if(!isset($_POST["codepostalbdd"]) || empty($_POST["codepostalbdd"]) || strlen($codepostal)!=5){
+if(!isset($_POST["codepostalbdd"]) || empty($_POST["codepostalbdd"]) || strlen($codepostal) != 5){
 	$return["codepostal"] = "Le code postal n'est pas valide";
 	$ok = false;
 }
@@ -111,7 +111,7 @@ if(!isset($_POST["codepostalbdd"]) || empty($_POST["codepostalbdd"]) || strlen($
 
 // * DATE
 
-if(!isset($_POST["datebdd"]) || empty($_POST['datebdd']) || strlen($date)>50){ //todo verifier la date
+if(!isset($_POST["datebdd"]) || empty($_POST['datebdd']) || strlen($date) > 10){ //todo verifier la date
 	$return["date"] = "la date n'est pas valide";
 	$ok = false;
 }
@@ -119,7 +119,7 @@ if(!isset($_POST["datebdd"]) || empty($_POST['datebdd']) || strlen($date)>50){ /
 // * TELEPHONE
 
 if(!isset($_POST["telephonebdd"]) || empty(($_POST['telephonebdd']))
-	|| !preg_match("/^[0-9]{9,15}$/", $_POST["telephonebdd"])) {
+	|| !preg_match("/^[0-9]{9,15}$/", $_POST["telephonebdd"]) || strlen($telephone) != 10) {
 	$return["telephoneVal"] = "le telephone n'est pas valide";
 	$telephone = NULL;
 	$ok = false;
