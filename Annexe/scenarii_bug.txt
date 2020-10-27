@@ -21,5 +21,8 @@
 ==> DONE pour login et enregistrer
 
 
+> Pour modifier le profil, ca appele update.php, le fichier n'existe pas
+
+
 
 
