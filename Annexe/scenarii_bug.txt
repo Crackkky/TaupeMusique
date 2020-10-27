@@ -25,4 +25,24 @@
 
 
 
+> Lorsqu'on est connecté, qu'on ajoute un item dans le panier et qu'on va dans l'onglet panier, le site nous demande de nous connecter
+
+
+
+> Message blanc quand on enleve un produit de notre panier
+
+
+
+> Lorsqu'on ajoute un produit en favoris, ca marche pas
+
+
+
+> Lorsqu'on est sur la page d'un produit, il n'y a pas le bouton "favoris"
+
+
+
+> Le site est moche
+
+
+
 
