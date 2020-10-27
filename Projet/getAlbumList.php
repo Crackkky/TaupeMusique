@@ -38,6 +38,7 @@ if (!isset($_POST["ingr"])) {
             }
         }
     } else {
+        $Albums = NULL;
         foreach ($Albums as $id => $album) {
             echo displayBox($id, "heart".(in_array($id, $favAlbums) ? (" fullHeart") : ("")));
             $step++;

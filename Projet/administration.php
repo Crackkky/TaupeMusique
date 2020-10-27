@@ -40,15 +40,13 @@ include 'fonctions/fonctionsAdministration.php';
 if(isset($_COOKIE["user"])){
     include("Fonctions.inc.php");
     include("Donnees.inc.php");
-    $host = getHost();
-    $user = getUser();
-    $pass = getPass();
-    $base = getBase();
-    $mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());
-    mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");
+    $mysqli=connect();
+
     $str = "SELECT LOGIN,EMAIL,PASS,NOM,PRENOM,DATE,SEXE,ADRESSE,CODEP,VILLE,TELEPHONE FROM USERS WHERE LOGIN = '".$_COOKIE["user"]."'";
+
     $result = queryDB($mysqli,$str) or die("Impossible de se connecter");
     $row = mysqli_fetch_assoc($result);
+
     if(is_null($row["LOGIN"])){$login = "";}else{$login = $row["LOGIN"];}
     if(is_null($row["EMAIL"])){$email = "";}else{$email = $row["EMAIL"];}
     if(is_null($row["NOM"])){$nom = "";}else{$nom = $row["NOM"];}
@@ -59,7 +57,7 @@ if(isset($_COOKIE["user"])){
     if(is_null($row["CODEP"])){$codepostal = "";}else{$codepostal = $row["CODEP"];}
     if(is_null($row["VILLE"])){$ville = "";}else{$ville = $row["VILLE"];}
     if(is_null($row["SEXE"])){$sexe = "";}else{$sexe = $row["SEXE"];}
-    mysqli_close($mysqli);
+    disconnect($mysqli);
 }
 ?>
 
@@ -110,7 +108,7 @@ if(isset($_COOKIE["user"])){
 if(isset($row)){
     if(empty($nom)){$nom = "Nom";}
     if(empty($prenom)){$prenom = "Prénom";}
-    if(empty($ADRESSEe)){$ADRESSEe = "ADRESSEe";}
+    if(empty($ADRESSEe)){$ADRESSEe = "ADRESSE";}
     if(empty($ville)){$ville = "Ville";}
     if(empty($codepostal)){$codepostal = "Code Postal";}
     if(empty($date)){$date = "Date de Naissance";};

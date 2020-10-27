@@ -46,6 +46,9 @@ function submitForm(formdata){
 		success: function(data){
 			rep_elem = document.getElementById("reponse0");
 			rep_elem.innerText = data.msg;
+			if(data.msg == "L'utilisateur est maintenant connecté"){
+				window.location.reload();
+			}
 		},
 	}).then(function (){ //si j'enleve ça, il y a un trigger deux fois de l'event ajax, WTF je sais pas pourquoi
 	});

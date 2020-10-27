@@ -1,11 +1,4 @@
-<?php
 
-if(isset($_SESSION['inscription'])) {
-    print_r($_SESSION['inscription']);
-}else{
-    echo "pas def";
-}
-?>
 <div class="modal fade" id="Login" role="dialog">
     <div class="modal-dialog">
         <div class = "modal-content">
