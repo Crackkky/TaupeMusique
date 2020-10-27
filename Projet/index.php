@@ -110,73 +110,11 @@ include ("Fonctions.inc.php")
                     <input type="checkbox" id="favOnly"> N'afficher que vos albums favoris
                 </label>
             </div>
-
-            <div class="list-group">
-                <?php
-                function displayList($rubriques, $produits) {
-                    $indentLvl = 0;
-                    if ($rubriques) {
-                        foreach ($produits as $keyProd => $produit) {
-                            /*echo 'CLEF : '.$keyRub.'<br />';
-                            echo 'CLEF PROD: '.$keyProd.'<br />';
-                            echo 'PRODUIT : '.$produit[0].'<br />';
-                            echo 'GENRE : '.$produit[1].'<br />';
-                            echo '<br />';*/
-
-                            //echo '<a href="#" class="list-group-item" style="margin-left:' . (25 * $indentLvl) . 'px" data-toggle="collapse" data-target="#element' . $produit[1] . '"><i class="fa fa-angle-down"></i>' . $rubrique . '</a href="#">' . PHP_EOL;
-
-                            //echo '<div id="element' . $keyRub . '" class="list-group collapse parent">';
-                            //echo '</div>' . PHP_EOL;
-                            $indentLvl++;
-                        }
-                    }
-                    /*else {
-                        echo '<label class="list-group-item" style="cursor:pointer; margin-left:'.(25*$indentLvl).'px" for="cb'.$keyProd.'">
-                        <input  type="checkbox" name="selection" id="cb'.$elementId.'" value="'.$rubrique.'"> '.$rubrique.'</label>'.PHP_EOL;
-                    }*/
-                }
-
-
-
-//                function displayList($current, $indentLvl) {
-//                    global $elementId;
-//                    $elementId++;
-//                    $nexts = getNexts($current);
-//
-//                    if ($nexts) {
-//                        echo '<a href="#" class="list-group-item" style="margin-left:'.(25*$indentLvl).'px" data-toggle="collapse" data-target="#element'.$elementId.'">
-//                        <i class="fa fa-angle-down"></i>'.$current.'</a href="#">'.PHP_EOL;
-//
-//                        echo '<div id="element'.$elementId.'" class="list-group collapse parent">';
-//
-//                        // On affiche les genres suivants si il y en a
-//                        foreach ($nexts as $next) {
-//                            echo displayList($next, $indentLvl+1);
-//                        }
-//
-//                        echo '</div>'.PHP_EOL;
-//                    }
-//                    else {
-//                        echo '<label class="list-group-item" style="cursor:pointer; margin-left:'.(25*$indentLvl).'px" for="cb'.$elementId.'">
-//                        <input  type="checkbox" name="selection" id="cb'.$elementId.'" value="'.$current.'"> '.$current.'</label>'.PHP_EOL;
-//                    }
-//                }
-///////////
-                //echo 'PRODUITS : <br />';
-                //getProduits();
-///////////
-                displayList(getRubriques(), getProduits());
-                /*foreach (getRoots() as $root) {
-                    displayList($root, 0);
-                }*/
-
-                ?>
-            </div>
         </div>
 
         <div class="col-md-9">
             <hr>
-            Artist / Album <input id="search" onchange="requestAlbumList();" type="text"/>
+                Artist / Album <input id="search" onchange="requestAlbumList();" type="text"/>
             <hr>
             <div class="row" id="albumList">
 
