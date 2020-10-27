@@ -117,9 +117,6 @@ if(isset($_POST["passwordbdd"])|| !empty($pass)){
         queryDB($mysqli,$str) or die("erreur<br>");
     }
 
-
+    disconnect($mysqli);
 }
-
-
-
 ?>
