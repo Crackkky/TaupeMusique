@@ -173,7 +173,7 @@ if(isset($_COOKIE["user"])){
 if(isset($row)){
     if(empty($nom)){$nom = "Nom";}
     if(empty($prenom)){$prenom = "Prénom";}
-    if(empty($adresse)){$adresse = "ADRESSEe";}
+    if(empty($adresse)){$adresse = "Adresse";}
     if(empty($ville)){$ville = "Ville";}
     if(empty($codepostal)){$codepostal = "Code Postal";}
     if(empty($date)){$date = "Date de Naissance";};
