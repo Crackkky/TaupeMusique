@@ -123,10 +123,10 @@ include ("Fonctions.inc.php")
                             foreach ($produits as $keyProd => $produit) {
                                 echo 'CLEF : '.$keyRub.'<br />';
                                 echo 'CLEF PROD: '.$keyProd.'<br />';
-                                echo 'PRODUIT : '.$produit[$keyProd]["LIBELLE"].'<br />';
-                                echo 'GENRE : '.$produit[$keyProd]["GENRE"].'<br />';
+                                echo 'PRODUIT : '.$produit[0].'<br />';
+                                echo 'GENRE : '.$produit[1].'<br />';
                                 echo '<br />';
-                                if($keyRub == $produit[$keyProd]["GENRE"]) {
+                                if($keyRub == $produit[$keyProd][1]) {
                                     echo '<a href="#" class="list-group-item" style="margin-left:' . (25 * $indentLvl) . 'px" data-toggle="collapse" data-target="#element' . $keyProd . '">
                             <i class="fa fa-angle-down"></i>' . $rubrique . '</a href="#">' . PHP_EOL;
 

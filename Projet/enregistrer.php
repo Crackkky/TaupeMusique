@@ -173,6 +173,7 @@ if($ok === true){ // tout est bon , on se connecte a la BDD puis on insert les v
 } else {
 	$return["msg"] = "Une ou plusieurs erreurs detectée : ";
 }
+
 //on renvoie la donnée pour ajax
 echo json_encode($return);
 exit();
