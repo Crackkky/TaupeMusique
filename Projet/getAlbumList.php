@@ -2,19 +2,39 @@
 include("Fonctions.inc.php");
 include("./API.php");
 $favAlbums = array();
+
+//visteur : non connecté
+
+
+/**
+ * on se connecte à la BDD
+ * on recupere tous les albums
+ * on se déconnecte
+ */
+$mysqli = connect();
+//PRODUIT : ID_PROD|LIBELLE|PRIX|CHANSONS|DESCRIPTIF|GENRE
+$resultAll = queryDB($mysqli, "SELECT * FROM PRODUITS") or die("echec recuperation de tous les albums");
+
+//on parse les resultats de tous les albums
+$Albums = array();
+while($all = mysqli_fetch_assoc($resultAll)) {
+    $Albums[] = $all;
+} //on a fini de construire l'album des favoris
+
+//print_r($Albums);
+disconnect($mysqli);
+
+
 if (isset($_COOKIE["user"])) { //todo changer la méthode de connexion par un simple cookie
 
     /**
      * on se connecte à la BDD
      * on recupere les alubms favoris
-     * on recupere tous les albums
      * on se déconnecte
      */
     $mysqli = connect();
     //FAVS :
     $resultFav = queryDB($mysqli, "SELECT ID_PROD FROM FAVS WHERE LOGIN = '".$_COOKIE["user"]."'") or die("récupération des Albums favoris impossible");
-    //PRODUIT : ID_PROD|LIBELLE|PRIX|CHANSONS|DESCRIPTIF|GENRE
-    $resultAll = queryDB($mysqli, "SELECT * FROM PRODUITS") or die("echec recuperation de tous les albums");
 
     //on parse les resultats des albums favoris
     $favAlbums = array();
@@ -22,18 +42,12 @@ if (isset($_COOKIE["user"])) { //todo changer la méthode de connexion par un si
         $favAlbums[] = $fav["ID_PROD"];
     } //on a fini de construire l'album des favoris
 
-    //on parse les resultats de tous les albums
-    $Albums = array();
-    while($all = mysqli_fetch_assoc($resultAll)) {
-        $Albums[] = $all;
-    } //on a fini de construire l'album des favoris
 
-    //print_r($Albums);
     disconnect($mysqli);
 
 
 
-} else if (isset($_COOKIE['favoris'])){ //si on a des favoris
+}else if (isset($_COOKIE['favoris'])){ //si on a des favoris
     $favAlbums = json_decode($_COOKIE['favoris'],true);
 } else {
     $favAlbums = array();
