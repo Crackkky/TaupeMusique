@@ -100,10 +100,9 @@ function getAlbumsWith($chansons) {
     return $albums;
 }
 
-function getAlbumById($id) {
-    global $Albums;
+function getAlbumById($id, $Album) {
     if(array_key_exists($id, $Album)){
-        return $Albums[$id];
+        return $Album[$id];
     }
     else {
     return array();

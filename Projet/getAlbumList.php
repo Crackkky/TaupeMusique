@@ -2,45 +2,59 @@
 include("Fonctions.inc.php");
 include("./API.php");
 $favAlbums = array();
-if (isset($_COOKIE["user"])) {
-    $host = getHost();
-    $user = getUser();
-    $pass = getPass();
-    $base = getBase();
-    $mysqliFav=mysqli_connect($host, $user, $pass) or die("Problème de connexion Fav de la base :".mysqli_error());
-    mysqli_select_db($mysqliFav,$base) or die("Impossible de sélectionner la base : $base");
+if (isset($_COOKIE["user"])) { //todo changer la méthode de connexion par un simple cookie
 
-    $result = queryDB($mysqliFav, "SELECT ID_PROD FROM FAVS WHERE LOGIN = '".$_COOKIE["user"]."'") or die("récupération des Albums favoris impossible");
+    /**
+     * on se connecte à la BDD
+     * on recupere les alubms favoris
+     * on recupere tous les albums
+     * on se déconnecte
+     */
+    $mysqli = connect();
+    //FAVS :
+    $resultFav = queryDB($mysqli, "SELECT ID_PROD FROM FAVS WHERE LOGIN = '".$_COOKIE["user"]."'") or die("récupération des Albums favoris impossible");
+    //PRODUIT : ID_PROD|LIBELLE|PRIX|CHANSONS|DESCRIPTIF|GENRE
+    $resultAll = queryDB($mysqli, "SELECT * FROM PRODUITS") or die("echec recuperation de tous les albums");
 
+    //on parse les resultats des albums favoris
     $favAlbums = array();
-
-    while($fav = mysqli_fetch_assoc($result)) {
+    while($fav = mysqli_fetch_assoc($resultFav)) {
         $favAlbums[] = $fav["ID_PROD"];
-    }
-} else if (isset($_COOKIE['favoris'])){
-    $favAlbums = json_decode($_COOKIE['favoris'],true);
+    } //on a fini de construire l'album des favoris
 
+    //on parse les resultats de tous les albums
+    $Albums = array();
+    while($all = mysqli_fetch_assoc($resultAll)) {
+        $Albums[] = $all;
+    } //on a fini de construire l'album des favoris
+
+    //print_r($Albums);
+    disconnect($mysqli);
+
+
+
+} else if (isset($_COOKIE['favoris'])){ //si on a des favoris
+    $favAlbums = json_decode($_COOKIE['favoris'],true);
 } else {
     $favAlbums = array();
 }
 
-if (!isset($_POST["ingr"])) {
+if (!isset($_POST["ingr"])) { //si requete un ingr
     echo '<table><tr>';
     $step = 0;
-    if ($_POST["favOnly"] == "true") {
-
+    if ($_POST["favOnly"] == "true") { //si on demande seulement les favoris on itère dessus
         foreach ($favAlbums as $id) {
-            echo displayBox($id, "heart fullHeart");
+            echo displayBox($id, "heart fullHeart", $Albums);
             $step++;
             if($step == 3){
                 $step = 0;
                 echo '</tr><tr>';
             }
         }
-    } else {
-        $Albums = NULL;
+    } else { //sinon on affiche tous les albums
+
         foreach ($Albums as $id => $album) {
-            echo displayBox($id, "heart".(in_array($id, $favAlbums) ? (" fullHeart") : ("")));
+            echo displayBox($id, "heart".(in_array($id, $favAlbums) ? (" fullHeart") : ("")), $Albums);
             $step++;
             if($step == 3){
                 $step = 0;
@@ -66,7 +80,7 @@ if (empty($albums)) {
 echo '<table><tr>';
 $step = 0;
 foreach ($albums as $albumId) {
-    echo displayBox($albumId, "heart".(in_array($albumId, $favAlbums) ? (" fullHeart") : ("")));
+    echo displayBox($albumId, "heart".(in_array($albumId, $favAlbums) ? (" fullHeart") : ("")), $Albums);
     $step++;
     if($step == 3){
         $step = 0;
@@ -75,14 +89,14 @@ foreach ($albums as $albumId) {
 }
 echo '</tr></table>';
 
-function displayBox($albumId, $heartClass) {
+function displayBox($albumId, $heartClass, $Albums) {
 
-    $album = getAlbumById($albumId);
+    $album = getAlbumById($albumId, $Albums);
 
-    $nom = $album["titre"];
+    $nom = $album["LIBELLE"];
     $shortName = substr($nom, 0, 25);
     $shortName .= ((strlen($nom) != strlen($shortName)) ? ("...") : (""));
-    $desc = $album["descriptif"];
+    $desc = $album["DESCRIPTIF"];
     if(file_exists("img_cover/$nom.jpg")){
         $imgURL = "img_cover/$nom.jpg";
     }else if(file_exists("img_cover/$nom.jpeg")){
