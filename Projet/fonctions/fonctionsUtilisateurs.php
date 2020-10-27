@@ -6,8 +6,8 @@
 		$mysqli = connect();
 		
 		echo "<hr>";
-		$result = queryDB($mysqli,'select login,prenom,nom,email,adresse,ville,telephone from users where login = \'admin\'');
-		$result2 = queryDB($mysqli,'select login,prenom,nom,email,adresse,ville,telephone from users where login != \'admin\'');
+		$result = queryDB($mysqli,'SELECT login,prenom,nom,email,adresse,ville,telephone FROM USERS WHERE login = \'admin\'');
+		$result2 = queryDB($mysqli,'SELECT login,prenom,nom,email,adresse,ville,telephone FROM USERS WHERE login != \'admin\'');
 		if((mysqli_num_rows($result)>0) || (mysqli_num_rows($result2)>0)){
 			
 			echo "<table>";
