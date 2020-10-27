@@ -53,7 +53,7 @@ if(isset($_COOKIE["user"])){
     if(is_null($row["PRENOM"])){$prenom = "";}else{$prenom = $row["PRENOM"];}
     if(is_null($row["DATE"])){$date = "";}else{$date = $row["DATE"];}
     if(is_null($row["TELEPHONE"])){$telephone = "";}else if((int)$row["TELEPHONE"] == 0){ $telephone = NULL;}else{$telephone = $row["TELEPHONE"];}
-    if(is_null($row["ADRESSE"])){$ADRESSEe = "";}else{$ADRESSEe = $row["ADRESSE"];}
+    if(is_null($row["ADRESSE"])){$adresse = "";}else{$adresse = $row["ADRESSE"];}
     if(is_null($row["CODEP"])){$codepostal = "";}else{$codepostal = $row["CODEP"];}
     if(is_null($row["VILLE"])){$ville = "";}else{$ville = $row["VILLE"];}
     if(is_null($row["SEXE"])){$sexe = "";}else{$sexe = $row["SEXE"];}
@@ -111,7 +111,7 @@ if(isset($_COOKIE["user"])){
 						</tr>
 						
 						<tr>
-							<td><p><strong>ADRESSEe</strong></p></td><td>".$ADRESSEe."</td>
+							<td><p><strong>ADRESSEe</strong></p></td><td>".$adresse."</td>
 						</tr>
 						<tr>
 							<td><p><strong>Ville</strong></p></td><td>".$ville."</td>
@@ -173,7 +173,7 @@ if(isset($_COOKIE["user"])){
 if(isset($row)){
     if(empty($nom)){$nom = "Nom";}
     if(empty($prenom)){$prenom = "Prénom";}
-    if(empty($ADRESSEe)){$ADRESSEe = "ADRESSEe";}
+    if(empty($adresse)){$adresse = "ADRESSEe";}
     if(empty($ville)){$ville = "Ville";}
     if(empty($codepostal)){$codepostal = "Code Postal";}
     if(empty($date)){$date = "Date de Naissance";};
@@ -218,7 +218,7 @@ if(isset($row)){
 							<input type='text' class='form-control' placeholder='".$telephone."' maxlength='15' name='telephonebdd'/>
 						</div>
 						<div class='form-group'>
-							<input type='textarea' class='form-control' placeholder='".$ADRESSEe."' maxlength='200' name='ADRESSEebdd'/>
+							<input type='textarea' class='form-control' placeholder='".$adresse."' maxlength='200' name='ADRESSEebdd'/>
 						</div>
 						<div class='form-group'>
 							<input type='textarea' class='form-control' placeholder='".$ville."' maxlength='200' name='villebdd'/>
