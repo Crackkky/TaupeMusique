@@ -48,7 +48,6 @@ function submitForm(formdata){
 			rep_elem.innerText = data.msg;
 		},
 	}).then(function (){ //si j'enleve ça, il y a un trigger deux fois de l'event ajax, WTF je sais pas pourquoi
-		$("#reponse0").html(data.msg);
 	});
 };
 
