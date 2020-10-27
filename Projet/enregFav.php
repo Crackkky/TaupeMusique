@@ -13,11 +13,11 @@ mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $b
 if(isset($_COOKIE["user"])){
     $user = $_COOKIE["user"];
     $produit = $_POST["id_produit"];
-    $str0 = 'select * from favs where id_prod = '.$produit;
+    $str0 = 'SELECT * FROM FAVS where id_prod = '.$produit;
     $str = "INSERT INTO FAVS VALUES('".$user."','".$produit."')";
     $result = queryDB($mysqli,$str0) or die("Impossible de ajouter produit<br>");
     if(mysqli_num_rows($result)>0){
-        queryDB($mysqli,'delete from favs where id_prod = '.$produit.' and LOGIN = \''.$_COOKIE["user"].'\'');
+        queryDB($mysqli,'delete from FAVS where id_prod = '.$produit.' and LOGIN = \''.$_COOKIE["user"].'\'');
         echo 'delete set';
     }else{
         queryDB($mysqli,$str);
