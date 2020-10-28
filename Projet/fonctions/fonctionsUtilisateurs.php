@@ -28,7 +28,7 @@
 				while ($row = mysqli_fetch_assoc($result2)){
 						echo "<tr>";
 						echo "<td>".$row["login"]." ".$row["prenom"]." ".$row["nom"]."</td>";
-						echo "<td><a href='details.php?login=".$row["login"]."'> détails </a></td>";
+						echo "<td><a href='detail.php?login=".$row["login"]."'> détails </a></td>";
 						echo "</tr>";
 					}
 			}
