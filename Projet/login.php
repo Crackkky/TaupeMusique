@@ -3,7 +3,7 @@ include("Fonctions.inc.php");
 include("Donnees.inc.php");
 
 $mysqli = connect();
-$return["error"] = false;
+$return["FLAG"] = false;
 $return["msg"] = "L'utilisateur n'a été pas trouvé";
 
 if(isset($_POST["login"]) && isset($_POST["password"]) &&
@@ -19,18 +19,18 @@ if(isset($_POST["login"]) && isset($_POST["password"]) &&
             setcookie("user",$row["LOGIN"]); //todo on se connecte via un cookie, oskour
             unset($return);
             $return["msg"] = "L'utilisateur est maintenant connecté";
-            $return["error"] = false;
+            $return["FLAG"] = false;
             mysqli_close($mysqli);
             echo json_encode($return);
             exit();
         } else {
-            $return["error"] = true;
+            $return["FLAG"] = true;
             $return["msg"] = "Mauvais login ou mot de passe.";
         }
 
     }
 }else{
-    $return["error"] = true;
+    $return["FLAG"] = true;
     $return["msg"] = "Veuillez vérifier vos champs login et mot de passe.";
 }
 mysqli_close($mysqli);

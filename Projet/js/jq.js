@@ -45,12 +45,13 @@ function submitForm(formdata){
 		cache: false,
 		success: function(data){
 			rep_elem = document.getElementById("reponse0");
-			rep_elem.innerText = data.msg;
 			if(data.msg == "L'utilisateur est maintenant connecté"){
+				rep_elem.innerHTML = rep_elem.innerHTML = "<span style=\"color: #00ff00; \"><ul>" + data.msg + "</ul></span\">";
 				window.location.reload();
+			} else {
+				rep_elem.innerHTML = rep_elem.innerHTML = "<span style=\"color: #ff0000; \"><ul>" + data.msg + "</ul></span\">";
 			}
 		},
-	}).then(function (){ //si j'enleve ça, il y a un trigger deux fois de l'event ajax, WTF je sais pas pourquoi
 	});
 };
 
@@ -135,7 +136,7 @@ function updateDetails(formdata){
 		dataType: 'json',
 		cache: false,
 		success: function(data){
-			location.reload();
+			window.location.reload();
 		},
 	});
 };	
