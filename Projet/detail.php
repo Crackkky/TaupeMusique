@@ -14,6 +14,8 @@ $albumId = $_GET["id"];
 
 $mysqli = connect();
 
+
+//todo rafiner la requete si le idProd est set, on peut faire une requete unique sur cet element
 //PRODUIT : ID_PROD|LIBELLE|PRIX|CHANSONS|DESCRIPTIF|GENRE
 $resultAll = queryDB($mysqli, "SELECT * FROM PRODUITS") or die("echec recuperation de tous les albums");
 
@@ -29,7 +31,7 @@ disconnect($mysqli);
 
 if (filter_var($albumId, FILTER_VALIDATE_INT) === false) {
     header("location: 404.php");
-} 
+}
 
 $album = getAlbumById($albumId, $Albums);
 
