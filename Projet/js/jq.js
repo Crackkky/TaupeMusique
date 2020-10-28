@@ -65,7 +65,8 @@ function submitDetails(formdata){
 		success: function(data){
 			/*
 			1. on recupere le conteneur d'affichage de message
-			2. on affiche les messages d'erreurs eventuelles
+			2.a on regarde si c'est un msg de succès => on affiche en vert
+			2.b on regarde si c'est un msg d'echec : => on affiche en rouge
 			 */
 			rep_elem = document.getElementById("reponseEnr");
 			//rep_elem.innerText = data.msg;
@@ -74,37 +75,51 @@ function submitDetails(formdata){
 				if(i==0){//juste pour ne pas mettre le premier message dans la liste à puce
 					str+= data[key];
 					i= i+1;
-				} else {
+				} else { if(key=="FLAG"){ str+="";}else{ //on enleve les true/falses
 					str+='<li>' + data[key] +'</li>'
+					}
 				}
-				rep_elem.innerHTML = "<span style=\"color: #ff0000; \"><ul>" + str + "</ul></span\">";
-				/*
-				alert("data:"+data);
-				alert("key:"+key);
-				alert("value:"+value);
-				 */
+				if(data["FLAG"]){ //data["FLAG"] = true | false en fonction de succes ou echec
+					rep_elem.style.color = "green";
+					rep_elem.innerHTML = "<span style=\"color: #00ff00; \"><ul>" + str + "</ul></span\">";
+				} else {
+					rep_elem.style.color = "red";
+					rep_elem.innerHTML = "<span style=\"color: #ff0000; \"><ul>" + str + "</ul></span\">";
+				}
 
 			});
+
 			;
 
 		},
 		error: function(data){
-			alert("error");
 			/*
 			1. on recupere le conteneur d'affichage de message
-			2. on affiche un message d'erreur
-			3. on enumère tous les messages d'erreurs enregistré
-			 */
+			2.a on regarde si c'est un msg de succès => on affiche en vert
+			2.b on regarde si c'est un msg d'echec : => on affiche en rouge
+			*/
 			rep_elem = document.getElementById("reponseEnr");
 			//rep_elem.innerText = data.msg;
-			alert(data[0]);
-			alert(data[1]);
-			$.each(data, function(i,item) {
-				str+='<li>' + item +'</li>'
-				rep_elem.innerHTML('<span style="color: #ff0000; "><ul>' + str + '</ul></span">');
-				rep_elem.fadeOut(5000);
+			i = 0
+			$.each(data, function(key,value) {
+				if(i==0){//juste pour ne pas mettre le premier message dans la liste à puce
+					str+= data[key];
+					i= i+1;
+				} else { if(key=="FLAG"){ str+="";}else{ //on enleve les true/falses
+					str+='<li>' + data[key] +'</li>'
+					}
+				}
+				if(data["FLAG"]){ //data["FLAG"] = true | false en fonction de succes ou echec
+					rep_elem.style.color = "green";
+					rep_elem.innerHTML = "<span style=\"color: #00ff00; \"><ul>" + str + "</ul></span\">";
+				} else {
+					rep_elem.style.color = "red";
+					rep_elem.innerHTML = "<span style=\"color: #ff0000; \"><ul>" + str + "</ul></span\">";
+				}
 
 			});
+
+			;
 		}
 	}).then(function(){
 	});

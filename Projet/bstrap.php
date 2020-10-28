@@ -40,11 +40,6 @@
                     <div class="form-group">
                         <input class="btn btn-primary" type="submit" value="Enregistrer">
                         <span style="color: red; "><label id="reponseEnr"></label></span>
-                        <?php
-                            if(isset($_SESSION['inscription'])){ //si y'a des erreurs d'inscription :
-                                print_r(array_values($_SESSION['inscription']));
-                            }
-                        ?>
                     </div>
                     <div class="form-group">
                         <label id="reponse1""></label>

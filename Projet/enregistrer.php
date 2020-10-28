@@ -96,7 +96,7 @@ if(!isset($_POST["adressebdd"]) || empty($_POST["adressebdd"]) || !is_char_ok($a
 
 // * VILLE
 
-if(!isset($_POST["villebdd"]) || empty(($_POST['villebdd'])) || !is_char_ok($ville) || strlen($ville) < 5 || strlen($ville) > 50){
+if(!isset($_POST["villebdd"]) || empty(($_POST['villebdd'])) || !is_char_ok($ville) || strlen($ville) < 2 || strlen($ville) > 50){
 	$return["ville"] = "La ville n'est pas valide";
 	$ok = false;
 }
@@ -159,18 +159,18 @@ if(isset($login) && !empty($login) && is_char_ok($login)){ //si on a renseigné 
 //todo je fais une connexion de la BDD pour check si mail et login sont pas déjà utilisé puis j'en refais une après : utile ?
 
 if($ok === true){ // tout est bon , on se connecte a la BDD puis on insert les valeurs
+	$return["FLAG"] = true;
 	$return["msg"] = "Compte crée, vous pouvez maintenant vous connecter.";
 	$mysqli = connect();
-	$return['msg'] = "OK";
 	//todo oskour l'injection SQL, faire des "sql prepare" machin
 	$str = "INSERT INTO USERS VALUES ('".$login."','".$email."','".password_hash($pass, PASSWORD_DEFAULT)."','".$nom."','".$prenom."','".$date."','".$sexe."','".$adresse."','".$codepostal."','".$ville."','".$telephone."');";
-	echo "insert into BDD...<br>";
 	queryDB($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
 	setcookie('user',$login,time() + 3600);
 	//unset($return);
 	disconnect($mysqli); //DECONNEXION BDD
 	//header('location: index.php');
 } else {
+	$return["FLAG"]= false;
 	$return["msg"] = "Une ou plusieurs erreurs detectée : ";
 }
 

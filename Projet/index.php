@@ -148,7 +148,6 @@ include ("Fonctions.inc.php")
 <script type="text/javascript" src="./js/jq.js"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="./js/heart.js"></script>
-<script src="./js/jq.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script type="text/javascript" src="./js/daterangepicker.js"></script>
 <script type="text/javascript" src="./js/bootstrap-datepicker.min.js"></script>
