@@ -13,15 +13,7 @@ $favAlbums = array();
  */
 $mysqli = connect();
 //PRODUIT : ID_PROD|LIBELLE|PRIX|CHANSONS|DESCRIPTIF|GENRE
-$resultAll = queryDB($mysqli, "SELECT * FROM PRODUITS") or die("echec recuperation de tous les albums");
-
-//on parse les resultats de tous les albums
-$Albums = array();
-while($all = mysqli_fetch_assoc($resultAll)) {
-    $Albums[] = $all;
-} //on a fini de construire l'album des favoris
-
-//print_r($Albums);
+$Albums = getAllAlbums($mysqli);
 disconnect($mysqli);
 
 
@@ -51,7 +43,7 @@ if (isset($_COOKIE["user"])) { //todo changer la méthode de connexion par un si
     $favAlbums = json_decode($_COOKIE['favoris'],true);
 } else {
     $favAlbums = array();
-}
+} //fin condition isset cookie user
 
 if (!isset($_POST["ingr"])) { //si requete un ingr
     echo '<table><tr>';
@@ -66,7 +58,6 @@ if (!isset($_POST["ingr"])) { //si requete un ingr
             }
         }
     } else { //sinon on affiche tous les albums
-
         foreach ($Albums as $id => $album) {
             echo displayBox($id, "heart".(in_array($id, $favAlbums) ? (" fullHeart") : ("")), $Albums);
             $step++;
@@ -78,22 +69,24 @@ if (!isset($_POST["ingr"])) { //si requete un ingr
     }
     echo '</tr></table>';
     die();
+} else {
+    $albums = getalbumsWith($_POST["ingr"]);
 }
 
-$albums = getalbumsWith($_POST["ingr"]);
 
 if ($_POST["favOnly"] == "true") {
-    $albums = array_intersect($albums, $favAlbums);
+    $Albums = array_intersect($Albums, $favAlbums);
 }
 
 
-if (empty($albums)) {
+if (empty($Albums)) {
     echo '<h2>Désolé, il n\'existe pas d\'albums contenant ces paramètres</h2>';
 }
 
 echo '<table><tr>';
 $step = 0;
-foreach ($albums as $albumId) {
+print_r($Albums);
+foreach ($Albums as $albumId) {
     echo displayBox($albumId, "heart".(in_array($albumId, $favAlbums) ? (" fullHeart") : ("")), $Albums);
     $step++;
     if($step == 3){

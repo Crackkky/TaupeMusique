@@ -18,7 +18,7 @@
 					while ($row = mysqli_fetch_assoc($result)){
 						echo "<tr>";
 						echo "<td id='item'><a href='detail.php?id=".$row["id_prod"]."'>".$row["id_com"]."</a></td><td> ".$row["date"]."</td><td> ".$row["ADRESSE"]."</td>";
-						echo "<td><button id='effacer'>effacer</button></td>";
+						echo "<td><button ida"effacer'>effacer</button></td>";
 						echo "</tr>";
 						echo "<tr><td colspan='3'><hr></td></tr>";
 					}

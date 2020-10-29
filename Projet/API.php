@@ -88,7 +88,9 @@ function getParent($current) {
  * @return Array<Int>              IDs des cocktails contenant tous les ingrédients de la liste
  */
 function getAlbumsWith($chansons) {
-    global $Albums;
+    $mysqli = connect();
+    $Albums = getAllAlbums($mysqli);
+    disconnect($mysqli);
     $albums = array();
     foreach ($Albums as $id => $album) {
         $albumIngr = $album["index"]; // Liste des ingrédients de la recette

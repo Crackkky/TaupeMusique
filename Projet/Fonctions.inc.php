@@ -51,7 +51,20 @@ function queryDB($link,$query)
     return($resultat);
 }
 
-
+/**
+ *  Fonction qui récupère la liste de tous les albums
+ * @param $mysql : la connexion de la BDD
+ * @return array : le tableau de tous les albums
+ */
+function getAllAlbums($mysqli){
+    $resultAll = queryDB($mysqli, "SELECT * FROM PRODUITS") or die("echec recuperation de tous les albums");
+    //on parse les resultats de tous les albums
+    $Albums = array();
+    while($all = mysqli_fetch_assoc($resultAll)) {
+        $Albums[] = $all;
+    } //on a fini de construire l'album des favoris
+    return $Albums;
+}
 
 /*---------------------------------
  * fonctions qui tests les strings
