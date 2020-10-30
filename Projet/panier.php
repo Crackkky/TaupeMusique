@@ -38,6 +38,7 @@ include 'fonctions/fonctionsAcheter.php';
         };
     </script>
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -57,17 +58,15 @@ include 'fonctions/fonctionsAcheter.php';
 
     <div class="row">
 
-        <div class="col-md-3">
-            <p class="lead">Votre Profil</p>
-        </div>
-
         <div class="col-md-9">
 
             <div class="row carousel-holder">
                 <h2>Panier</h2>
+
                 <?php afficherPanier(); ?>
 
             </div>
+
             <div>
                 <?php
                 if(isset($_Cookie["user"]) && isset($_COOKIE["panier"])){
@@ -78,6 +77,11 @@ include 'fonctions/fonctionsAcheter.php';
                 ?>
             </div>
 
+        </div>
+
+        <div class="col-md-3">
+            <p class="lead">Votre Profil</p>
+            <?php afficherCadreCompte(); ?>
         </div>
 
     </div>

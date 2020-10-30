@@ -74,6 +74,7 @@ else{
     <![endif]
     -->
 
+    <script src="./js/panFav.js"></script>
 </head>
 
 <body>
@@ -83,9 +84,21 @@ else{
 <?php include("./navbar.php");?>
 
 <!-- Page Content -->
+
 <div class="container">
 
-    <div class="col-xs-5">
+    <hr>
+
+    <!-- Footer -->
+    <?php include("./footer.php");?>
+</body>
+
+</div>
+<!-- /.container -->
+
+<div class="container">
+
+        <div class="col-xs-5">
 
         <img style="width: 100%;" src="<?=$imgURL?>"></img>
 
@@ -106,27 +119,24 @@ else{
 
             ?>
         </ul>
+        <?php
+        //todo securiser ça
+        if(isset($_GET["id"])){
+            $id= $_GET["id"];
+        } else {
+            $id = -1;
+        }
+        ?>
 
         <h3>Critique</h3>
 
         <p><?=$prep?></p>
         <hr>
-        <h3><?=$prix?> €  </h3><button class="btn btn-default">Ajouter au panier</button>
+        <h3><?=$prix?> €  </h3><button id="addPan" onclick="addPanier(<?=$id?>)" class="btn btn-default">Ajouter au panier</button>
     </div>
 
-<?php } ?>
+    <?php } ?>
 
 </div>
-
-</div>
-<!-- /.container -->
-
-<div class="container">
-
-    <hr>
-
-    <!-- Footer -->
-    <?php include("./footer.php");?>
-</body>
 
 </html>
