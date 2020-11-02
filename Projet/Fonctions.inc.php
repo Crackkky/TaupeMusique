@@ -61,7 +61,7 @@ function getUserData($mysqli){
     $res = queryDB($mysqli, $str);
     while($all = mysqli_fetch_assoc($res)) {
         $user = $all;
-    } //on a fini de construire l'album des favoris
+    }
     return $user;
 }
 
