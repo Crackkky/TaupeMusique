@@ -242,8 +242,9 @@ function afficherAdministration()
 	//si on a cliqu� sur "Visualiser les commandes." alors on affiche ce qui suit
 	if(isset($action) && $action=='commande')
 	{
+	    $mysqli = connect();
 		echo '<form action="administration.php?action=commande" method="post"><div class="floatRight">';
-		$result = mysql_query('select * from commande order by id_com DESC');
+		$result = queryDB($mysqli, 'select * from COMMANDE order by id_com DESC');
 		
 		echo '<label>N� commande: </label><select name="id_com">';
 		
@@ -261,7 +262,7 @@ function afficherAdministration()
 		//si on a cliqu� sur voir
 		if(isset($_POST['voir']))
 		{
-			$result = mysql_query('select * from commande where id_com="'.$_POST['id_com'].'"');
+			$result = mysql_query('select * from COMMANDE where id_com="'.$_POST['id_com'].'"');
 			
 			$commande = mysql_fetch_assoc($result);
 			
@@ -316,6 +317,7 @@ function afficherAdministration()
 			foreach($detail as $article) $total += $article['Prix'] * $article['Quantite'];
 			
 			echo '<div class="piedPanier">'.$total.' �</div>';
+			disconnect($mysqli);
 		}	
 	}
 }
