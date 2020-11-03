@@ -123,7 +123,7 @@ if(isset($_COOKIE["user"])){
 						<tr>
 							<td><p><strong>Sexe</strong></p></td><td>".$sexe."</td>
 						</tr>
-							<td><a href='#Modifier'  data-toggle='modal' class='list-group-item'>Éditer</a></td><td></td>
+							
 						</tr>
 						</table>";
                 }
