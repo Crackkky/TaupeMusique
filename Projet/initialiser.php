@@ -31,7 +31,8 @@ queryDB($mysqli,"CREATE TABLE IF NOT EXISTS USERS (
                         ADRESSE varchar(300),
                         CODEP varchar(5),
                         VILLE varchar(50),
-                        TELEPHONE varchar(10)                     
+                        TELEPHONE varchar(10),
+                        ADMIN tinyint(1)                     
                         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
 queryDB($mysqli,"CREATE TABLE IF NOT EXISTS  RUBRIQUES (
@@ -57,11 +58,11 @@ queryDB($mysqli,"CREATE TABLE IF NOT EXISTS FAVS (
                         PRIMARY KEY(LOGIN,ID_PROD)
                         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
-queryDB($mysqli,"CREATE TABLE IF NOT EXISTS `COMMANDE` (
+queryDB($mysqli,"CREATE TABLE IF NOT EXISTS `commande` (
                         ID_COM bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         ID_PROD int(11) NOT NULL,
                         ETAT int(1) NOT NULL,
-                        ID_CLIENT varchar (255) NOT NULL,
+                        ID_CLIENT int(11) NOT NULL,
                         DATE varchar(40) NOT NULL,
                         CIVILITE varchar(4) NOT NULL,
                         NOM varchar(40) NOT NULL,
@@ -85,42 +86,30 @@ queryDB($mysqli,"INSERT INTO USERS VALUES ('admin',
                                                  NULL,
                                                  '57000',
                                                  NULL,
-                                                 918633099);");
+                                                 918633099,
+                                                 true);");
 
 queryDB($mysqli, "INSERT INTO RUBRIQUES VALUES (1, 'Alternative');");
+
 queryDB($mysqli, "INSERT INTO RUBRIQUES VALUES (2, 'Jazz');");
+
 queryDB($mysqli, "INSERT INTO RUBRIQUES VALUES (3, 'Hip-Hop');");
+
 queryDB($mysqli, "INSERT INTO RUBRIQUES VALUES (4, 'Pop');");
-queryDB($mysqli, "INSERT INTO RUBRIQUES VALUES (5, 'Metalcore');");
-queryDB($mysqli, "INSERT INTO RUBRIQUES VALUES (6, 'KPop');");
 
 queryDB($mysqli,"INSERT INTO PRODUITS VALUES ('1',
-                                                     'Momoland (Chiri Chiri)',
-                                                     19.99,
-                                                     '1 Chiri Chiri | 2 Pinky Love | 3 BBoom BBoom -Japanese Version- | 4 BAAM -Japanese Version-',
-                                                     'Chiri Chiri is the first Japanese full-length album by MOMOLAND. It was released on November 9, 2019 with \"Pinky Love\" serving as the albums title track.',
-                                                     6);");
-
-queryDB($mysqli,"INSERT INTO PRODUITS VALUES ('2',
                                                      'Joss Stone (Water for Your Soul)',
                                                      19.99,
-                                                     '1 Love Me | 2 This Aint Love | 3 Stuck on You | 4 Star | 5 Let Me Breathe | 6 Cut the Line | 7 Wake Up | 8 Way Oh | 9 Underworld | 10 Molly Town | 11 Sensimilla | 12 Harrys Symphony | 13 Clean Water | 14 The Answer ',
+                                                     '1 Love Me |2 This Aint Love |3 Stuck on You |4 Star | 5 Let Me Breathe | 6 Cut the Line | 7 Wake Up | 8 Way Oh | 9 Underworld | 10 Molly Town | 11 Sensimilla | 12 Harrys Symphony | 13 Clean Water | 14 The Answer ',
                                                      'Joss Stone n avait pas sorti de chansons originales depuis son LP1, publié en 2011. Il lui a fallu 4 ans de voyages, de Projets et d enseignements pour arriver à collecter les 14 nouveaux morceaux de Water For Your Soul. De ses sessions d improvisation à Los Angeles avec Damian Marley à l Angleterre, en passant par Hawaï et les routes d Europe où elle a voyagées dans un vieux camping-car en compagnie de son ancien petit ami, la chanteuse a nourri son âme de nouvelles expériences. ',
                                                      1);");
 
-queryDB($mysqli,"INSERT INTO PRODUITS VALUES ('3',
-                                                     'Gorillaz (Plastic Beach)',
-                                                     14.99,
-                                                     '1 Stylo | 2 Superfast Jellyfish | 3 Melancholy Hill',
-                                                     'Plastic Beach is the third studio album by British virtual band Gorillaz. It was released on 3 March 2010 by Parlophone internationally and by Virgin Records in the United States. Conceived from an unfinished project called Carousel, the album was recorded from June 2008 to November 2009, and was produced primarily by group co-creator Damon Albarn. It features guest appearances by such artists as Snoop Dogg, Gruff Rhys, De La Soul, Bobby Womack, Mos Def, Lou Reed, Mark E. Smith, Bashy, Kano and Little Dragon.',
-                                                     1);");
-
-queryDB($mysqli,"INSERT INTO PRODUITS VALUES ('4',
-                                                     'Bring Me the Horizon (Sempiternal)',
-                                                     9.99,
-                                                     '1 Can You Feel My Heart | 2 The House Of Wolves | 3 Empire (Let Them Sing) | 4 Sleepwalking | 5 Go to Hell, for Heavens Sake | 6 Shadow Moses',
-                                                     'Sempiternal est le quatrième album studio du groupe de metalcore anglais Bring Me the Horizon. Le premier single Shadow Moses est diffusé via la chaîne YouTube de Epitaph Record le 22 janvier 2013.',
-                                                     5);");
+queryDB($mysqli,"INSERT INTO PRODUITS VALUES ('2',
+                                                     'Album Test',
+                                                     99.99,
+                                                     '1 Hello there | 2 General Kenobi | 3 Youre a bold one',
+                                                     'TIN TINTINTIN TINTINTIN TINTIN TINTINTINTINTIN TINTINTINTIN TIN TINTINTINTIN TIN TINTINTINTIN TIN TINTINTINTIN ',
+                                                     4);");
 
 mysqli_close($mysqli);
 ?>

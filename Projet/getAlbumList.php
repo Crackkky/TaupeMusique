@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 include("Fonctions.inc.php");
 include("./API.php");
 $favAlbums = array();
@@ -17,33 +20,23 @@ $Albums = getAllAlbums($mysqli);
 disconnect($mysqli);
 
 
-if (isset($_COOKIE["user"])) { //todo changer la méthode de connexion par un simple cookie
+if (isset($_SESSION["user"])) {
 
-    /**
-     * on se connecte à la BDD
-     * on recupere les alubms favoris
-     * on se déconnecte
-     */
-    $mysqli = connect();
-    //FAVS :
-    $resultFav = queryDB($mysqli, "SELECT ID_PROD FROM FAVS WHERE LOGIN = '".$_COOKIE["user"]."'") or die("récupération des Albums favoris impossible");
+    //Plus besoin d'aller chercher à chaque fois dans la bdd puisqu'ils sont stockés dans la variable de session
 
-    //on parse les resultats des albums favoris
-    $favAlbums = array();
-    while($fav = mysqli_fetch_assoc($resultFav)) {
-        $favAlbums[] = $fav["ID_PROD"];
-    } //on a fini de construire l'album des favoris
+    if(isset($_SESSION['favoris'])){ //si on a des favoris
+        $favAlbums = json_decode($_SESSION['favoris'], true);
+    }
+    else {
+        $favAlbums = array();
+    }
 
-
-    disconnect($mysqli);
-
-
-
-}else if (isset($_COOKIE['favoris'])){ //si on a des favoris
-    $favAlbums = json_decode($_COOKIE['favoris'],true);
 } else {
     $favAlbums = array();
-} //fin condition isset cookie user
+}
+
+//Debug
+//print_r($favAlbums);
 
 if (!isset($_POST["ingr"])) { //si requete un ingr
     echo '<table><tr>';

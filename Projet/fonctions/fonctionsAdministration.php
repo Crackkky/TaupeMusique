@@ -1,7 +1,7 @@
 <?php
 
 function afficherAdmin(){
-			if(isset($_COOKIE["user"]) && $_COOKIE["user"] == 'admin'){
+			if(isset($_SESSION["user"]) && $_SESSION["admin"] == 1){
 				echo '<a href="produits.php"><h4>Gestion de produits</h4></a><br/>';
 				echo '<a href="utilisateurs.php"><h4>Gestion d\'utilisateurs</h4></a><br/>';
 				echo '<a href="commandes.php"><h4>Visualiser les commandes<h4></a>';
@@ -242,9 +242,8 @@ function afficherAdministration()
 	//si on a cliqu� sur "Visualiser les commandes." alors on affiche ce qui suit
 	if(isset($action) && $action=='commande')
 	{
-	    $mysqli = connect();
 		echo '<form action="administration.php?action=commande" method="post"><div class="floatRight">';
-		$result = queryDB($mysqli, 'select * from COMMANDE order by id_com DESC');
+		$result = mysql_query('select * from commande order by id_com DESC');
 		
 		echo '<label>N� commande: </label><select name="id_com">';
 		
@@ -262,7 +261,7 @@ function afficherAdministration()
 		//si on a cliqu� sur voir
 		if(isset($_POST['voir']))
 		{
-			$result = mysql_query('select * from COMMANDE where id_com="'.$_POST['id_com'].'"');
+			$result = mysql_query('select * from commande where id_com="'.$_POST['id_com'].'"');
 			
 			$commande = mysql_fetch_assoc($result);
 			
@@ -317,7 +316,6 @@ function afficherAdministration()
 			foreach($detail as $article) $total += $article['Prix'] * $article['Quantite'];
 			
 			echo '<div class="piedPanier">'.$total.' �</div>';
-			disconnect($mysqli);
 		}	
 	}
 }

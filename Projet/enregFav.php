@@ -1,35 +1,39 @@
 <?php
+session_start();
+
 include("Fonctions.inc.php");
 include("Donnees.inc.php");
 
-$mysqli = connect();
+$host = getHost();
+$user = getUser();
+$pass = getPass();
+$base = getBase();
+$mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());
+mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");
 
 
-
-if(isset($_COOKIE["user"])){
-    $user = $_COOKIE["user"];
+if(isset($_SESSION["user"])){
+    $user = $_SESSION["user"];
     $produit = $_POST["id_produit"];
-    $str0 = "SELECT * FROM FAVS where id_prod = '".$produit."' AND login = '".$user."'";
-    $str = "INSERT INTO FAVS (login, id_prod) VALUES('".$user."','".$produit."')";
+    $str0 = "SELECT * FROM FAVS where id_prod = '".$produit."' and LOGIN = '".$user."'";
+    $str = "INSERT INTO FAVS VALUES('".$user."','".$produit."')";
     $result = queryDB($mysqli,$str0) or die("Impossible de ajouter produit<br>");
     if(mysqli_num_rows($result)>0){
-        queryDB($mysqli,'delete from FAVS where id_prod = '.$produit.' and LOGIN = \''.$user.'\'');
+        queryDB($mysqli,'delete from FAVS where id_prod = '.$produit.' and LOGIN = \''.$_SESSION["user"].'\'');
         echo 'delete set';
     }else{
         queryDB($mysqli,$str);
     }
-}
-//Pas besoin de cookies puisqu'on ne va jamais les utiliser. Lorsqu'on voudra afficher la liste des albums mis en favoris pour l'utilisateur connecté alors on va directement aller les chercher dans la bdd
-/*else{
-    if(!isset($_COOKIE["favoris"])){
+
+    if(!isset($_SESSION["favoris"])){
         $arr[] = $_POST["id_produit"];
         if(isset($_POST["id_produit"])){
-            setcookie("favoris",json_encode($arr),time() + (86400 * 15),'/');
+            $_SESSION["favoris"] = json_encode($arr);
         }
     }
     else{
         $arr = array();
-        $arr = json_decode($_COOKIE["favoris"],true);
+        $arr = json_decode($_SESSION["favoris"], true);
         if(isset($_POST["id_produit"])){
 
             if(!in_array($_POST["id_produit"],$arr)){
@@ -45,9 +49,10 @@ if(isset($_COOKIE["user"])){
                 $arr = $temp;
             }
         }
-        setcookie("favoris",json_encode($arr), time() + (86400 * 15),'/');
+        $_SESSION["favoris"] = json_encode($arr);
     }
-}*/
+}
+
 mysqli_close($mysqli);
 
 ?>

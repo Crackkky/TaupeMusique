@@ -1,9 +1,11 @@
 <?php
+	session_start();
+
 	if(isset($_POST["item"]) && isset($_POST["pos"])){
 		$arr1 = array();
 		$trouve = false;
-		if(isset($_COOKIE["panier"])){
-		$arr = json_decode($_COOKIE["panier"],true);
+		if(isset($_SESSION["panier"])){
+		$arr = json_decode($_SESSION["panier"], true);
 		$x = 0;	
 			foreach($arr as $item){
 				
@@ -19,9 +21,10 @@
 		}
 		
 		if($arr1){
-			setcookie('panier',json_encode($arr1),time() + (60*30),"/");
+			$_SESSION['panier'] = json_encode($arr1);
 		}else{
-			setcookie("panier", "", time()-3600,"/");
-		}			
+			unset($_SESSION['panier']);
+		}
+			
 	}
 ?>

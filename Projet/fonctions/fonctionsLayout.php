@@ -49,10 +49,10 @@ function afficherCadreCompte()
 {
 	echo '<div style="padding-left:8px; padding-right:8px;">';
 	
-if(isset($_COOKIE["user"]) && $_COOKIE["user"] == 'admin'){
+if(isset($_SESSION["user"]) && $_SESSION["admin"] == 1){
 	echo '<a class="btn btn-default" href="administration.php">Administration</a><br /><br /><a class="btn btn-default" href="profil.php">Mon compte</a><br /><br />';
 	
-	}else if(isset($_COOKIE["user"])){
+	}else if(isset($_SESSION["user"])){
 		echo '<a class="btn btn-default" href="profil.php">Mon compte</a><br /><br />';
 	}
 	

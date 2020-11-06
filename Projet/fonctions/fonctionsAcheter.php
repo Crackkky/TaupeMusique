@@ -14,8 +14,8 @@ function afficherPanier(){
         /*le cookie panier :
         $_COOKIE["panier"] = Array([0] => ID, ..., [N] => ID}
         */
-        if(isset($_COOKIE["panier"])){
-            $arr = json_decode($_COOKIE["panier"],true);
+        if(isset($_SESSION["panier"])){
+            $arr = json_decode($_SESSION["panier"],true);
             echo '<table>';
             echo "<tr><td width='50px'>ID</td><td width='80px'>Titre</td><td width='80px'>Prix</td></tr>";
             echo "<tr><td colspan='3'><hr></td></tr>";

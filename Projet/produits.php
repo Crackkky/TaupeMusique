@@ -1,7 +1,6 @@
 <?php
 include 'fonctions/fonctionsLayout.php';
 include 'fonctions/fonctionsProduits.php';
-include 'Fonctions.inc.php';
 ?>
 
 <!DOCTYPE html>

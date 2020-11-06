@@ -1,33 +1,19 @@
 <?php
 session_start();
 
-/**
- * La commande est gérée via le Cookie Panier
- * qui contient un tableau des ID des produits à commander
- */
 
-if(isset($_COOKIE["panier"]) && isset($_COOKIE["user"])){
-    $panier = json_decode($_COOKIE["panier"]);
+
+if(isset($_SESSION["panier"]) && isset($_SESSION["user"])){
+    $panier = json_decode($_SESSION["panier"]);
     include("Fonctions.inc.php");
     include("Donnees.inc.php");
 
 
     $mysqli=connect();
-    $userData = getUserData($mysqli);
-    print_r($userData);
     foreach($panier as $item){
-        /*
-         * COMMANDE : ID_COM | ID_PROD | ETAT | ID_CLIENT | DATE | CIVILITE | NOM | PRENOM | ADRESSE | CP | VILLE | TELEPHONE
-         */
-        if($userData["SEXE"]=="Homme"){
-            $CIVILITE = "M";
-        }else{
-            $CIVILITE = "Mme";
-        }
-        $ETAT = 1;//je sais pas ce que c'est
-        queryDB($mysqli,"INSERT INTO COMMANDE (ID_PROD,ETAT,ID_CLIENT,DATE,CIVILITE,NOM,PRENOM,ADRESSE,CP,VILLE,TELEPHONE) values ('".$item."',$ETAT,'".$_COOKIE["user"]."','".date('d/m/Y')."','".$CIVILITE."','".$userData["NOM"]."','".$userData["PRENOM"]."','".$userData["ADRESSE"]."','".$userData["CODEP"]."','".$userData["VILLE"]."','".$userData["TELEPHONE"]."')");
+        queryDB($mysqli,"replace into commande (ID_PROD,ID_CLIENT,DATE,CIVILITE,NOM,PRENOM,ADRESSE,CP,VILLE,TELEPHONE) values ('".$item."','".$_SESSION["user"]."','".date('d/m/Y')."','".$_SESSION["CIVILITE"]."','".$_SESSION["NOM"]."','".$_SESSION["PRENOM"]."','".$_SESSION["ADRESSE"]."','".$_SESSION["CP"]."','".$_SESSION["VILLE"]."','".$_SESSION["TELEPHONE"]."')");
     }
-    setcookie("panier", "", time()-3600,"/");
+    unset($_SESSION['panier']);
     disconnect($mysqli);
     $_SESSION["paiement"] = "opération réussie";
     $_SESSION["color"] = "green";

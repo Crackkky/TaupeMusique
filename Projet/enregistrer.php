@@ -163,9 +163,9 @@ if($ok === true){ // tout est bon , on se connecte a la BDD puis on insert les v
 	$return["msg"] = "Compte crée, vous pouvez maintenant vous connecter.";
 	$mysqli = connect();
 	//todo oskour l'injection SQL, faire des "sql prepare" machin
-	$str = "INSERT INTO USERS VALUES ('".$login."','".$email."','".password_hash($pass, PASSWORD_DEFAULT)."','".$nom."','".$prenom."','".$date."','".$sexe."','".$adresse."','".$codepostal."','".$ville."','".$telephone."');";
+	$str = "INSERT INTO USERS VALUES ('".$login."','".$email."','".password_hash($pass, PASSWORD_DEFAULT)."','".$nom."','".$prenom."','".$date."','".$sexe."','".$adresse."','".$codepostal."','".$ville."','".$telephone."', false);";
 	queryDB($mysqli,$str) or die("Impossible de creer une compte dans ce moment<br>");
-	setcookie('user',$login,time() + 3600);
+	//$_SESSION['user'] = $login;
 	//unset($return);
 	disconnect($mysqli); //DECONNEXION BDD
 	//header('location: index.php');

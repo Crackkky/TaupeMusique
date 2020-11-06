@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include("Fonctions.inc.php");
 include("Donnees.inc.php");
 
@@ -6,17 +8,32 @@ $mysqli = connect();
 $return["FLAG"] = false;
 $return["msg"] = "L'utilisateur n'a été pas trouvé";
 
-if(isset($_POST["login"]) && isset($_POST["password"]) &&
-    !empty($_POST["login"]) && !empty($_POST["password"])){
+if(isset($_POST["login"]) && isset($_POST["password"]) && !empty($_POST["login"]) && !empty($_POST["password"])){
     $login = trim(mysqli_real_escape_string($mysqli,$_POST["login"]));
     $pass = $_POST["password"];
     //todo alerte sql injection oskour
-    $str = "SELECT LOGIN,PASS,EMAIL FROM USERS WHERE LOGIN = '".$login."'";
+    $str = "SELECT LOGIN,PASS,EMAIL,ADMIN FROM USERS WHERE LOGIN = '".$login."'";
+    //On récupère les favoris de l'utilisateur qui se connecte
+    $str1 = "SELECT ID_PROD FROM FAVS WHERE LOGIN = '".$login."'";
+
     $result = queryDB($mysqli,$str) or die ("Impossible de se connection à la base de données<br>");
     if(mysqli_num_rows($result)>0){
         $row = mysqli_fetch_assoc($result);
         if(password_verify($pass, $row["PASS"])){
-            setcookie("user",$row["LOGIN"]); //todo on se connecte via un cookie, oskour
+            //Ici, lorsque le login fonctionne alors il faut récupérer toutes les infos utiles de l'utilisateur pour éviter de refaire à chaque fois des appels à la bdd
+            $_SESSION["user"] = $row["LOGIN"];
+            $_SESSION["admin"] = $row["ADMIN"];
+            //On vient charger les favoris de l'utilisateur lors de la connexion
+            $resultFav = queryDB($mysqli, $str1) or die("récupération des Albums favoris impossible");
+
+            //on parse les resultats des albums favoris
+            $favAlbums = array();
+            while($fav = mysqli_fetch_assoc($resultFav)) {
+                $favAlbums[] = $fav["ID_PROD"];
+            }
+
+            $_SESSION["favoris"] = json_encode($favAlbums);
+
             unset($return);
             $return["msg"] = "L'utilisateur est maintenant connecté";
             $return["FLAG"] = false;

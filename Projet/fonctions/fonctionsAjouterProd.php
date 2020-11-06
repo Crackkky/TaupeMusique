@@ -11,18 +11,15 @@
 		echo "<tr><td>Critique</td><td><textarea type='text' name='descriptif' rows='8' cols='50'></textarea><br/></td></tr>";
 		echo "<tr><td>Image</td><td><input id='file' name='file' type='file' multiple/></td></tr>";
 		echo "<tr><td>Genre</td><td><select name='rubrique' style='wnameth:145px'>";
-		$i = 0;
 		foreach($Hierarchie as $item => $cat){
-			echo "<option value=".$i.">".$item."</option>";
-			$i+=1;
-		}
+			echo "<option>".$item."</option>";
+			}	
 		echo "</select><br/></td></tr>";
 		
 		
 		
 		echo "<tr><td>Nombre de Chansons</td><td><select id='nombre' name='nombre' style='wnameth:145px' onchange='numChansons()'>";
 		echo "<option selected>0</option>";
-		$i=0;
 		for($i = 1 ; $i <= 30 ; $i++){
 			echo "<option>".$i."</option>";
 		}
