@@ -4,6 +4,7 @@ include("Fonctions.inc.php");
 
 $mysqli = connect();
 
+$login = mysqli_real_escape_string($mysqli,$_SESSION["user"]);
 $pass = mysqli_real_escape_string($mysqli,$_POST["passwordbdd"]);
 $email = mysqli_real_escape_string($mysqli,$_POST["emailbdd"]);
 $nom = mysqli_real_escape_string($mysqli,$_POST["nombdd"]);//
@@ -14,9 +15,6 @@ $codepostal = mysqli_real_escape_string($mysqli,$_POST["postalbdd"]);
 $date = mysqli_real_escape_string($mysqli,$_POST["datebdd"]);
 $telephone = mysqli_real_escape_string($mysqli,$_POST["telephonebdd"]);
 $sexe = $_POST["optradio"];
-
-$login = $_SESSION["user"]; //TODO VULENRABILITE SQL ATTENTION OSEKOUR AAAAH
-
 
 
 // * EMAIL
@@ -75,7 +73,7 @@ if(isset($_POST["postalbdd"]) && !empty($_POST["postalbdd"]) && strlen($codepost
 
 // * DATE
 
-if(isset($_POST["datebdd"]) && !empty($_POST['datebdd']) && strlen($date)<50){ //todo verifier la date
+if(isset($_POST["datebdd"]) && !empty($_POST['datebdd']) && strlen($date)<11){
     $str = "UPDATE USERS SET DATE = '".$date."' WHERE login='".$login."';";
     $date = NULL;
     queryDB($mysqli,$str) or die("erreur<br>");
