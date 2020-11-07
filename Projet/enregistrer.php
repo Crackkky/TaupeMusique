@@ -143,6 +143,8 @@ if(!isset($_SESSION["user"])){
 		$sexe = NULL;
 	}
 
+	if($sexe != "Homme" && $sexe != "Femme")
+		$ok = false;
 
 	if(isset($login) && !empty($login) && is_char_ok($login)){ //si on a renseigné le login et qu'il est bon
 		$mysqli = connect(); //CONNEXION BDD
@@ -165,8 +167,6 @@ if(!isset($_SESSION["user"])){
 	}else{
 		$ok = false;
 	}
-
-	//todo je fais une connexion de la BDD pour check si mail et login sont pas déjà utilisé puis j'en refais une après : utile ?
 
 	if($ok === true){ // tout est bon , on se connecte a la BDD puis on insert les valeurs
 		$return["FLAG"] = true;

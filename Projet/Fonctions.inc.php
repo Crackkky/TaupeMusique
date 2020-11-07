@@ -111,4 +111,18 @@ function is_ok($string){
     return $res;
 }
 
+/**
+ * Fonction temporaire pour récupérer les userdata via la BD, il faudrait faire ça en local //todo
+ * @param $mysqli: la connexion à la bdd
+ */
+function getUserData($mysqli){
+    $login = $_COOKIE['user'];
+    $str = "SELECT * FROM USERS WHERE login = '".$login."'";
+    $res = queryDB($mysqli, $str);
+    while($all = mysqli_fetch_assoc($res)) {
+        $user = $all;
+    }
+    return $user;
+}
+
 ?>

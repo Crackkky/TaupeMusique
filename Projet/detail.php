@@ -9,13 +9,12 @@ if(!isset($_GET["id"])) {
     header("location: ./");
 }
 
-$albumId = $_GET["id"];
+$albumId = intval($_GET["id"]);
 
 
 $mysqli = connect();
 
 
-//todo rafiner la requete si le idProd est set, on peut faire une requete unique sur cet element
 //PRODUIT : ID_PROD|LIBELLE|PRIX|CHANSONS|DESCRIPTIF|GENRE
 $resultAll = queryDB($mysqli, "SELECT * FROM PRODUITS") or die("echec recuperation de tous les albums");
 

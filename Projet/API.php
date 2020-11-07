@@ -52,7 +52,7 @@ function getProduits() {
     return $produits;
 }
 
-/*function getRoots() { //TODO Adapter a la db
+/*function getRoots() {
     global $Hierarchie;
     $roots = array();
     foreach ($Hierarchie as $categorie => $ssCategorie) {

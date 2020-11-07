@@ -1,9 +1,9 @@
 <?php
 session_start();
-
 if(isset($_SESSION["user"])){
-    if($_SESSION["admin"] == true){
+if($_SESSION["admin"] == true){
 
+include("Fonctions.inc.php");
 include 'fonctions/fonctionsLayout.php';
 include 'fonctions/fonctionsProduits.php';
 ?>
@@ -92,10 +92,10 @@ include 'fonctions/fonctionsProduits.php';
     else {
         echo "Unauthorized access";
     }
-}
-else {
-    echo "Unauthorized access";
-}
+    }
+    else {
+        echo "Unauthorized access";
+    }
 
     ?>
 

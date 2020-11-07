@@ -1,6 +1,6 @@
 <?php
 include("Fonctions.inc.php");
-//todo debuguer
+
 function afficherPanier(){
     $mysql = connect();
     $Albums = getAllAlbums($mysql);

@@ -13,45 +13,47 @@ if(!isset($_SESSION["user"])){
         $return["msg"] = "L'utilisateur n'a été pas trouvé";
 
 
-            $login = trim(mysqli_real_escape_string($mysqli,$_POST["login"]));
-            $pass = $_POST["password"];
-            //todo alerte sql injection oskour
-            $str = "SELECT LOGIN,PASS,EMAIL,ADMIN FROM USERS WHERE LOGIN = '".$login."'";
-            //On récupère les favoris de l'utilisateur qui se connecte
-            $str1 = "SELECT ID_PROD FROM FAVS WHERE LOGIN = '".$login."'";
+        $login = trim(mysqli_real_escape_string($mysqli,$_POST["login"]));
+        $pass = trim(mysqli_real_escape_string($mysqli,$_POST["password"]));
 
-            $result = queryDB($mysqli,$str) or die ("Impossible de se connection à la base de données<br>");
-            if(mysqli_num_rows($result)>0){
-                $row = mysqli_fetch_assoc($result);
-                if(password_verify($pass, $row["PASS"])){
-                    //Ici, lorsque le login fonctionne alors il faut récupérer toutes les infos utiles de l'utilisateur pour éviter de refaire à chaque fois des appels à la bdd
-                    $_SESSION["user"] = $row["LOGIN"];
-                    $_SESSION["admin"] = $row["ADMIN"];
-                    //On vient charger les favoris de l'utilisateur lors de la connexion
-                    $resultFav = queryDB($mysqli, $str1) or die("récupération des Albums favoris impossible");
 
-                    //on parse les resultats des albums favoris
-                    $favAlbums = array();
-                    while($fav = mysqli_fetch_assoc($resultFav)) {
-                        $favAlbums[] = $fav["ID_PROD"];
-                    }
+        $str = "SELECT LOGIN,PASS,EMAIL,ADMIN FROM USERS WHERE LOGIN = '".$login."'";
 
-                    $_SESSION["favoris"] = json_encode($favAlbums);
+        //On récupère les favoris de l'utilisateur qui se connecte
+        $str1 = "SELECT ID_PROD FROM FAVS WHERE LOGIN = '".$login."'";
 
-                    unset($return);
-                    $return["msg"] = "L'utilisateur est maintenant connecté";
-                    $return["FLAG"] = false;
-                    mysqli_close($mysqli);
-                    echo json_encode($return);
-                    exit();
-                } else {
-                    $return["FLAG"] = true;
-                    $return["msg"] = "Mauvais login ou mot de passe.";
+        $result = queryDB($mysqli,$str) or die ("Impossible de se connection à la base de données<br>");
+        if(mysqli_num_rows($result)>0){
+            $row = mysqli_fetch_assoc($result);
+            if(password_verify($pass, $row["PASS"])){
+                //Ici, lorsque le login fonctionne alors il faut récupérer toutes les infos utiles de l'utilisateur pour éviter de refaire à chaque fois des appels à la bdd
+                $_SESSION["user"] = $row["LOGIN"];
+                $_SESSION["admin"] = $row["ADMIN"];
+                //On vient charger les favoris de l'utilisateur lors de la connexion
+                $resultFav = queryDB($mysqli, $str1) or die("récupération des Albums favoris impossible");
+
+                //on parse les resultats des albums favoris
+                $favAlbums = array();
+                while($fav = mysqli_fetch_assoc($resultFav)) {
+                    $favAlbums[] = $fav["ID_PROD"];
                 }
 
+                $_SESSION["favoris"] = json_encode($favAlbums);
+
+                unset($return);
+                $return["msg"] = "L'utilisateur est maintenant connecté";
+                $return["FLAG"] = false;
+                mysqli_close($mysqli);
+                echo json_encode($return);
+                exit();
+            } else {
+                $return["FLAG"] = true;
+                $return["msg"] = "Mauvais login ou mot de passe.";
             }
 
-            mysqli_close($mysqli);
+        }
+
+        mysqli_close($mysqli);
 
     }
     else{
