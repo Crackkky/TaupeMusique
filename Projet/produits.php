@@ -1,7 +1,11 @@
 <?php
+session_start();
+if(isset($_SESSION["user"])){
+if($_SESSION["admin"] == true){
+
+include("Fonctions.inc.php");
 include 'fonctions/fonctionsLayout.php';
 include 'fonctions/fonctionsProduits.php';
-include 'Fonctions.inc.php';
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +86,18 @@ include 'Fonctions.inc.php';
     <hr>
 
     <!-- Footer -->
-    <?php include("./footer.php");?>
+    <?php include("./footer.php");
+
+    }
+    else {
+        echo "Unauthorized access";
+    }
+    }
+    else {
+        echo "Unauthorized access";
+    }
+
+    ?>
 
 </div>
 

@@ -6,8 +6,9 @@
 		$mysqli = connect();
 		
 		echo "<hr>";
-		$result = queryDB($mysqli,'SELECT login,prenom,nom,email,adresse,ville,telephone FROM USERS WHERE login = \'admin\'');
-		$result2 = queryDB($mysqli,'SELECT login,prenom,nom,email,adresse,ville,telephone FROM USERS WHERE login != \'admin\'');
+		//Modifier ici les requêtes
+		$result = queryDB($mysqli,'SELECT login,prenom,nom,email,adresse,ville,telephone,admin FROM USERS WHERE admin = 1');
+		$result2 = queryDB($mysqli,'SELECT login,prenom,nom,email,adresse,ville,telephone,admin FROM USERS WHERE admin = 0');
 		if((mysqli_num_rows($result)>0) || (mysqli_num_rows($result2)>0)){
 			
 			echo "<table>";

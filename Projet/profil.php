@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include 'fonctions/fonctionsLayout.php';
 ?>
 
@@ -23,19 +25,11 @@ include 'fonctions/fonctionsLayout.php';
     <link rel="stylesheet" href="./css/datepicker3.min.css" />
 
 
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
 </head>
 
 <body>
 <?php
-if(isset($_COOKIE["user"])){
+if(isset($_SESSION["user"])){
     include 'Fonctions.inc.php';
     include 'Donnees.inc.php';
     $host = getHost();
@@ -44,7 +38,7 @@ if(isset($_COOKIE["user"])){
     $base = getBase();
     $mysqli=mysqli_connect($host,$user,$pass) or die("Problème de création de la base :".mysqli_error());
     mysqli_select_db($mysqli,$base) or die("Impossible de sélectionner la base : $base");
-    $str = "SELECT LOGIN,EMAIL,PASS,NOM,PRENOM,DATE,SEXE,ADRESSE,CODEP,VILLE,TELEPHONE FROM USERS WHERE LOGIN = '".$_COOKIE["user"]."'";
+    $str = "SELECT LOGIN,EMAIL,PASS,NOM,PRENOM,DATE,SEXE,ADRESSE,CODEP,VILLE,TELEPHONE FROM USERS WHERE LOGIN = '".$_SESSION["user"]."'";
     $result = queryDB($mysqli,$str) or die("Impossible de se connecter");
     $row = mysqli_fetch_assoc($result);
     if(is_null($row["LOGIN"])){$login = "";}else{$login = $row["LOGIN"];}
@@ -62,7 +56,11 @@ if(isset($_COOKIE["user"])){
 ?>
 
 <!-- Navigation -->
-<?php include("./navbar.php");?>
+<?php include("./navbar.php");
+
+if(isset($_SESSION["user"])){
+
+?>
 
 <!-- Page Content -->
 <div class="container">
@@ -123,13 +121,16 @@ if(isset($_COOKIE["user"])){
 						<tr>
 							<td><p><strong>Sexe</strong></p></td><td>".$sexe."</td>
 						</tr>
-							
+							<td><a href='#Modifier'  data-toggle='modal' class='list-group-item'>Éditer</a></td><td></td>
 						</tr>
 						</table>";
                 }
                 else{
                     echo "<font color='grey'>Connectez vous pour afficher cette page</font>";
                 }
+    }else{
+        echo "You must be connected";
+    }
                 ?>
 
 

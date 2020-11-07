@@ -52,20 +52,6 @@ function queryDB($link,$query)
 }
 
 /**
- * Fonction temporaire pour récupérer les userdata via la BD, il faudrait faire ça en local //todo
- * @param $mysqli: la connexion à la bdd
- */
-function getUserData($mysqli){
-    $login = $_COOKIE['user'];
-    $str = "SELECT * FROM USERS WHERE login = '".$login."'";
-    $res = queryDB($mysqli, $str);
-    while($all = mysqli_fetch_assoc($res)) {
-        $user = $all;
-    }
-    return $user;
-}
-
-/**
  *  Fonction qui récupère la liste de tous les albums
  * @param $mysql : la connexion de la BDD
  * @return array : le tableau de tous les albums
@@ -111,8 +97,6 @@ function is_char_ok($string){
     return preg_match("/^[a-zA-Z'\-\_0-9 ]+$/", $string);
 }
 
-
-
 //fait une batterie de test sur une string pour valider le format
 function is_ok($string){
     $res = true;
@@ -125,6 +109,20 @@ function is_ok($string){
     }
 
     return $res;
+}
+
+/**
+ * Fonction temporaire pour récupérer les userdata via la BD, il faudrait faire ça en local //todo
+ * @param $mysqli: la connexion à la bdd
+ */
+function getUserData($mysqli){
+    $login = $_COOKIE['user'];
+    $str = "SELECT * FROM USERS WHERE login = '".$login."'";
+    $res = queryDB($mysqli, $str);
+    while($all = mysqli_fetch_assoc($res)) {
+        $user = $all;
+    }
+    return $user;
 }
 
 ?>

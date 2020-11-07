@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+if(isset($_SESSION["user"])){
+    if($_SESSION["admin"] == true){
+
 include 'fonctions/fonctionsLayout.php';
 include 'fonctions/fonctionsAdministration.php';
 ?>
@@ -37,12 +41,12 @@ include 'fonctions/fonctionsAdministration.php';
 
 <body>
 <?php
-if(isset($_COOKIE["user"])){
+if(isset($_SESSION["user"])){
     include("Fonctions.inc.php");
     include("Donnees.inc.php");
     $mysqli=connect();
 
-    $str = "SELECT LOGIN,EMAIL,PASS,NOM,PRENOM,DATE,SEXE,ADRESSE,CODEP,VILLE,TELEPHONE FROM USERS WHERE LOGIN = '".$_COOKIE["user"]."'";
+    $str = "SELECT LOGIN,EMAIL,PASS,NOM,PRENOM,DATE,SEXE,ADRESSE,CODEP,VILLE,TELEPHONE FROM USERS WHERE LOGIN = '".$_SESSION["user"]."'";
 
     $result = queryDB($mysqli,$str) or die("Impossible de se connecter");
     $row = mysqli_fetch_assoc($result);
@@ -105,6 +109,16 @@ if(isset($_COOKIE["user"])){
 
 
 <?php
+
+    }
+    else {
+        echo "Unauthorized access";
+    }
+}
+else {
+    echo "Unauthorized access";
+}
+
 if(isset($row)){
     if(empty($nom)){$nom = "Nom";}
     if(empty($prenom)){$prenom = "Prénom";}

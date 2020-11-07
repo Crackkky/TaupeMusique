@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 include ("API.php");
 ?>
 <!DOCTYPE html>

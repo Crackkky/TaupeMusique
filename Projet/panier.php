@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 include 'fonctions/fonctionsLayout.php';
 include 'fonctions/fonctionsAcheter.php';
 ?>
@@ -31,7 +32,7 @@ include 'fonctions/fonctionsAcheter.php';
                 url: 'fonctions/fonctionsRemove.php',
                 data: {item : e,pos: p},
                 success: function(data){
-                    alert(data);
+                    //alert(data);
                     location.reload();
                 },
             });
@@ -69,9 +70,9 @@ include 'fonctions/fonctionsAcheter.php';
 
             <div>
                 <?php
-                if(isset($_COOKIE["user"]) && isset($_COOKIE["panier"])){
+                if(isset($_SESSION["user"]) && isset($_SESSION["panier"])){
                     echo '<a class="btn btn-default" href="confirmerCommande.php">ACHETER</a>';
-                }else if(isset($_COOKIE["panier"])){
+                }else if(isset($_SESSION["panier"])){
                     echo '<p>Connectez vous pour pouvoir acheter</p>';
                 }
                 ?>
@@ -79,10 +80,13 @@ include 'fonctions/fonctionsAcheter.php';
 
         </div>
 
+        <?php if(isset($_SESSION["user"])){
+        ?>
         <div class="col-md-3">
             <p class="lead">Votre Profil</p>
             <?php afficherCadreCompte(); ?>
         </div>
+        <?php } ?>
 
     </div>
 

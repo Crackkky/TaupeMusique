@@ -24,8 +24,7 @@ if(isset($_COOKIE["panier"]) && isset($_COOKIE["user"])){
         }else{
             $CIVILITE = "Mme";
         }
-        $ETAT = 1;//je sais pas ce que c'est
-        queryDB($mysqli,"INSERT INTO COMMANDE (ID_PROD,ETAT,ID_CLIENT,DATE,CIVILITE,NOM,PRENOM,ADRESSE,CP,VILLE,TELEPHONE) values ('".$item."',$ETAT,'".$_COOKIE["user"]."','".date('d/m/Y')."','".$CIVILITE."','".$userData["NOM"]."','".$userData["PRENOM"]."','".$userData["ADRESSE"]."','".$userData["CODEP"]."','".$userData["VILLE"]."','".$userData["TELEPHONE"]."')");
+        queryDB($mysqli,"INSERT INTO COMMANDE (ID_PROD,ID_CLIENT,DATE,CIVILITE,NOM,PRENOM,ADRESSE,CP,VILLE,TELEPHONE) values ('".$item."','".$_COOKIE["user"]."','".date('d/m/Y')."','".$CIVILITE."','".$userData["NOM"]."','".$userData["PRENOM"]."','".$userData["ADRESSE"]."','".$userData["CODEP"]."','".$userData["VILLE"]."','".$userData["TELEPHONE"]."')");
     }
     setcookie("panier", "", time()-3600,"/");
     disconnect($mysqli);

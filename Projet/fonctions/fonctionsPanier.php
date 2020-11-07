@@ -1,16 +1,19 @@
 <?php
+session_start();
+
 	if(isset($_POST["item"])){
-		if(isset($_COOKIE["panier"])){
+		if(isset($_SESSION["panier"])){
 			$arr = array();
-			$arr = json_decode($_COOKIE["panier"],true);
+			$arr = json_decode($_SESSION["panier"], true);
 			$arr[] = $_POST["item"];
-			setcookie('panier',json_encode($arr),time() + (60*30),"/");
+			$_SESSION['panier'] = json_encode($arr);
 			echo "Produit ajouté au panier";
+
 		}
 		else{
-			$arra = array();
+			$arr = array();
 			$arr[] = $_POST["item"];
-			setcookie('panier',json_encode($arr),time() + (60*30),"/");
+			$_SESSION['panier'] = json_encode($arr);
 			echo "Produit ajouté au panier";
 		}
 	}
