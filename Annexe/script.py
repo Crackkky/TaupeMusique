@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import sys
 import networkx as nx
 import matplotlib.pyplot as plt
+import netgraph
 
 """
 @author : gouth
@@ -221,10 +222,20 @@ def build_dico():
 
 def plot_graph(G):
 	plt.figure(figsize=(10,6))
-	pos = nx.spring_layout(G, k=0.3)
+	pos = nx.circular_layout(G)#, k=0.3)
 	nx.draw(G, pos=pos, with_labels=False, node_size=100)
 	nx.draw_networkx_labels(G, pos=pos, font_size=10)
-	nx.draw_networkx_edges(G, pos=pos, width=0.2)
+	nx.draw_networkx_edges(G, pos=pos, width=0.2, arrowstyle="->")
+
+	"""
+	plot_instance = netgraph.InteractiveGraph(G, node_positions=pos)
+
+	######## drag nodes around #########
+
+	# To access the new node positions:
+	node_positions = plot_instance.node_positions
+	"""
+	#exit(1)
 	plt.show()
 
 """
@@ -235,7 +246,7 @@ def generate_sitemap():
 	#décommenter la ligne pour tester networkx et plot 
 	#test_graph()
 	
-	G = nx.Graph() #creation du graph
+	G = nx.DiGraph() #creation d'un graph orienté 
 	dico = build_dico()
 	
 	G.add_nodes_from(dico)
@@ -244,7 +255,7 @@ def generate_sitemap():
 		G.add_edges_from(ptite_liste)
 
 	plot_graph(G)
-	#exit(1)
+	
 
 
 
