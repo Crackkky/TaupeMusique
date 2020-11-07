@@ -80,10 +80,13 @@ include 'fonctions/fonctionsAcheter.php';
 
         </div>
 
+        <?php if(isset($_SESSION["user"])){
+        ?>
         <div class="col-md-3">
             <p class="lead">Votre Profil</p>
             <?php afficherCadreCompte(); ?>
         </div>
+        <?php } ?>
 
     </div>
 

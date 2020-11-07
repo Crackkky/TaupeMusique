@@ -15,7 +15,7 @@ $date = mysqli_real_escape_string($mysqli,$_POST["datebdd"]);
 $telephone = mysqli_real_escape_string($mysqli,$_POST["telephonebdd"]);
 $sexe = $_POST["optradio"];
 
-$login = $_COOKIE["user"]; //TODO VULENRABILITE SQL ATTENTION OSEKOUR AAAAH
+$login = $_SESSION["user"]; //TODO VULENRABILITE SQL ATTENTION OSEKOUR AAAAH
 
 
 

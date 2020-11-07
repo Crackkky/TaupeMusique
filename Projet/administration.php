@@ -1,5 +1,9 @@
 <?php
 session_start();
+
+if(isset($_SESSION["user"])){
+    if($_SESSION["admin"] == true){
+
 include 'fonctions/fonctionsLayout.php';
 include 'fonctions/fonctionsAdministration.php';
 ?>
@@ -105,6 +109,16 @@ if(isset($_SESSION["user"])){
 
 
 <?php
+
+    }
+    else {
+        echo "Unauthorized access";
+    }
+}
+else {
+    echo "Unauthorized access";
+}
+
 if(isset($row)){
     if(empty($nom)){$nom = "Nom";}
     if(empty($prenom)){$prenom = "Prénom";}

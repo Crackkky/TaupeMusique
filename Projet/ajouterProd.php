@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+//Permet de n'autoriser que l'administrateur à accéder à cette page
+if(isset($_SESSION["user"])){
+    if($_SESSION["admin"] == true){
+
+
 include 'fonctions/fonctionsLayout.php';
 include 'fonctions/fonctionsAjouterProd.php';
 ?>
@@ -77,7 +84,18 @@ include 'fonctions/fonctionsAjouterProd.php';
     <hr>
 
     <!-- Footer -->
-    <?php include("./footer.php");?>
+    <?php include("./footer.php");
+
+    }
+    else {
+        echo "Unauthorized access";
+    }
+}
+else {
+    echo "Unauthorized access";
+}
+
+?>
 
 </div>
 
