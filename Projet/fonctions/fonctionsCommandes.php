@@ -6,7 +6,7 @@
 		$mysqli = connect();
 		
 		echo "<h2>Commandes</h2><br/>";
-		$result = queryDB($mysqli,'select id_com,id_client,(select prenom from users where users.login = commande.id_client limit 1) as prenom,(select nom from users where users.login = commande.id_client limit 1) as nom,id_prod,date,ADRESSE,cp,ville from commande');
+		$result = queryDB($mysqli,'select id_com,id_client,(select prenom from USERS where USERS.login = COMMANDE.id_client limit 1) as prenom,(select nom from USERS where USERS.login = COMMANDE.id_client limit 1) as nom,id_prod,date,ADRESSE,cp,ville from COMMANDE');
 		if(mysqli_num_rows($result)<=0){
 			echo "Aucun enregistrement dans la base de données";
 		}

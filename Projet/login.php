@@ -4,13 +4,12 @@ session_start();
 if(!isset($_SESSION["user"])){
 
     if(isset($_POST["login"]) && isset($_POST["password"]) && !empty($_POST["login"]) && !empty($_POST["password"])){
-
         include("Fonctions.inc.php");
         include("Donnees.inc.php");
 
         $mysqli = connect();
         $return["FLAG"] = false;
-        $return["msg"] = "L'utilisateur n'a été pas trouvé";
+        $return["msg"] = "L'utilisateur n'a été pas trouvé ou mot de passe incorrect"; //faut pas leak des infos
 
 
         $login = trim(mysqli_real_escape_string($mysqli,$_POST["login"]));
@@ -52,7 +51,6 @@ if(!isset($_SESSION["user"])){
             }
 
         }
-
         mysqli_close($mysqli);
 
     }
@@ -63,8 +61,11 @@ if(!isset($_SESSION["user"])){
     }
 
 
-}
+} //utilisateur déjà connecté
 else{
-    echo "You're already connected";
+    $return["msg"] = "You're already connected";
 }
+
+echo json_encode($return);
+exit();
 ?>
