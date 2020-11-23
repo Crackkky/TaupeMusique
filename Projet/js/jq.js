@@ -53,7 +53,20 @@ function submitForm(formdata){
 				rep_elem.innerHTML = rep_elem.innerHTML = "<span style=\"color: #ff0000; \"><ul>" + data.msg + "</ul></span\">";
 			}
 		},
-	});
+		error: function(data){
+			alert(data.msg);
+			rep_elem = document.getElementById("reponse0");
+			if(data.msg == "L'utilisateur est maintenant connecté"){
+				rep_elem.innerHTML = rep_elem.innerHTML = "<span style=\"color: #00ff00; \"><ul>" + data.msg + "</ul></span\">";
+				//Pour les tests on enlève cette ligne
+				window.location.reload();
+			} else {
+				rep_elem.innerHTML = rep_elem.innerHTML = "<span style=\"color: #ff0000; \"><ul>" + data.msg + "</ul></span\">";
+			}
+		}
+	}).then(function(data){
+	}
+);;
 };
 
 function submitDetails(formdata){

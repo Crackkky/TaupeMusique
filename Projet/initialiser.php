@@ -58,11 +58,11 @@ queryDB($mysqli,"CREATE TABLE IF NOT EXISTS FAVS (
                         PRIMARY KEY(LOGIN,ID_PROD)
                         ) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
 
-queryDB($mysqli,"CREATE TABLE IF NOT EXISTS `commande` (
+queryDB($mysqli,"CREATE TABLE IF NOT EXISTS `COMMANDE` (
                         ID_COM bigint(20) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                         ID_PROD int(11) NOT NULL,
                         ETAT int(1) NOT NULL,
-                        ID_CLIENT int(11) NOT NULL,
+                        ID_CLIENT varchar (250) NOT NULL,
                         DATE varchar(40) NOT NULL,
                         CIVILITE varchar(4) NOT NULL,
                         NOM varchar(40) NOT NULL,

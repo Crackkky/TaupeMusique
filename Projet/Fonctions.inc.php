@@ -116,7 +116,8 @@ function is_ok($string){
  * @param $mysqli: la connexion à la bdd
  */
 function getUserData($mysqli){
-    $login = $_COOKIE['user'];
+    $login = $_SESSION['user'];
+    $user=array();
     $str = "SELECT * FROM USERS WHERE login = '".$login."'";
     $res = queryDB($mysqli, $str);
     while($all = mysqli_fetch_assoc($res)) {

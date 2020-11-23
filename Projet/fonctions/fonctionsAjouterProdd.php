@@ -54,9 +54,10 @@ if($_FILES['file']['error']>0){
         if($ok){ //on peut insérer dans la BDD
 
             //insertion image cover dans les fichiers
-            $file_result = 'img_cover/'.($_POST["auteur"]." (".$_POST["titre"].")").$file_extension;
+            $file_result = 'img_cover/'.($_POST["auteur"]." ".$_POST["titre"]).$file_extension;
             move_uploaded_file($_FILES['file']['tmp_name'],'../'.$file_result);
-            echo "image cover updated</br></br>";
+            //echo "image cover updated</br></br>";
+
 
             //insertions dans la BDD
             $titre = $_POST['titre'];
