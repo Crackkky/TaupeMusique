@@ -78,7 +78,7 @@ echo 'Initialisation réussie <br />';
 // Insertion
 queryDB($mysqli,"INSERT INTO USERS VALUES ('admin',
                                                  'admin@admin.com',
-                                                 '".password_hash('pass', PASSWORD_DEFAULT)."',
+                                                 '".password_hash('Wonderful', PASSWORD_DEFAULT)."',
                                                  'ADMIN',
                                                  'admin',
                                                  '01/01/1999',
@@ -98,18 +98,19 @@ queryDB($mysqli, "INSERT INTO RUBRIQUES VALUES (3, 'Hip-Hop');");
 queryDB($mysqli, "INSERT INTO RUBRIQUES VALUES (4, 'Pop');");
 
 queryDB($mysqli,"INSERT INTO PRODUITS VALUES ('1',
-                                                     'Joss Stone (Water for Your Soul)',
+                                                     'Joss Stone - Water for Your Soul',
                                                      19.99,
                                                      '1 Love Me |2 This Aint Love |3 Stuck on You |4 Star | 5 Let Me Breathe | 6 Cut the Line | 7 Wake Up | 8 Way Oh | 9 Underworld | 10 Molly Town | 11 Sensimilla | 12 Harrys Symphony | 13 Clean Water | 14 The Answer ',
                                                      'Joss Stone n avait pas sorti de chansons originales depuis son LP1, publié en 2011. Il lui a fallu 4 ans de voyages, de Projets et d enseignements pour arriver à collecter les 14 nouveaux morceaux de Water For Your Soul. De ses sessions d improvisation à Los Angeles avec Damian Marley à l Angleterre, en passant par Hawaï et les routes d Europe où elle a voyagées dans un vieux camping-car en compagnie de son ancien petit ami, la chanteuse a nourri son âme de nouvelles expériences. ',
                                                      1);");
 
 queryDB($mysqli,"INSERT INTO PRODUITS VALUES ('2',
-                                                     'Album Test',
-                                                     99.99,
-                                                     '1 Hello there | 2 General Kenobi | 3 Youre a bold one',
-                                                     'TIN TINTINTIN TINTINTIN TINTIN TINTINTINTINTIN TINTINTINTIN TIN TINTINTINTIN TIN TINTINTINTIN TIN TINTINTINTIN ',
-                                                     4);");
+                                                     'Israel Kamakawiwo\'ole - Facing Future',
+                                                     14.99,
+                                                     '1 Hawai\'i Introduction | 2 Ka Huila Wai | 3 \'Ama\'ama\' 
+                                                     | 4 Panini Pua Kea | 5  Take Me Home Country Road | 6 Kuhio Bay | 7 Ku Pua | 8 White Sandy Beach of Hawai\'i | 9 Henehene Kou \'Aka | 10 La \'Elima | 11 Pili Me Ka\'u Manu | 12 Maui Hawaiian Sup\'pa Man | 13 Kaulana Kawaihae | 14 Over the Rainbow / What a Wonderful World | 15 Hawai\'i \'78' ,
+                                                     'Etant l\'administrateur de ce site, j\'ai ajouté cet album avec beaucoup d\'entousiasme, car c\'est vraiment mon album de coeur. Je l\'écoute depuis des années et il me suit vraiment partout. Parfois j\'ai vraiment l\'impression qu\'il arrive à m\'aider à garder mes secrets. Ce doit être une forme de méditation peut être ? Ou peut être pas... Il faut vraiment écouter chaque mot de chaque chanson pour apprécier au plus juste ce bijoux musical.',
+                                                     1);");
 
 mysqli_close($mysqli);
 ?>

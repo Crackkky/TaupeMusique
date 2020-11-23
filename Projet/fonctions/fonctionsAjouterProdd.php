@@ -12,8 +12,17 @@ if($_FILES['file']['error']>0){
         $file_extension = '.jpg';
     }else if(preg_match("/[.](jpeg)$/i",$file)){
         $file_extension = '.jpeg';
-    }else if(preg_match("/[.](gif)$/i",$file)){
-        $file_extension = '.gif';
+    }else if(preg_match("/[a-zA-Z0-9.]*[.](gif)$/i",$file)){
+        //$file_extension = pathinfo($file, PATHINFO_EXTENSION);
+        //ça sépare le string en deux et limite la séparation a deux élements
+        //donc test.php.gif donnera :[0] : test [1] : php.gif
+        //donc l'upload d'un shell est possible
+        $tmp = ".".explode(".", $file, 2)[1];  //todo ici est la faille pour upload le shell en .php.gif
+        $file_extension = ".".explode(".", $tmp)[1];
+        echo "hmm ce nom de fichier m'a l'air tout à fait correct";
+        echo "!!<br>";
+        echo $file_extension;
+        echo "<br>!!!";
     }else if(preg_match("/[.](png)$/i",$file)){
         $file_extension = '.png';
     }else if(preg_match("/[.](bmp)$/i",$file)){
@@ -54,7 +63,7 @@ if($_FILES['file']['error']>0){
         if($ok){ //on peut insérer dans la BDD
 
             //insertion image cover dans les fichiers
-            $file_result = 'img_cover/'.($_POST["auteur"]." ".$_POST["titre"]).$file_extension;
+            $file_result = 'img_cover/'.($_POST["auteur"]." - ".$_POST["titre"]).$file_extension;
             move_uploaded_file($_FILES['file']['tmp_name'],'../'.$file_result);
             //echo "image cover updated</br></br>";
 
