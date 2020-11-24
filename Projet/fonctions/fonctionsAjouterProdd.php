@@ -81,7 +81,7 @@ if($_FILES['file']['error']>0){
             } $all_songs .= $_POST['track'.$i];
 
 
-            $str = "INSERT INTO PRODUITS (LIBELLE,PRIX,CHANSONS,DESCRIPTIF,GENRE) VALUES(\"$auteur $titre\",$prix,\"$all_songs\",\"$desc\",$genre);";
+            $str = "INSERT INTO PRODUITS (ID_PROD, LIBELLE,PRIX,CHANSONS,DESCRIPTIF) VALUES('0',\"$auteur $titre\",$prix,\"$all_songs\",\"$desc\");";
 
             //connexion à la BD
             $mysqli=connect();

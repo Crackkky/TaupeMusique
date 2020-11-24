@@ -1,7 +1,5 @@
 <?php
 function ajouterProduit(){
-    include("Donnees.inc.php");
-
     echo "<h2>Ajouter produit</h2><br/>";
     echo "<form  enctype='multipart/form-data' action='fonctions/fonctionsAjouterProdd.php' method='post' class='putImages'>";
     echo "<table>";
@@ -10,12 +8,6 @@ function ajouterProduit(){
     echo "<tr><td>Prix</td><td><input type='text' name='prix'></input><br/></td></tr>";
     echo "<tr><td>Critique</td><td><textarea type='text' name='descriptif' rows='8' cols='50'></textarea><br/></td></tr>";
     echo "<tr><td>Image</td><td><input id='file' name='file' type='file' multiple/></td></tr>";
-    echo "<tr><td>Genre</td><td><select name='rubrique' style='wnameth:145px'>";
-    $i =1 ;
-    foreach($Hierarchie as $item => $cat){
-        echo "<option value=".$i.">".$item."</option>";
-        $i+=1;
-    }
     echo "</select><br/></td></tr>";
 
 

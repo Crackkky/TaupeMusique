@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+function validateDate($date, $format = 'd/m/Y')
+{
+	$d = DateTime::createFromFormat($format, $date);
+	// The Y ( 4 digits year ) returns TRUE for any integer with any number of digits so changing the comparison from == to === fixes the issue.
+	return $d && $d->format($format) === $date;
+}
+
 if(!isset($_SESSION["user"])){
 
 	if(isset($_POST["loginbdd"]) && isset($_POST["passwordbdd"]) && isset($_POST["emailbdd"]) && isset($_POST["nombdd"]) && isset($_POST["prenombdd"]) && isset($_POST["adressebdd"]) && isset($_POST["villebdd"]) && isset($_POST["codepostalbdd"]) && isset($_POST["datebdd"]) && isset($_POST["telephonebdd"])){
@@ -121,8 +128,8 @@ if(!isset($_SESSION["user"])){
 
 	// * DATE
 
-	if(!isset($_POST["datebdd"]) || empty($_POST['datebdd']) || strlen($date) > 10){ //todo verifier la date
-		$return["date"] = "la date n'est pas valide";
+	if(!isset($_POST["datebdd"]) || empty($_POST['datebdd']) || !validateDate($date)){
+		$return["date"] = "la date n'est pas valide : ".$date;
 		$ok = false;
 	}
 

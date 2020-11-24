@@ -14,7 +14,7 @@ function getUser(){
 }
 
 function getPass(){
-    $pass="";
+    $pass="root";
     return $pass;
 }
 

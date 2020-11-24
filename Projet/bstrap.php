@@ -38,10 +38,6 @@
             <div class="modal-body">
                 <form role="form" method="post" id="enregform">
                     <div class="form-group">
-                        <input class="btn btn-primary" type="submit" value="Enregistrer">
-                        <span style="color: red; "><label id="reponseEnr"></label></span>
-                    </div>
-                    <div class="form-group">
                         <label id="reponse1""></label>
                     </div>
                     <div class="form-group">
@@ -80,6 +76,10 @@
                         <label class='radio-inline'><input type='radio' name='optradio' value='Femme'/>Femme</label>
                     </div>
 
+                    <div class="form-group">
+                        <input class="btn btn-primary" type="submit" value="Enregistrer">
+                        <span style="color: red; "><label id="reponseEnr"></label></span>
+                    </div>
             </div>
             <div class="modal-footer">
 
